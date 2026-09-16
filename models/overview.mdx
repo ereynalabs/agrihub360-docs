@@ -34,11 +34,10 @@ Most of the models are **mechanistic** or **rule-based**. They apply published r
 
 ## Language & Vision Models
 
-A second group reads what the field models write and turns it into text, or reads a photo. The [Assistant](/models/assistant) answers questions about your farm from its records. [Scout Photo Diagnosis](/models/scout-diagnosis) names a disease or pest from a leaf photo. The [Field Health Review](/models/field-health-review) synthesises a field's readings, forecast, NDVI and model outputs into a status and actions. [EUDR Document Drafting](/models/document-drafting) writes the due-diligence statement from the farm's records.
+A second group reads what the field models write and turns it into text, or reads a photo. [Scout Photo Diagnosis](/models/scout-diagnosis) names a disease or pest from a leaf photo. The [Field Health Review](/models/field-health-review) synthesises a field's readings, forecast, NDVI and model outputs into a status and actions. [EUDR Document Drafting](/models/document-drafting) writes the due-diligence statement from the farm's records.
 
 | Model | Type | Reads | Produces |
 |---|---|---|---|
-| [Assistant](/models/assistant) | Language model with retrieval | Your question, the farm's records and the knowledge base | An answer with sources |
 | [Scout Photo Diagnosis](/models/scout-diagnosis) | Vision model | A leaf photo, location data stripped and downscaled | A species from a curated list, a confidence and what the model saw |
 | [Field Health Review](/models/field-health-review) | Language model | Readings, the weather outlook, the soil sample, the NDVI capture and the field models' outputs | A status, headline, factors and actions, each action with a condition the server checks |
 | [EUDR Document Drafting](/models/document-drafting) | Language model | Parcels and dates from the record, your answers and the farm's metadata | Sections with headings and body text, rendered to PDF |

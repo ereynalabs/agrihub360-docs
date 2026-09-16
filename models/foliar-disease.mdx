@@ -88,7 +88,7 @@ Only hours that are both wet and inside the temperature range count. So day 1 ad
 
 ## External Models
 
-This model calls no language model. Its outputs are numbers and states: a pressure level, the accumulated units, days to window and flags. Card text is rendered from templates. Its driving input is the leaf-wetness reading from the sensor on the field. Air temperature comes from the field's own sensors and the weather. Two language-model features read its output. The [Field Health Review](/models/field-health-review) folds it into its summary of the field. The [Assistant](/models/assistant) can answer questions about it.
+This model calls no language model. Its outputs are numbers and states: a pressure level, the accumulated units, days to window and flags. Card text is rendered from templates. Its driving input is the leaf-wetness reading from the sensor on the field. Air temperature comes from the field's own sensors and the weather. One language-model feature reads its output. The [Field Health Review](/models/field-health-review) folds it into its summary of the field.
 
 ## Validation
 

@@ -219,7 +219,6 @@
           {
             "group": "Language & Vision Models",
             "pages": [
-              "models/assistant",
               "models/scout-diagnosis",
               "models/field-health-review",
               "models/document-drafting"

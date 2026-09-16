@@ -85,7 +85,7 @@ On Friday every test passes and the crop is inside its window. The state is appl
 
 ## External Models
 
-This model calls no language model. Its outputs are numbers and states: apply, marginal or hold, a leaching risk and the reasons. Alert text is rendered from templates. The forecast rain it reads comes from a gridded weather model, cached per field and refreshed every four hours. Two language-model features read its output. The [Field Health Review](/models/field-health-review) folds it into its summary of the field. The [Assistant](/models/assistant) can answer questions about it.
+This model calls no language model. Its outputs are numbers and states: apply, marginal or hold, a leaching risk and the reasons. Alert text is rendered from templates. The forecast rain it reads comes from a gridded weather model, cached per field and refreshed every four hours. One language-model feature reads its output. The [Field Health Review](/models/field-health-review) folds it into its summary of the field.
 
 ## Validation
 
