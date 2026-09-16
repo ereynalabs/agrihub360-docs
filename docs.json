@@ -2,7 +2,7 @@
   "$schema": "https://mintlify.com/docs.json",
   "theme": "mint",
   "name": "AgriHub360",
-  "description": "Developer documentation for AgriHub360: the device API, bringing your own hardware, and how each model works.",
+  "description": "AgriHub360 documentation: what each feature does on the farm, the Sensor and Hub, the Device API, and the science behind every model.",
   "colors": {
     "primary": "#146134",
     "light": "#1F9A4D",
