@@ -1,0 +1,29 @@
+---
+title: "Field Health Review"
+description: "A language model reads a field's readings, forecast and NDVI and writes a status, its drivers and prioritised actions, with a resolution the server can check."
+---
+
+The **Field Health Review** runs on a schedule for every field. It reads the field's recent readings, the weather outlook, the soil sample and the latest NDVI capture, and writes a status, a headline, the factors behind it and the actions to take. Each action carries a condition the server can check, so "mark resolved" is verified against live data rather than taken on trust.
+
+## The Science
+
+A language model given structured numbers and a fixed output schema writes a readable summary of them. Without it, a farmer reads those numbers as separate charts. The model has two known weaknesses. It states confidence it doesn't have, and it treats text in its inputs as instructions. The review guards against both. Confidence is computed from the data, not asked of the model. Free text from the farm passes through a sanitiser, a filter that neutralises instructions, before it enters the prompt.
+
+## How It's Applied
+
+The readings, the forecast, the soil sample and the NDVI go to a language model. Its answer is checked against the schema. Its confidence is computed from how complete the data was.
+
+| Element | How it works |
+|---|---|
+| Cadence | Every three hours, as a scheduled job |
+| Vision note | The NDVI image is described once by a vision model |
+| Output | Status and headline are required. Summary and notes are truncated to fit. Malformed factor or action lists degrade to empty. |
+| Confidence | High, medium or low from soil series completeness, sample count, device liveness and NDVI presence. The model is not asked to rate itself. |
+| Resolution | Each action states a metric, a comparison, a threshold and a hint. The server re-checks it before allowing the insight to be resolved. |
+| Input safety | Field names, crop names and farm descriptions are neutralised, never rejected |
+
+## Limits
+
+* The review summarises. It doesn't replace the mechanistic models, whose outputs it reads.
+* A field with no readings and no NDVI gets a low-confidence review or none.
+* Every review is reportable from the app.

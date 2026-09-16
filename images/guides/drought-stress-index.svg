@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 450" role="img" aria-label="Cartoon of a banded gauge with its needle in the moderate band, the sun drawing water up from a crop, a probe in cracked soil and rain on the way">
+  <defs><style>.o{stroke:#1A1E1B;stroke-width:4;stroke-linejoin:round;stroke-linecap:round}</style></defs>
+  <rect width="800" height="450" fill="#EAF3EC"/>
+<circle cx="110" cy="80" r="38" fill="#F5C842" class="o"/><g stroke="#1A1E1B" stroke-width="4" stroke-linecap="round"><line x1="158" y1="80" x2="170" y2="80"/><line x1="144" y1="114" x2="152" y2="122"/><line x1="110" y1="128" x2="110" y2="140"/><line x1="76" y1="114" x2="68" y2="122"/><line x1="62" y1="80" x2="50" y2="80"/><line x1="76" y1="46" x2="68" y2="38"/><line x1="110" y1="32" x2="110" y2="20"/><line x1="144" y1="46" x2="152" y2="38"/></g>
+<g stroke="#1A1E1B" stroke-width="34" fill="none"><path d="M450 180 A110 110 0 0 1 670 180"/></g><g stroke-width="26" fill="none"><path d="M450 180 A110 110 0 0 1 505 85" stroke="#1F9A4D"/><path d="M505 85 A110 110 0 0 1 615 85" stroke="#E8A33D"/><path d="M615 85 A110 110 0 0 1 670 180" stroke="#D9534F"/></g>
+<line x1="560" y1="180" x2="574" y2="84" stroke="#1A1E1B" stroke-width="6" stroke-linecap="round"/>
+<circle cx="560" cy="180" r="12" fill="#FFFFFF" class="o"/>
+<rect x="506" y="206" width="108" height="30" rx="15" fill="#C9D3CC" class="o"/>
+<g fill="#146134"><rect x="530" y="222" width="8" height="8" rx="2"/><rect x="544" y="216" width="8" height="14" rx="2"/></g><rect x="558" y="210" width="8" height="20" rx="2" fill="#FFFFFF"/>
+<path d="M0 330 Q400 316 800 330 L800 450 L0 450 Z" fill="#8B5E3C" class="o"/>
+<g fill="none" stroke="#6E4A2F" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"><path d="M120 360 L150 380 L140 410"/><path d="M600 350 L640 372 L620 400"/><path d="M400 380 L430 400 L420 430"/><path d="M700 400 L730 420"/></g>
+<line x1="270" y1="332" x2="270" y2="262" stroke="#146134" stroke-width="5" stroke-linecap="round"/>
+<path d="M270 302 C236 292 224 262 230 244 C252 254 266 276 270 302 Z" fill="#1F9A4D" class="o"/>
+<path d="M270 272 C304 262 316 232 310 214 C288 224 274 246 270 272 Z" fill="#1F9A4D" class="o"/>
+<line x1="320" y1="332" x2="320" y2="262" stroke="#146134" stroke-width="5" stroke-linecap="round"/>
+<path d="M320 302 C286 292 274 262 280 244 C302 254 316 276 320 302 Z" fill="#1F9A4D" class="o"/>
+<path d="M320 272 C354 262 366 232 360 214 C338 224 324 246 320 272 Z" fill="#1F9A4D" class="o"/>
+<line x1="370" y1="332" x2="370" y2="262" stroke="#146134" stroke-width="5" stroke-linecap="round"/>
+<path d="M370 302 C336 292 324 262 330 244 C352 254 366 276 370 302 Z" fill="#1F9A4D" class="o"/>
+<path d="M370 272 C404 262 416 232 410 214 C388 224 374 246 370 272 Z" fill="#1F9A4D" class="o"/>
+<line x1="420" y1="332" x2="420" y2="262" stroke="#146134" stroke-width="5" stroke-linecap="round"/>
+<path d="M420 302 C386 292 374 262 380 244 C402 254 416 276 420 302 Z" fill="#1F9A4D" class="o"/>
+<path d="M420 272 C454 262 466 232 460 214 C438 224 424 246 420 272 Z" fill="#1F9A4D" class="o"/>
+<path d="M300 250 Q290 220 300 200 T300 150" fill="none" stroke="#3B82C4" stroke-width="4" stroke-linecap="round" stroke-dasharray="6 8"/>
+<path d="M300 150 L291 166 L309 166 Z" fill="#3B82C4" class="o"/>
+<path d="M350 250 Q340 220 350 200 T350 150" fill="none" stroke="#3B82C4" stroke-width="4" stroke-linecap="round" stroke-dasharray="6 8"/>
+<path d="M350 150 L341 166 L359 166 Z" fill="#3B82C4" class="o"/>
+<path d="M400 250 Q390 220 400 200 T400 150" fill="none" stroke="#3B82C4" stroke-width="4" stroke-linecap="round" stroke-dasharray="6 8"/>
+<path d="M400 150 L391 166 L409 166 Z" fill="#3B82C4" class="o"/>
+<rect x="182" y="278" width="36" height="60" rx="10" fill="#1F9A4D" class="o"/>
+<rect x="182" y="268" width="36" height="16" rx="6" fill="#1A3A5C" class="o"/>
+<line x1="212" y1="268" x2="212" y2="228" stroke="#1A1E1B" stroke-width="5" stroke-linecap="round"/><circle cx="212" cy="224" r="6" fill="#1A1E1B"/>
+<path d="M0 -18 C-8 -6 -13 0 -13 6 A13 13 0 0 0 13 6 C13 0 8 -6 0 -18 Z" fill="#BFE0F5" class="o" transform="translate(150 246) scale(1.0)"/>
+<path d="M0 0 C-20 0 -24 -30 0 -32 C4 -54 40 -56 46 -38 C66 -46 86 -30 76 -14 C88 -12 88 4 74 4 Z" fill="#C9D3CC" class="o" transform="translate(660 250) scale(0.9)"/>
+<g stroke="#3B82C4" stroke-width="4" stroke-linecap="round"><line x1="672" y1="260" x2="667" y2="277"/><line x1="692" y1="260" x2="687" y2="277"/><line x1="712" y1="260" x2="706" y2="277"/></g>
+</svg>

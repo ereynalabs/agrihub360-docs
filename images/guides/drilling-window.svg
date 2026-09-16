@@ -1,0 +1,45 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 450" role="img" aria-label="Cartoon of a run of ticked days, a thermometer standing above its floor line, and a tractor with a drill moving into a warm seedbed">
+  <defs><style>.o{stroke:#1A1E1B;stroke-width:4;stroke-linejoin:round;stroke-linecap:round}</style></defs>
+  <rect width="800" height="450" fill="#EAF3EC"/>
+<circle cx="730" cy="190" r="28" fill="#F5C842" class="o"/><g stroke="#1A1E1B" stroke-width="4" stroke-linecap="round"><line x1="768" y1="190" x2="780" y2="190"/><line x1="757" y1="217" x2="765" y2="225"/><line x1="730" y1="228" x2="730" y2="240"/><line x1="703" y1="217" x2="695" y2="225"/><line x1="692" y1="190" x2="680" y2="190"/><line x1="703" y1="163" x2="695" y2="155"/><line x1="730" y1="152" x2="730" y2="140"/><line x1="757" y1="163" x2="765" y2="155"/></g>
+<rect x="90" y="30" width="76" height="60" rx="10" fill="#C9D3CC" class="o"/>
+<rect x="114" y="56" width="28" height="8" rx="4" fill="#FFFFFF"/>
+<rect x="178" y="30" width="76" height="60" rx="10" fill="#C9D3CC" class="o"/>
+<rect x="202" y="56" width="28" height="8" rx="4" fill="#FFFFFF"/>
+<rect x="266" y="30" width="76" height="60" rx="10" fill="#FFFFFF" class="o"/>
+<polyline points="290,60 301,71 320,48" fill="none" stroke="#1F9A4D" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+<rect x="354" y="30" width="76" height="60" rx="10" fill="#FFFFFF" class="o"/>
+<polyline points="378,60 389,71 408,48" fill="none" stroke="#1F9A4D" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+<rect x="442" y="30" width="76" height="60" rx="10" fill="#FFFFFF" class="o"/>
+<polyline points="466,60 477,71 496,48" fill="none" stroke="#1F9A4D" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+<rect x="530" y="30" width="76" height="60" rx="10" fill="#FFFFFF" class="o"/>
+<polyline points="554,60 565,71 584,48" fill="none" stroke="#1F9A4D" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+<rect x="618" y="30" width="76" height="60" rx="10" fill="#FFFFFF" class="o"/>
+<polyline points="642,60 653,71 672,48" fill="none" stroke="#1F9A4D" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+<rect x="46" y="140" width="28" height="120" rx="14" fill="#FFFFFF" class="o"/>
+<rect x="54" y="184" width="12" height="70" fill="#D9534F"/>
+<circle cx="60" cy="266" r="18" fill="#D9534F" class="o"/>
+<path d="M26 208 L94 208" fill="none" stroke="#1A1E1B" stroke-width="4" stroke-linecap="round" stroke-dasharray="6 6"/>
+<path d="M0 330 Q400 316 800 330 L800 450 L0 450 Z" fill="#8B5E3C" class="o"/>
+<g fill="none" stroke="#6E4A2F" stroke-width="4" stroke-linecap="round"><path d="M0 370 Q400 356 800 370"/><path d="M0 402 Q400 388 800 402"/><path d="M0 434 Q400 420 800 434"/></g>
+<rect x="250" y="270" width="110" height="40" rx="8" fill="#E8A33D" class="o"/>
+<line x1="360" y1="300" x2="372" y2="300" stroke="#1A1E1B" stroke-width="5" stroke-linecap="round"/>
+<g stroke="#1A1E1B" stroke-width="4" stroke-linecap="round"><line x1="262" y1="310" x2="262" y2="336"/><line x1="290" y1="310" x2="290" y2="336"/><line x1="318" y1="310" x2="318" y2="336"/><line x1="346" y1="310" x2="346" y2="336"/></g>
+<circle cx="262" cy="336" r="8" fill="#C9D3CC" class="o"/>
+<circle cx="290" cy="336" r="8" fill="#C9D3CC" class="o"/>
+<circle cx="318" cy="336" r="8" fill="#C9D3CC" class="o"/>
+<circle cx="346" cy="336" r="8" fill="#C9D3CC" class="o"/>
+<g class="o"><rect x="400" y="260" width="110" height="34" rx="8" fill="#1F9A4D" class="o"/>
+<rect x="420" y="220" width="54" height="44" rx="8" fill="#1F9A4D" class="o"/>
+<rect x="428" y="228" width="38" height="26" rx="6" fill="#BFE0F5" class="o"/>
+<rect x="486" y="230" width="8" height="30" rx="3" fill="#1A1E1B" class="o"/>
+<circle cx="410" cy="300" r="30" fill="#1A1E1B" class="o"/>
+<circle cx="410" cy="300" r="12" fill="#C9D3CC" class="o"/>
+<circle cx="492" cy="310" r="20" fill="#1A1E1B" class="o"/>
+<circle cx="492" cy="310" r="8" fill="#C9D3CC" class="o"/>
+</g>
+<circle cx="140" cy="336" r="4" fill="#F5C842" class="o"/>
+<circle cx="170" cy="336" r="4" fill="#F5C842" class="o"/>
+<circle cx="200" cy="336" r="4" fill="#F5C842" class="o"/>
+<circle cx="226" cy="336" r="4" fill="#F5C842" class="o"/>
+</svg>

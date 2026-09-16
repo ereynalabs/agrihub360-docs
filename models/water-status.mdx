@@ -1,0 +1,126 @@
+---
+title: "Water Stress"
+description: "A banded drought-stress index per field, from temperature-based reference evapotranspiration, the field's own soil moisture reading and the rain ahead."
+---
+
+**Water Stress** gives each field a drought-stress index from 0 to 100, banded low, moderate or high. It computes reference evapotranspiration from the next 24 hours of forecast temperature with the Hargreaves equation and sets that demand against the latest soil moisture reading from a device on the field and the rain forecast for the next three days. Each index carries a confidence of low or moderate. It's a stress signal, not a soil water balance, so it doesn't produce an irrigation prescription.
+
+## The Science
+
+**Evapotranspiration** is the water a surface loses to the air. It combines evaporation from soil and transpiration from leaves. **Reference evapotranspiration**, ETo, is that loss from a defined reference surface. The reference is a hypothetical grass 0.12 m tall, with a fixed surface resistance of 70 s m⁻¹ and an albedo of 0.23, actively growing, fully shading the ground and well watered (Allen et al., 1998). ETo is a property of the weather, not of any crop. FAO Irrigation and Drainage Paper 56 recommends one method for it, the FAO Penman-Monteith equation (equation 6):
+
+$$
+ET_o = \frac{0.408\,\Delta\,(R_n - G) + \gamma\,\frac{900}{T + 273}\,u_2\,(e_s - e_a)}{\Delta + \gamma\,(1 + 0.34\,u_2)}
+$$
+
+where $R_n$ is net radiation and $G$ soil heat flux (MJ m⁻² day⁻¹), $T$ mean air temperature at 2 m (°C), $u_2$ wind speed at 2 m (m s⁻¹), $e_s - e_a$ the **vapour pressure deficit** (kPa, how far the air is from saturation), $\Delta$ the slope of the saturation vapour pressure curve and $\gamma$ the psychrometric constant (kPa °C⁻¹). It needs radiation, temperature, humidity and wind (Allen et al., 1998).
+
+When radiation, humidity or wind are missing, FAO-56 offers the Hargreaves equation (equation 52). It needs only daily maximum and minimum temperature and **extraterrestrial radiation** $R_a$, the radiation reaching the top of the atmosphere for that latitude and date (Hargreaves and Samani, 1985; Allen et al., 1998):
+
+$$
+ET_o = 0.0023\,(T_{mean} + 17.8)\,(T_{max} - T_{min})^{0.5}\,R_a
+$$
+
+FAO-56 advises checking the Hargreaves estimate against Penman-Monteith in each new region. Hargreaves tends to under-predict under high wind (above 3 m s⁻¹) and to over-predict under high humidity (Allen et al., 1998).
+
+A water balance turns ETo into stress. Crop evapotranspiration is ETo scaled by a crop coefficient. **Total available water** is the difference between the soil's water content at field capacity and at wilting point, over the rooting depth: $TAW = 1000\,(\theta_{FC} - \theta_{WP})\,Z_r$ (equation 82). Field capacity is the water the soil holds after it has drained. Wilting point is where the crop can draw no more. **Readily available water** is the fraction $p$ of that which a crop can use before it is stressed, $RAW = p \cdot TAW$ (equation 83). Root-zone depletion is tracked daily from rain, run-off, irrigation, capillary rise, crop evapotranspiration and deep percolation (equation 85). Once depletion exceeds RAW, the stress coefficient falls: $K_s = (TAW - D_r)/(TAW - RAW)$ (equation 84) (Allen et al., 1998). This model doesn't run that balance. Every term it lacks is listed under limits.
+
+## How It's Applied
+
+Two pure functions run in turn: Hargreaves reference evapotranspiration, then a stress index. Hargreaves needs only what every field has, the forecast temperature and the latitude. Penman-Monteith needs net radiation, wind and humidity at the field. Those aren't available.
+
+### Inputs
+
+| Input | Source | If missing |
+|---|---|---|
+| Maximum and minimum air temperature over the next 24 hours | The field's cached forecast, from a gridded weather model | ETo is taken as zero and the index is computed from the probe alone |
+| Extraterrestrial radiation $R_a$ | Computed from the field's latitude and the date in the published FAO-56 form (Allen et al., 1998), converted to mm per day | Never missing. It's computed, not fetched |
+| Soil moisture | Metric `220`, the latest reading from a device on the field, for example the [AgriHub360 Sensor](/devices/sensor) or a [device you bring](/devices/byod) | A demand-only index from ETo and the rain ahead, at low confidence |
+| Rain over the next 3 days | The field's cached forecast | Absent with the rest of the forecast: ETo is zero and the index comes from the probe alone |
+| Growth stage | Growth-stage model, through the "stage past the nitrogen window" test shared with [Nitrogen Timing](/models/nitrogen-timing) | The index is still computed and shown. No advisory is raised |
+
+The index is computed whenever a moisture reading or a forecast exists. Only with neither does the model report `no_data`.
+
+### The Rule
+
+```text
+ETo        = 0.0023 * (Tmean + 17.8) * sqrt(Tmax - Tmin) * Ra   # Hargreaves, FAO-56 eq. 52
+                                                                 # Tmax, Tmin from the next 24 hours of forecast
+                                                                 # Ra in mm per day
+ETo        = 0                                                   # when there is no forecast
+index      = stress(ETo, soil_moisture, rain_ahead)              # 0 to 100
+band       = low       if index < 30
+             moderate  if 30 <= index < 60
+             high      if index >= 60
+confidence = moderate  with a probe and a forecast
+             low       with a forecast and no probe                # never higher
+state      = no_data   only with no probe and no forecast
+```
+
+### Parameters
+
+| Quantity | Value |
+|---|---|
+| Index range | 0 to 100 |
+| Band edges | 30 and 60. Below 30 is low, 30 to 60 is moderate, 60 and above is high |
+| Confidence cap | `moderate`. A temperature-only ETo against a single-point probe never earns more. Without the probe the confidence is `low` |
+| ETo without a forecast | 0 mm per day |
+| Soil water-holding capacity, crop coefficient, readily available water | Not in the model |
+
+### Output and Cadence
+
+The model writes one drought-stress index per field, banded, with a confidence of `low` or `moderate`. The state is `no_data` only when there is neither a moisture reading nor a forecast. Resolution is the field. The job runs every six hours, after the growth-stage job. A sensitive stage is one where water stress still drives yield loss. It is the "stage past the nitrogen window" test shared with nitrogen timing. For a high band while the crop is at a sensitive stage, it writes an advisory row and sends a push and an email, at most once per field every three days. The field-detail card reads the live value on request. The confidence label is the uncertainty the index carries.
+
+### Data Flow
+
+The forecast temperature and rain feed the Hargreaves ETo. The ETo and the latest soil-moisture reading make the index and its band. The growth stage gates the advisory only. The scheduled job and the field route share the fetch step and both functions. Only the job writes advisory rows.
+
+### The Scheduled Run
+
+1. The weather ingest job refreshes the forecast every four hours, per grid cell, and writes it to each field in the cell.
+2. The growth-stage job runs at start-up and then daily, and writes a stage row per planting.
+3. Every six hours, and never at start-up, the water stress job lists the fields with an active planting. It reads the latitude, the latest moisture reading, the cached forecast and the stage row for each.
+4. A field with neither a probe nor a forecast is reported as `no_data` and nothing is written. Otherwise the job computes ETo, zero without a forecast, then the index, band and confidence.
+5. For a high band at a sensitive stage the job writes an advisory row, at most once per field every three days, and sends a push and an email.
+6. The field-detail card asks the field route for the live result, so it never waits for the next run.
+
+### Worked Example
+
+The table is an example, not a record. It walks one field at 52.2 °N through four July days. $R_a$ is given in its mm per day equivalent so that ETo follows directly from the formula above. The index values are illustrative and the bands follow the edges of 30 and 60.
+
+| Day | Tmin, Tmax, $R_a$ | ETo, soil moisture, rain ahead | Index and band |
+|---|---|---|---|
+| 19 July | 12 °C, 24 °C, 16.09 | 4.59 mm, 32 per cent, 0 mm | 33, moderate |
+| 20 July | 13 °C, 27 °C, 16.03 | 5.21 mm, 24 per cent, 0 mm | 49, moderate |
+| 21 July | 14 °C, 28 °C, 15.96 | 5.33 mm, 15 per cent, 2 mm | 62, high |
+| 22 July | 12 °C, 20 °C, 15.90 | 3.50 mm, 15 per cent, 18 mm | 37, moderate |
+
+On 19 July the ETo is $0.0023 \times (18 + 17.8) \times \sqrt{12} \times 16.09 = 4.59$ mm per day. The index climbs as the probe dries and the demand rises. It crosses 60 into the high band on 21 July, while the crop is at flag leaf (GS39). It falls back on 22 July when cooler air lowers the demand and 18 mm of rain is forecast, although the probe still reads 15 per cent. The advisory fires once, on 21 July, the day the band turns high.
+
+## External Models
+
+This model calls no language model. Its outputs are numbers and states: an ETo, an index, a band and a confidence. Alert text is rendered from templates. The forecast temperature and rain it reads come from a gridded weather model, cached per field and refreshed every four hours. Two language-model features read its output. The [Field Health Review](/models/field-health-review) folds it into its summary of the field. The [Assistant](/models/assistant) can answer questions about it.
+
+## Validation
+
+Validation holds out a whole season, a whole region, or both. The Hargreaves reference evapotranspiration is scored against the FAO Penman-Monteith value computed from full weather records at stations in the held-out region. That is the check FAO-56 asks for in each new region (Allen et al., 1998). The stress index is scored against the FAO-56 stress coefficient $K_s$ from a full soil water balance on held-out fields with a soil moisture record. The baseline for the index is a rainfall-only signal: days since the last rain.
+
+## Limits
+
+- It does not produce an irrigation prescription.
+- It uses Hargreaves rather than Penman-Monteith. FAO-56 itself sanctions that trade-off when radiation, humidity and wind are missing (Allen et al., 1998).
+- One moisture probe per field, at one depth, stands for the whole field.
+- There is no soil water-holding capacity term, so the same index means different things on sand and on clay. In FAO-56 terms there is no $TAW$, no $RAW$ and no $K_s$.
+- There is no crop coefficient and no root-zone depletion model. The index is a stress signal, not a water balance.
+- Without a probe the index is demand-only and its confidence is low. Without a forecast the demand term is zero. It never estimates a moisture reading.
+
+See the [models overview](/models/overview) for the rules every model inherits.
+
+## References
+
+<div className="refs">
+
+1. Allen, R.G., Pereira, L.S., Raes, D. and Smith, M., 1998. [Crop evapotranspiration: guidelines for computing crop water requirements. FAO Irrigation and Drainage Paper 56](https://www.fao.org/4/x0490e/x0490e00.htm). Food and Agriculture Organization of the United Nations, Rome.
+2. Hargreaves, G.H. and Samani, Z.A., 1985. [Reference crop evapotranspiration from temperature](https://doi.org/10.13031/2013.26773). Applied Engineering in Agriculture, 1(2), 96–99.
+
+</div>

@@ -1,0 +1,16 @@
+---
+title: "Drilling Window"
+description: "Soil temperature held N days, per crop and soil type."
+---
+
+## What It Tells You
+
+The **drilling window** says whether the seedbed is warm enough to drill: open, approaching or closed. A seed will not germinate below its crop's base temperature. One warm afternoon does not warm a seedbed. The window opens when the field's daily mean soil temperature has held above the crop's floor for the required run of consecutive days. Approaching means the latest day is above the floor but the run is not yet long enough. The window covers soil temperature only. Moisture, tilth and the weather for the drilling pass are yours to judge. The state is computed by the [Drilling Window](/models/drilling-window) model.
+
+## How It Works
+
+The model reads the daily mean soil temperature from the field's own probe over the last 30 days. The floor and the run length come from a per-crop parameter table, by crop and soil type. The model runs daily. The field card recomputes the state from the readings whenever it is opened. A reading older than six hours is flagged as stale.
+
+<Frame caption="Five days in a row above the floor, and the drill moves into the seedbed.">
+  <img src="/images/guides/drilling-window.svg" alt="Cartoon of a run of ticked days, a thermometer standing above its floor line, and a tractor with a drill moving into a warm seedbed." />
+</Frame>

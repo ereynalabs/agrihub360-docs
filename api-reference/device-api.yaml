@@ -1,0 +1,251 @@
+openapi: 3.1.0
+
+info:
+  title: AgriHub360 Device API
+  version: "1.0.0"
+  description: |
+    The Device API is the path a device takes to put a reading on a field. One
+    authenticated endpoint stores a reading. Two unauthenticated probes report
+    whether the service is up.
+
+    A device authenticates with a per-device bearer API key or a client
+    certificate, posts one `{ device_id, metric_id, value }` per request, and
+    receives the stored row back with a server-assigned timestamp. Devices are
+    claimed and keys are issued in the app.
+  contact:
+    name: AgriHub360 support
+    url: https://www.agrihub360.com/support
+
+servers:
+  - url: https://devices.agrihub360.example
+    description: Device API
+
+tags:
+  - name: telemetry
+    description: Store a reading
+  - name: health
+    description: Liveness and readiness probes
+
+paths:
+  /api/metric-values:
+    post:
+      tags: [telemetry]
+      operationId: ingestMetricValue
+      summary: Post a reading
+      description: |
+        Stores one reading for one device. The body names the device, the
+        metric and the value. The server assigns the timestamp on arrival; any
+        `timestamp` in the request is ignored.
+
+        On success the stored row is returned with a `201`. The reading is also
+        published to the live-updates message bus. That publish is best-effort
+        and never fails the request.
+
+        One reading per request. There is no batch endpoint. Each device
+        credential is limited to 120 requests per 60 seconds.
+      security:
+        - deviceApiKey: []
+        - clientCertificate: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ReadingIn"
+            examples:
+              soilMoisture:
+                summary: Soil moisture, 42.5%
+                value:
+                  device_id: "77777777-7777-7777-7777-777777777703"
+                  metric_id: 220
+                  value: 42.5
+              soilTemperature:
+                summary: Soil temperature, 8.4 °C, as a string
+                value:
+                  device_id: "77777777-7777-7777-7777-777777777701"
+                  metric_id: 70
+                  value: "8.4"
+      responses:
+        "201":
+          description: Reading stored. The body is the stored row.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Reading"
+              example:
+                device_id: "77777777-7777-7777-7777-777777777703"
+                metric_id: 220
+                value: "42.5"
+                timestamp: "1784367787126"
+        "400":
+          description: The body failed validation. `device_id`, `metric_id` or `value` is missing or malformed. Fix the request; do not retry it as sent.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+              example: { error: bad_request, reason: metric_id must be an integer }
+        "401":
+          description: Missing or invalid device credential. Retrying does not clear it. Issue a new key in the app.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+              examples:
+                missing:
+                  value: { error: unauthorized, reason: missing device credential }
+                invalid:
+                  value: { error: unauthorized, reason: invalid device credential }
+        "429":
+          description: Over the rate limit of 120 requests per 60 seconds for this credential. Wait for `retry-after` seconds.
+          headers:
+            retry-after:
+              description: Seconds to wait before the next request.
+              schema:
+                type: integer
+                example: 12
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+              example: { error: rate_limited, reason: retry after 12 seconds }
+        "500":
+          description: Server or database error. Back off and retry.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+              example: { error: internal_error, reason: database error }
+
+  /healthz:
+    get:
+      tags: [health]
+      operationId: healthz
+      summary: Liveness probe
+      description: Returns `200` while the process is running. No database check. Unauthenticated and exempt from the rate limit.
+      security: []
+      responses:
+        "200":
+          description: The service process is alive.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Health"
+              example: { status: ok, service: device-api }
+
+  /readyz:
+    get:
+      tags: [health]
+      operationId: readyz
+      summary: Readiness probe
+      description: Returns `200` when the database is reachable and `503` when it is not. Unauthenticated and exempt from the rate limit.
+      security: []
+      responses:
+        "200":
+          description: Ready. The database is reachable.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Ready"
+              example: { status: ok }
+        "503":
+          description: Not ready. The database is unreachable.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Ready"
+              example: { status: unavailable }
+
+components:
+  securitySchemes:
+    deviceApiKey:
+      type: http
+      scheme: bearer
+      description: |
+        The device's API key, sent as `Authorization: Bearer <api_key>`. Issued
+        per device in the app and shown once. Issuing a new key revokes the
+        previous one.
+    clientCertificate:
+      type: apiKey
+      in: header
+      name: X-Client-Cert-CN
+      description: |
+        Set by the TLS-terminating proxy after it verifies the device's client
+        certificate, in the form `device:<device-uuid>`. The device presents the
+        certificate and never sets this header itself. A verified certificate
+        takes precedence over a bearer key.
+
+  schemas:
+    ReadingIn:
+      type: object
+      additionalProperties: false
+      required: [device_id, metric_id, value]
+      description: One reading. A `timestamp` is not accepted; the server assigns it.
+      properties:
+        device_id:
+          type: string
+          format: uuid
+          description: The id of a device claimed in the app.
+          example: "77777777-7777-7777-7777-777777777703"
+        metric_id:
+          type: integer
+          description: What was measured, from the shared metric catalogue. `220` is soil moisture in percent.
+          example: 220
+        value:
+          description: The reading, as a number or a numeric string. Stored and returned as a string. Units are not converted.
+          oneOf:
+            - type: number
+            - type: string
+          example: 42.5
+
+    Reading:
+      type: object
+      description: A stored reading.
+      required: [device_id, metric_id, value, timestamp]
+      properties:
+        device_id:
+          type: string
+          format: uuid
+          example: "77777777-7777-7777-7777-777777777703"
+        metric_id:
+          type: integer
+          example: 220
+        value:
+          type: string
+          description: The stored reading, always a string.
+          example: "42.5"
+        timestamp:
+          type: string
+          description: Server-assigned time of arrival in epoch milliseconds, serialised as a string.
+          example: "1784367787126"
+
+    Error:
+      type: object
+      required: [error]
+      properties:
+        error:
+          type: string
+          description: A short error code.
+          example: unauthorized
+        reason:
+          type: string
+          description: A sentence saying what went wrong.
+          example: invalid device credential
+
+    Health:
+      type: object
+      required: [status, service]
+      properties:
+        status:
+          type: string
+          enum: [ok]
+        service:
+          type: string
+          enum: [device-api]
+
+    Ready:
+      type: object
+      required: [status]
+      properties:
+        status:
+          type: string
+          enum: [ok, unavailable]

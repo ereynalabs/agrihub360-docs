@@ -1,0 +1,16 @@
+---
+title: "Nitrogen Timing"
+description: "Apply or hold, from temperature, moisture and rain."
+---
+
+## What It Tells You
+
+**Nitrogen timing** says whether the field is ready for a nitrogen application today: apply, marginal or hold. A crop past GS55 is held. The dressing is too late to help. Soil colder than 5.5 °C and not rising is held. The roots take up little and the soil releases little. Soil wetter than 85 per cent is held, in line with the Farming Rules for Water on waterlogged ground. Soil below 20 per cent, or 25 mm or more of rain forecast over the next three days, is marginal. The leaching risk is shown next to the state, so you can see which test held it. The state is computed by the [Nitrogen Timing](/models/nitrogen-timing) model. The model times the application. It does not set the rate.
+
+## How It Works
+
+Every three hours the model reads the growth stage, the last ten days of soil temperature, the latest soil moisture reading from a device on the field and the three-day forecast rain. An apply state raises an advisory at most once per field every three days. A high leaching risk raises one at most once a day. The field card reads the live result whenever it is opened.
+
+<Frame caption="The field card reads apply, with the temperature, moisture and rain tests behind it, and the spreader goes out.">
+  <img src="/images/guides/nitrogen-timing.svg" alt="Cartoon of a field card marked N showing an apply state with temperature, moisture and rain rows, and a spreader throwing granules across a field." />
+</Frame>

@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 450" role="img" aria-label="Cartoon of modelled and measured values for one field: a sensor probe in the soil beside a chart where a dashed modelled line runs next to a solid measured line, with a chip for each">
+  <defs><style>.o{stroke:#1A1E1B;stroke-width:4;stroke-linejoin:round;stroke-linecap:round}</style></defs>
+  <rect width="800" height="450" fill="#EAF3EC"/>
+  <path d="M0 330 Q150 310 300 330 L300 450 L0 450 Z" fill="#8B5E3C" class="o"/>
+  <path d="M0 330 Q150 310 300 330" fill="none" stroke="#6E4A2F" stroke-width="6"/>
+  <g class="o">
+    <path d="M60 330 C52 292 70 266 80 244 C90 274 98 294 84 330 Z" fill="#1F9A4D"/>
+    <path d="M240 330 C232 292 250 266 260 244 C270 274 278 294 264 330 Z" fill="#1F9A4D"/>
+    <path d="M160 330 L140 330 L160 400 Z" fill="#C9D3CC"/>
+    <rect x="120" y="250" width="80" height="84" rx="14" fill="#1F9A4D"/>
+    <rect x="120" y="236" width="80" height="24" rx="8" fill="#1A3A5C"/>
+    <line x1="186" y1="236" x2="186" y2="170" stroke-width="6"/><circle cx="186" cy="162" r="9" fill="#1A1E1B"/>
+    <circle cx="140" cy="296" r="7" fill="#F5C842"/><rect x="156" y="288" width="34" height="16" rx="6" fill="#0F4A27"/>
+  </g>
+  <g fill="none" stroke="#146134" stroke-width="4" stroke-linecap="round" stroke-dasharray="8 8"><path d="M210 168 A36 36 0 0 1 210 222"/><path d="M228 150 A60 60 0 0 1 228 240"/></g>
+  <g class="o">
+    <rect x="340" y="50" width="420" height="350" rx="16" fill="#FFFFFF"/>
+    <rect x="364" y="72" width="130" height="30" rx="15" fill="#EAF3EC"/><circle cx="382" cy="87" r="8" fill="#C9D3CC" stroke-width="3"/><rect x="398" y="82" width="80" height="10" rx="5" fill="#C9D3CC" stroke="none"/>
+    <rect x="508" y="72" width="130" height="30" rx="15" fill="#EAF3EC"/><circle cx="526" cy="87" r="8" fill="#3B82C4" stroke-width="3"/><rect x="542" y="82" width="80" height="10" rx="5" fill="#C9D3CC" stroke="none"/>
+    <line x1="380" y1="130" x2="380" y2="360"/><line x1="380" y1="360" x2="730" y2="360"/>
+  </g>
+  <path d="M400 300 C440 280 470 240 510 236 C550 232 580 260 620 220 C660 180 690 200 720 190" fill="none" stroke="#146134" stroke-width="5" stroke-linecap="round" stroke-dasharray="10 10"/>
+  <path d="M400 320 C440 290 470 270 510 260 C550 250 580 290 620 250 C660 210 690 230 720 210" fill="none" stroke="#3B82C4" stroke-width="5" stroke-linecap="round"/>
+  <g fill="#3B82C4" class="o" stroke-width="3"><circle cx="510" cy="260" r="7"/><circle cx="620" cy="250" r="7"/><circle cx="720" cy="210" r="7"/></g>
+</svg>

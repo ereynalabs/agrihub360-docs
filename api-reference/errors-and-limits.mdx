@@ -1,0 +1,45 @@
+---
+title: "Errors and Limits"
+description: "Status codes, the rate limit, the rules every reading follows, and the health probes."
+---
+
+The Device API answers with conventional status codes and a JSON body that names the error. This page lists them, the rate limit, the rules that apply to every reading, and the two unauthenticated probes.
+
+## Status Codes
+
+| Code | Meaning | What to do |
+|---|---|---|
+| `201` | Reading stored. The body is the stored row with the server timestamp. | Nothing |
+| `400` | The body failed validation: a missing or malformed `device_id`, `metric_id` or `value`. | Fix the request. Don't retry as sent |
+| `401` | Missing or invalid credential. | Issue a new key in the app. Retrying won't clear it |
+| `429` | Over the rate limit. | Wait for the `retry-after` value, then resume |
+| `500` | Server or database error. | Back off and retry |
+
+Error bodies have the same shape:
+
+```json
+{ "error": "unauthorized", "reason": "missing device credential" }
+```
+
+## Rate Limit
+
+120 requests per 60 seconds per device credential. The limit is per key, not per IP address, so one device cannot starve another. Over the limit the API returns `429` with a `retry-after` header in seconds. A device reporting every 15 minutes uses a fraction of the allowance; a bridge flushing a backlog after an outage is the case that meets it.
+
+## Rules For Every Reading
+
+- **The server sets the timestamp.** Any `timestamp` in the request is ignored. A reading buffered offline and sent later is stored with the time it arrived, not the time it was taken.
+- **One reading per request.** There's no batch endpoint. Post each field of a multi-channel uplink as its own request.
+- **Values are stored as strings.** Send a number or a numeric string. A value you want to chart must parse as a number.
+- **Units aren't converted.** Convert to the catalogue unit on the device or in the bridge. See [Metrics](/devices/metrics).
+- **Don't send filler.** A device that goes quiet is shown as stale in the app. A repeated old value looks current and isn't.
+
+## Health Probes
+
+Two probes report whether the service is up. Both are unauthenticated and exempt from the rate limit, so a load balancer or a monitoring job can call them as often as it needs.
+
+| Endpoint | Returns | Use it for |
+|---|---|---|
+| `GET /healthz` | `200` while the process is running. No database check. | Liveness |
+| `GET /readyz` | `200` when the database is reachable, otherwise `503`. | Readiness |
+
+A device doesn't need to call either. If a post fails with a connection error, back off and retry.

@@ -1,0 +1,100 @@
+---
+title: "Drilling Window"
+description: "Whether a field's soil has held above the crop's temperature floor for enough consecutive days to drill, from the field's own soil-temperature record."
+---
+
+The **Drilling Window** model tells you whether a field's soil has held above the crop's temperature floor for enough consecutive days to drill. It reads the daily mean soil temperature from the field's own probe, picks the floor and the run length for the intended crop and the field's soil type from a per-crop parameter table, and reports the field as open, approaching or closed on the field-detail card. It speaks to soil temperature only: soil moisture, tilth and the weather window for the drilling operation itself are outside it.
+
+## The Science
+
+A seed will not germinate below a base temperature. Above it, the warmer the soil, the sooner the seedling emerges. For wheat, controlled-temperature work put the base at about 1 °C for germination and 0.4 °C for emergence, with roughly 130 °C days of thermal time needed to emerge. The same work found that final germination and emergence were reduced at 2 °C compared with 8 °C and above (Addae and Pearson, 1992). **Thermal time** is the sum of daily mean temperatures above the base, in degree-days (°C days). The [growth stage](/models/growth-stage) page defines and calculates it. AHDB benchmarks for UK field crops are of the same order: about 150 °C days from sowing to 50% emergence in wheat and barley, and 160 °C days in oilseed rape. In oilseed rape, accumulated soil temperature at 2 cm was a strong predictor of emergence, and germination fell to 70% when soil was below 3 °C (AHDB, n.d. a; AHDB, n.d. b; AHDB, 1995). Germination also needs water and oxygen. A seedbed that is very wet or near saturation slows the flow of oxygen to the seed. That limits germination even when the soil is warm enough (AHDB, n.d. b).
+
+A cold seedbed means slow, uneven and sometimes reduced emergence. Practical guidance therefore states a soil-temperature floor and asks for it to be held. AHDB advice for maize is to start drilling when soil temperature reaches 8 °C for five consecutive days, or 6 °C for maize grown under degradable film. In practice that is generally after 15 April (AHDB, n.d. c). The run length matters. One warm afternoon does not warm a seedbed. A floor held for several days is evidence that the soil, not just the air, has warmed.
+
+Soil temperature at drilling depth varies from field to field with aspect, soil type and drainage. It is not the same as air temperature. That is why this model reads the field's own probe rather than a regional weather feed. A regional air-temperature series cannot produce a per-field drilling window.
+
+## How It's Applied
+
+A pure function reads the field's daily soil-temperature series and returns the state. The floor and the run length are rows in a table, one per crop and soil type. Each can be tuned without touching the rule.
+
+### Inputs
+
+| Input | Source | If missing |
+|---|---|---|
+| Daily mean soil temperature | The field's own soil probe, via an [AgriHub360 Sensor](/devices/sensor) or a [bring-your-own device](/devices/byod), averaged per day over the last 30 days | No output for the field: the shared rule is to skip, not approximate |
+| Intended crop | The field record | No output for the field |
+| Soil type | The field record: light, medium or heavy | The medium row is used and the card flags the soil type as assumed |
+| Minimum soil temperature and consecutive-day requirement | Per-crop parameter table, with a row per soil type | No output for that crop |
+
+### The Rule
+
+```
+row    = threshold row for the crop and the field's soil type
+floor  = min_soil_temp_c[row]
+N      = consecutive_days[row]
+
+open        if the daily mean soil temperature has been >= floor
+            on each of the last N days
+approaching if the latest daily mean is >= floor, but the run is shorter than N days
+closed      if the latest daily mean is below the floor
+```
+
+The row is chosen by soil type. The table holds light, medium and heavy rows per crop. The field's soil type picks its row. With no matching row, the medium row is used. With no medium row, a row with no soil type is used. Failing that, the first row for the crop is used. When the field has no soil type and a soil-specific row was used, the result carries an assumed-soil-type flag.
+
+The run is counted back from the latest day. A single day below the floor resets it. The rule does not average across days. A cold day breaks a run even when the mean over the period is well above the floor. An open window is dated from the day the run first reached N.
+
+### Parameters
+
+| Parameter | Value | Note |
+|---|---|---|
+| Minimum soil temperature | Per crop and soil type, set in the parameter table | Guidance for maize sets the floor at 8 °C, or 6 °C under degradable film (AHDB, n.d. c) |
+| Consecutive days | Per crop and soil type, set in the parameter table | Guidance for maize asks for five consecutive days (AHDB, n.d. c) |
+
+### The Scheduled Run
+
+1. Daily, and once at start-up, the job selects the active fields that have an intended crop.
+2. For each field it loads the crop's threshold rows, picks the row for the field's soil type, and averages the field's soil readings per day over the last 30 days. No threshold row, or no readings: skip.
+3. It runs the rule and gets open, approaching or closed, with the run length. No state row is stored. The read route recomputes the same state from the readings whenever the card asks.
+4. If the window is open, the latest reading is under six hours old, and the field has no drilling advisory from the last 14 days, it inserts an advisory row and notifies the farm.
+5. When the latest reading is older than six hours, the job raises nothing. The read route returns the state with a stale flag, so the card says the reading is old rather than showing a stale window. Resolution is the field.
+
+### Worked Example
+
+Illustrative values: a floor of 8 °C held for three days.
+
+| Day | Daily mean soil temperature (°C) | Run (days) | State |
+|---|---|---|---|
+| 1 | 8.4 | 1 | approaching |
+| 2 | 7.8 | 0 | closed |
+| 3 | 8.2 | 1 | approaching |
+| 4 | 8.6 | 2 | approaching |
+| 5 | 9.1 | 3 | open |
+
+## External Models
+
+This model calls no language model. Its outputs are numbers and states. Alert text is rendered from templates. No external model feeds it either. Its only input is the field's own soil probe, not the gridded weather model behind the forecast. Two language-model features read its output. The [Field Health Review](/models/field-health-review) folds the window state into its summary of the field. The [Assistant](/models/assistant) can answer questions about it.
+
+## Validation
+
+Validation holds out a whole season, a whole region, or both. The held-out window is scored against observed emergence on the same fields: the date of 50% emergence and the final emergence percentage. The baseline is the calendar: the fixed earliest sowing date that guidance gives for the crop, such as 15 April for maize (AHDB, n.d. c).
+
+## Limits
+
+- **Seedbed condition.** Soil moisture, tilth and workability are not modelled. There is no sensor for tilth. A field can be warm enough and completely undrillable. The card speaks to soil temperature only and says so.
+- It does not forecast a weather window for the drilling operation itself.
+- Soil temperature is read at one probe depth and one point in the field. A field with a cold, wet corner and a warm, sandy headland is represented by whichever the probe sits in.
+- It does not consider sowing date in its own right. Guidance on latest safe sowing dates, and on the yield cost of drilling late, is outside its scope.
+- It does not read or infer nutrient status. Nutrient sensing is not a supported reading.
+
+## References
+
+<div className="refs">
+
+1. Addae, P. C. and Pearson, C. J. (1992). [Thermal requirement for germination and seedling growth of wheat](https://doi.org/10.1071/AR9920585). *Australian Journal of Agricultural Research*, 43(3), 585–594.
+2. AHDB (n.d. a). [Establishment in wheat: germination and emergence (GS0–GS2)](https://ahdb.org.uk/knowledge-library/establishment-in-wheat-germination-and-emergence-gs0-gs2). AHDB Knowledge Library.
+3. AHDB (n.d. b). [Establishment in barley: germination and emergence (GS0–GS2)](https://ahdb.org.uk/knowledge-library/establishment-in-barley-germination-and-emergence-gs0-gs2). AHDB Knowledge Library.
+4. AHDB (1995). [Establishment of oilseed rape: the influence of physical characteristics of seedbeds and weather on germination, emergence and seedling survival](https://ahdb.org.uk/establishment-of-oilseed-rape-the-influence-of-physical-characteristics-of-seedbeds-and-weather-on-germination-emergence-and-seedling-survival). Project PROS31.
+5. AHDB (n.d. c). [Establishing maize](https://ahdb.org.uk/knowledge-library/establishing-maize). AHDB Knowledge Library.
+6. [AHDB (2023, updated 2025). *Wheat growth guide*](https://projectblue.blob.core.windows.net/media/Default/Imported%20Publication%20Docs/WheatGrowthGuide4470_UPDATE_250627_WEB.pdf). Agriculture and Horticulture Development Board.
+
+</div>

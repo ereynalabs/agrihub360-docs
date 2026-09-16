@@ -1,0 +1,47 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 450" role="img" aria-label="Cartoon of variety evidence: harvest results from consenting farms on a top-down map flow along dashed lines into a pooled card showing the results, their margin and a confidence tier, while two farms with padlocks keep theirs out">
+  <defs><style>.o{stroke:#1A1E1B;stroke-width:4;stroke-linejoin:round;stroke-linecap:round}</style></defs>
+  <rect width="800" height="450" fill="#EAF3EC"/>
+  <g class="o">
+    <path d="M40 50 L170 40 L186 130 L56 142 Z" fill="#1F9A4D"/>
+    <path d="M60 150 L190 138 L200 200 L70 212 Z" fill="#A7D7B4"/>
+    <path d="M40 300 L180 290 L196 400 L60 412 Z" fill="#146134"/>
+    <path d="M600 300 L760 292 L770 410 L612 420 Z" fill="#1F9A4D"/>
+    <path d="M540 330 L590 326 L596 396 L548 400 Z" fill="#A7D7B4"/>
+    <path d="M620 40 L760 48 L750 140 L612 130 Z" fill="#C9D3CC"/>
+    <path d="M600 150 L740 158 L730 214 L596 206 Z" fill="#C9D3CC"/>
+    <path d="M330 30 L470 26 L476 96 L336 100 Z" fill="#C9D3CC"/>
+  </g>
+  <g fill="none" stroke-width="3" stroke-linecap="round">
+    <g stroke="#146134"><line x1="72" y1="60" x2="84" y2="128"/><line x1="104" y1="58" x2="116" y2="126"/><line x1="136" y1="56" x2="148" y2="124"/><line x1="650" y1="310" x2="660" y2="400"/><line x1="690" y1="308" x2="700" y2="398"/><line x1="730" y1="306" x2="740" y2="396"/></g>
+    <g stroke="#1F9A4D"><line x1="74" y1="310" x2="86" y2="394"/><line x1="110" y1="308" x2="122" y2="392"/><line x1="146" y1="306" x2="158" y2="390"/></g>
+  </g>
+  <ellipse cx="120" cy="360" rx="22" ry="14" fill="#3B82C4" class="o"/>
+  <g class="o">
+    <path d="M675 82 V72 A12 12 0 0 1 699 72 V82" fill="none"/>
+    <rect x="669" y="82" width="36" height="28" rx="6" fill="#F5C842"/>
+    <circle cx="687" cy="95" r="4" fill="#1A1E1B"/>
+    <path d="M391 52 V42 A12 12 0 0 1 415 42 V52" fill="none"/>
+    <rect x="385" y="52" width="36" height="28" rx="6" fill="#F5C842"/>
+    <circle cx="403" cy="65" r="4" fill="#1A1E1B"/>
+  </g>
+  <g fill="none" stroke="#146134" stroke-width="4" stroke-linecap="round" stroke-dasharray="8 8">
+    <path d="M200 172 Q250 210 280 200"/>
+    <path d="M200 340 Q250 300 280 270"/>
+    <path d="M600 350 Q560 300 520 270"/>
+  </g>
+  <g class="o">
+    <circle cx="240" cy="196" r="7" fill="#F5C842"/><circle cx="240" cy="306" r="7" fill="#F5C842"/><circle cx="560" cy="306" r="7" fill="#F5C842"/>
+    <rect x="280" y="120" width="240" height="210" rx="16" fill="#FFFFFF"/>
+  </g>
+  <rect x="300" y="138" width="90" height="12" rx="6" fill="#C9D3CC"/>
+  <line x1="300" y1="216" x2="500" y2="216" stroke="#C9D3CC" stroke-width="3" stroke-linecap="round"/>
+  <line x1="384" y1="160" x2="384" y2="224" stroke="#1F9A4D" stroke-width="4" stroke-linecap="round"/>
+  <g class="o">
+    <circle cx="322" cy="198" r="8" fill="#F5C842"/><circle cx="352" cy="182" r="8" fill="#F5C842"/><circle cx="380" cy="204" r="8" fill="#F5C842"/><circle cx="412" cy="172" r="8" fill="#F5C842"/><circle cx="444" cy="190" r="8" fill="#F5C842"/>
+  </g>
+  <g stroke="#1A1E1B" stroke-width="3" stroke-linecap="round"><line x1="350" y1="240" x2="418" y2="240"/><line x1="350" y1="232" x2="350" y2="248"/><line x1="418" y1="232" x2="418" y2="248"/></g>
+  <g class="o">
+    <rect x="300" y="276" width="44" height="20" rx="8" fill="#1F9A4D"/><rect x="352" y="276" width="44" height="20" rx="8" fill="#1F9A4D"/><rect x="404" y="276" width="44" height="20" rx="8" fill="#1F9A4D"/><rect x="456" y="276" width="44" height="20" rx="8" fill="#C9D3CC"/>
+  </g>
+  <rect x="300" y="306" width="120" height="10" rx="5" fill="#C9D3CC"/>
+</svg>

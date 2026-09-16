@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 450" role="img" aria-label="Cartoon of a phone card with green spray bands on a 48-hour strip ending in a frost mark, a sprayer waiting on the field and a windsock">
+  <defs><style>.o{stroke:#1A1E1B;stroke-width:4;stroke-linejoin:round;stroke-linecap:round}</style></defs>
+  <rect width="800" height="450" fill="#EAF3EC"/>
+<circle cx="80" cy="70" r="28" fill="#F5C842" class="o"/><g stroke="#1A1E1B" stroke-width="4" stroke-linecap="round"><line x1="118" y1="70" x2="130" y2="70"/><line x1="107" y1="97" x2="115" y2="105"/><line x1="80" y1="108" x2="80" y2="120"/><line x1="53" y1="97" x2="45" y2="105"/><line x1="42" y1="70" x2="30" y2="70"/><line x1="53" y1="43" x2="45" y2="35"/><line x1="80" y1="32" x2="80" y2="20"/><line x1="107" y1="43" x2="115" y2="35"/></g>
+<path d="M0 0 C-20 0 -24 -30 0 -32 C4 -54 40 -56 46 -38 C66 -46 86 -30 76 -14 C88 -12 88 4 74 4 Z" fill="#FFFFFF" class="o" transform="translate(240 100) scale(0.9)"/>
+<path d="M0 372 Q400 356 800 372 L800 450 L0 450 Z" fill="#1F9A4D" class="o"/>
+<rect x="60" y="120" width="220" height="320" rx="24" fill="#1A1E1B" class="o"/>
+<rect x="74" y="136" width="192" height="288" rx="14" fill="#FFFFFF" class="o"/>
+<rect x="90" y="150" width="120" height="12" rx="6" fill="#1A1E1B"/>
+<circle cx="110" cy="190" r="8" fill="#F5C842" class="o"/>
+<circle cx="150" cy="190" r="8" fill="#F5C842" class="o"/>
+<circle cx="190" cy="190" r="8" fill="#C9D3CC" class="o"/>
+<circle cx="230" cy="190" r="8" fill="#C9D3CC" class="o"/>
+<rect x="90" y="210" width="160" height="30" rx="8" fill="#C9D3CC" class="o"/>
+<rect x="122" y="210" width="40" height="30" fill="#1F9A4D"/><rect x="186" y="210" width="30" height="30" fill="#1F9A4D"/>
+<rect x="90" y="210" width="160" height="30" rx="8" fill="none" class="o"/>
+<path d="M122 196 L112 182 L132 182 Z" fill="#D9534F" class="o"/>
+<rect x="90" y="262" width="160" height="30" rx="8" fill="#C9D3CC" class="o"/>
+<rect x="130" y="262" width="60" height="30" fill="#1F9A4D"/><rect x="226" y="262" width="24" height="30" rx="8" fill="#BFE0F5"/>
+<rect x="90" y="262" width="160" height="30" rx="8" fill="none" class="o"/>
+<g stroke="#3B82C4" stroke-width="4" stroke-linecap="round"><line x1="247" y1="277" x2="229" y2="277"/><line x1="242" y1="285" x2="234" y2="269"/><line x1="234" y1="285" x2="242" y2="269"/></g>
+<rect x="90" y="318" width="160" height="30" rx="15" fill="#1F9A4D" class="o"/>
+<polyline points="108,333 116,341 130,325" fill="none" stroke="#FFFFFF" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+<rect x="136" y="328" width="90" height="10" rx="5" fill="#FFFFFF"/>
+<rect x="90" y="368" width="140" height="10" rx="5" fill="#C9D3CC"/>
+<rect x="90" y="388" width="100" height="10" rx="5" fill="#C9D3CC"/>
+<rect x="470" y="300" width="90" height="56" rx="16" fill="#F5C842" class="o"/>
+<circle cx="515" cy="372" r="20" fill="#1A1E1B" class="o"/>
+<circle cx="515" cy="372" r="8" fill="#C9D3CC" class="o"/>
+<rect x="360" y="318" width="116" height="12" rx="6" fill="#C9D3CC" class="o"/>
+<line x1="560" y1="340" x2="592" y2="340" stroke="#1A1E1B" stroke-width="5" stroke-linecap="round"/>
+<g class="o"><rect x="610" y="302" width="110" height="34" rx="8" fill="#1F9A4D" class="o"/>
+<rect x="630" y="262" width="54" height="44" rx="8" fill="#1F9A4D" class="o"/>
+<rect x="638" y="270" width="38" height="26" rx="6" fill="#BFE0F5" class="o"/>
+<rect x="696" y="272" width="8" height="30" rx="3" fill="#1A1E1B" class="o"/>
+<circle cx="620" cy="342" r="30" fill="#1A1E1B" class="o"/>
+<circle cx="620" cy="342" r="12" fill="#C9D3CC" class="o"/>
+<circle cx="702" cy="352" r="20" fill="#1A1E1B" class="o"/>
+<circle cx="702" cy="352" r="8" fill="#C9D3CC" class="o"/>
+</g>
+<line x1="740" y1="372" x2="740" y2="262" stroke="#1A1E1B" stroke-width="4" stroke-linecap="round"/>
+<path d="M740 262 L792 270 L792 286 L740 280 Z" fill="#E8A33D" class="o"/>
+</svg>

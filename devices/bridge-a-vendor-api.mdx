@@ -1,0 +1,256 @@
+---
+title: "Bridge a Vendor API"
+description: "Forward readings from a vendor API, a network server or a datalogger with the bridge template."
+---
+
+This guide shows you how to forward readings from a system that already holds them: a vendor's cloud, a LoRaWAN network server or a datalogger. You need a claimed device and its key from the [quickstart](/quickstart).
+
+The **bridge** is a script that pulls readings from the vendor's cloud or network server, by polling or from a webhook, maps each one to a `metric_id`, and posts it to `POST /api/metric-values`, one request per reading. Copy the template below and replace `fetchVendorReadings`. The template's API calls are verified against a live server.
+
+## Run The Template
+
+```bash
+export AGRIHUB_DEVICE_ID=<device-uuid>
+export AGRIHUB_DEVICE_KEY=<device-api-key>
+npx tsx bridge-template.ts
+```
+
+The template needs Node 18 or later and uses the built-in `fetch`.
+
+| Variable | Description |
+|---|---|
+| `AGRIHUB_DEVICE_ID` | The id of a device claimed in the app. |
+| `AGRIHUB_DEVICE_KEY` | The device's API key. |
+| `AGRIHUB_INGEST_URL` | Overrides the ingest URL. |
+| `POLL_INTERVAL_MS` | Overrides the poll interval. Default 15 minutes. |
+
+## Adapt It
+
+<Steps>
+  <Step title="Bind each sensor to a device">
+    `DEVICES` maps a vendor sensor id to one device and its key. Use one device and one key per physical sensor. A shared key loses per-device revocation and rate limiting.
+  </Step>
+  <Step title="Map vendor fields">
+    `METRIC_MAP` maps vendor field names to [metric ids](/devices/metrics). Map only the fields you're sure about. An unmapped field is logged. A wrongly mapped one is stored and reaches the models.
+
+    <Warning>
+      `METRIC_MAP` includes ids `221`, `222` and `223` (nitrogen, phosphorus and potassium). They exist in the catalogue but aren't a supported reading. Leave those rows unused.
+    </Warning>
+  </Step>
+  <Step title="Replace fetchVendorReadings">
+    This is the only vendor-specific code. Convert units here. Forward only readings you haven't already sent: a reading re-posted every poll produces a flat series that hides an outage.
+  </Step>
+  <Step title="Handle the response">
+    `postMetric` sends no timestamp. The server assigns one on arrival. A `201` means the reading is stored. On `429` the template sleeps for the server's `retry_after_seconds`. A `401` means the key was revoked or rotated. Issue a new key in the app. Retrying won't clear it.
+  </Step>
+  <Step title="Watch the log">
+    Each poll logs how many readings were forwarded and which vendor fields were unmapped. Non-numeric values are skipped.
+  </Step>
+</Steps>
+
+<Note>
+  The limit is 120 requests per 60 seconds per device. The template posts one reading per request, so the poll interval and the number of metrics per sensor set your rate.
+</Note>
+
+## bridge-template.ts
+
+```typescript bridge-template.ts
+/**
+ * AgriHub360 vendor bridge template
+ *
+ * Pull readings from a system that already holds them (a LoRaWAN network
+ * server, a weather-station vendor's API, a farm's own datalogger) and forward
+ * them to AgriHub360.
+ *
+ * Copy it, replace `fetchVendorReadings`, and you have an integration.
+ *
+ * Run: npx tsx bridge-template.ts
+ * Node 18+ (uses the built-in fetch).
+ */
+
+// ---- configuration ---------------------------------------------------------
+
+const INGEST_URL = process.env.AGRIHUB_INGEST_URL
+  ?? 'https://devices.agrihub360.example/api/metric-values'
+
+/**
+ * One AgriHub360 device + key per PHYSICAL sensor.
+ *
+ * It is tempting to run a whole fleet through one key. Don't: you lose
+ * per-device revocation and per-device rate limiting, and one leaked key
+ * exposes every sensor you own. Keys are free.
+ */
+interface DeviceBinding {
+  vendorSensorId: string
+  deviceId: string
+  apiKey: string
+}
+
+const DEVICES: DeviceBinding[] = [
+  {
+    vendorSensorId: 'vendor-sensor-001',
+    deviceId: process.env.AGRIHUB_DEVICE_ID ?? '00000000-0000-0000-0000-000000000000',
+    apiKey: process.env.AGRIHUB_DEVICE_KEY ?? '',
+  },
+]
+
+/**
+ * Vendor field name → AgriHub360 metric_id. See quickstart.md for the
+ * catalogue.
+ *
+ * Map only what you are sure about. An unmapped field is a gap you can see;
+ * a wrongly mapped one is silent corruption that reaches agronomic models.
+ */
+const METRIC_MAP: Record<string, number> = {
+  soil_temperature: 70,
+  humidity: 110,
+  ph: 120,
+  battery: 200,
+  signal: 201,
+  soil_moisture: 220,
+  nitrogen: 221,
+  phosphorus: 222,
+  potassium: 223,
+  conductivity: 224,
+}
+
+// ---- vendor side (REPLACE THIS) --------------------------------------------
+
+interface VendorReading {
+  sensorId: string
+  /** Vendor's field name; looked up in METRIC_MAP. */
+  field: string
+  value: number
+}
+
+/**
+ * Replace with a real call to your vendor's API.
+ *
+ * Two things worth getting right here:
+ *
+ * 1. UNITS. Vendors differ (°F vs °C, VWC fraction vs percent, kPa vs bar).
+ *    Convert here, once, rather than letting a wrong scale reach the platform
+ *    where it will look plausible and be wrong by a constant factor.
+ *
+ * 2. FRESHNESS. Only forward readings you have not already sent. Re-posting
+ *    the same reading each poll produces a flat series that looks like a
+ *    working sensor and hides an outage.
+ */
+async function fetchVendorReadings(): Promise<VendorReading[]> {
+  // Example shape only.
+  return [
+    { sensorId: 'vendor-sensor-001', field: 'soil_moisture', value: 42.5 },
+    { sensorId: 'vendor-sensor-001', field: 'soil_temperature', value: 11.2 },
+    { sensorId: 'vendor-sensor-001', field: 'battery', value: 87 },
+  ]
+}
+
+// ---- AgriHub360 side -------------------------------------------------------
+
+interface PostResult { ok: boolean; status: number; retryAfterSeconds?: number }
+
+async function postMetric(
+  binding: DeviceBinding, metricId: number, value: number,
+): Promise<PostResult> {
+  const res = await fetch(INGEST_URL, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${binding.apiKey}`,
+    },
+    // No timestamp: the server assigns it. Anything sent is ignored.
+    body: JSON.stringify({
+      device_id: binding.deviceId,
+      metric_id: metricId,
+      value,
+    }),
+  })
+
+  if (res.status === 201) return { ok: true, status: 201 }
+
+  if (res.status === 429) {
+    const body = await res.json().catch(() => ({}) as Record<string, unknown>)
+    const retry = Number((body as { retry_after_seconds?: number }).retry_after_seconds ?? 60)
+    return { ok: false, status: 429, retryAfterSeconds: retry }
+  }
+
+  if (res.status === 401) {
+    // Retrying will never help: the key was revoked or rotated. Surface it
+    // loudly rather than burying it in a retry loop that looks like a
+    // transient network problem.
+    console.error(`[${binding.deviceId}] 401: device key rejected. Re-issue it.`)
+    return { ok: false, status: 401 }
+  }
+
+  console.error(`[${binding.deviceId}] HTTP ${res.status}: ${await res.text()}`)
+  return { ok: false, status: res.status }
+}
+
+const sleep = (ms: number) => new Promise((r) => setTimeout(r, ms))
+
+async function runOnce(): Promise<void> {
+  const readings = await fetchVendorReadings()
+  const byId = new Map(DEVICES.map((d) => [d.vendorSensorId, d]))
+
+  let sent = 0
+  const unmapped = new Set<string>()
+
+  for (const r of readings) {
+    const binding = byId.get(r.sensorId)
+    if (!binding) continue
+
+    const metricId = METRIC_MAP[r.field]
+    if (metricId === undefined) {
+      unmapped.add(r.field)
+      continue
+    }
+
+    if (!Number.isFinite(r.value)) {
+      // A gap is visible; a NaN posted as a reading is not.
+      console.warn(`[${r.sensorId}] skipping non-numeric ${r.field}`)
+      continue
+    }
+
+    const result = await postMetric(binding, metricId, r.value)
+    if (result.ok) {
+      sent += 1
+    } else if (result.status === 429) {
+      // Honour the server's own backoff rather than guessing one.
+      console.warn(`rate limited, waiting ${result.retryAfterSeconds}s`)
+      await sleep((result.retryAfterSeconds ?? 60) * 1000)
+    }
+  }
+
+  // Report what was dropped. A bridge that silently ignores fields it does not
+  // understand looks like it is working while quietly losing data.
+  console.log(`forwarded ${sent}/${readings.length} readings`)
+  if (unmapped.size > 0) {
+    console.warn(`unmapped vendor fields (add to METRIC_MAP): ${[...unmapped].join(', ')}`)
+  }
+}
+
+// Poll interval. The ingest limit is 120 requests per 60s PER DEVICE, so the
+// binding constraint is usually how many metrics each sensor reports, not how
+// many sensors you have.
+const POLL_INTERVAL_MS = Number(process.env.POLL_INTERVAL_MS ?? 15 * 60 * 1000)
+
+async function main(): Promise<void> {
+  if (!DEVICES.every((d) => d.apiKey)) {
+    console.error('Set AGRIHUB_DEVICE_KEY (see docs/devices/quickstart.md).')
+    process.exit(1)
+  }
+  for (;;) {
+    try {
+      await runOnce()
+    } catch (err) {
+      // Never let one bad poll kill the bridge; the next one may succeed.
+      console.error('poll failed:', err)
+    }
+    await sleep(POLL_INTERVAL_MS)
+  }
+}
+
+void main()
+```
+
+That's it. You have a bridge forwarding vendor readings. Next: [Map a LoRaWAN Uplink](/devices/map-a-lorawan-uplink) for probes on your own network server.

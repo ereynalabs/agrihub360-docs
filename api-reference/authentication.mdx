@@ -1,0 +1,39 @@
+---
+title: "Authentication"
+description: "Two ways a device proves who it is: a bearer API key, or a client certificate."
+---
+
+Every request to the Device API carries a device credential, except the two [health probes](/api-reference/errors-and-limits#health-probes). The credential identifies one device. Devices are claimed and keys are issued in the app.
+
+## Bearer API Key
+
+Send the key in the `Authorization` header.
+
+```bash
+curl -X POST https://devices.agrihub360.example/api/metric-values \
+  -H "Authorization: Bearer $DEVICE_API_KEY" \
+  -H 'Content-Type: application/json' \
+  -d '{"device_id":"<device-uuid>","metric_id":220,"value":42.5}'
+```
+
+The key is issued per device in the app and shown once. Issuing a new key revokes the previous one immediately. Keys are opaque secrets, not tokens you can decode.
+
+## Client Certificate
+
+A device behind a TLS-terminating proxy can present a client certificate instead of a key. The proxy verifies the certificate and forwards its common name to the API as `X-Client-Cert-CN`, in the form `device:<device-uuid>`. The device never sets this header itself. Where both a certificate and a key are present, the certificate wins.
+
+## Failed Authentication
+
+A missing or invalid credential returns `401` with a reason.
+
+```json
+{ "error": "unauthorized", "reason": "invalid device credential" }
+```
+
+<Warning>
+  A `401` does not clear on retry. The key was revoked or rotated. Issue a new one in the app and update the device.
+</Warning>
+
+## One Credential Per Device
+
+Claim each physical sensor as its own device and give it its own key. A shared key removes per-device revocation and per-device rate limiting, and one lost key then exposes every device that used it.

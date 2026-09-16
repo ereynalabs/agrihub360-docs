@@ -1,0 +1,26 @@
+---
+title: "Hub"
+description: "Our gateway for AgriHub360 Sensors."
+---
+
+The **AgriHub360 Hub** is the gateway for [AgriHub360 Sensors](/devices/sensor). A Hub covers the sensors within its radio range, so a small farm needs one and a large or hilly farm needs more. It receives LoRa uplinks from each sensor and posts them to the [Device API](/quickstart) over a wired or cellular connection.
+
+<Frame caption="The AgriHub360 Hub: receiving LoRa uplinks from the sensors in range and posting them on.">
+  <img src="/images/hub.svg" alt="" />
+</Frame>
+
+## How It Posts
+
+The Hub posts one request per reading, using the API key of the sensor that produced it. Each sensor stays a separate device in AgriHub360, so you can revoke or replace one without touching the others.
+
+Three sensors reach one Hub over LoRa, and the Hub makes a separate request for each of them.
+
+## Datasheet
+
+<Card title="AgriHub360 Hub datasheet (PDF)" icon="file-arrow-down">
+  Radio, backhaul, power and mechanical specifications, in one sheet.
+</Card>
+
+## Do You Need One?
+
+Only for AgriHub360 Sensors. Your own hardware posts to the Device API directly. See [Bring Your Own Sensor](/devices/byod).

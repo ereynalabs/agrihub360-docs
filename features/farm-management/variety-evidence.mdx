@@ -1,0 +1,56 @@
+---
+title: "Variety Evidence"
+description: "The factors, trial entries and harvest results behind each ranking, and the rule that withholds a ranking."
+---
+
+Two views sit behind the recommender. The first is the reasoning for one variety: each factor with its weight, its points and its source, the gaps in the evidence, and the trade-off against the top pick. The second is the harvest record for the field's microclimate: how each variety has yielded in fields like this one, with sample sizes, a margin and a confidence tier, and a ranking only where the numbers can carry one. **Variety evidence** is both views together.
+
+## What It Tells You
+
+For a variety: the five factors with their weights and contributions, the source each came from, a list of gaps, and a trade-off sentence where the variety beats the top pick on trial yield but loses on septoria resistance, or the reverse. Its Recommended List record: every metric by region and harvest year, the number of trial sites, the edition and when it was last updated.
+
+For the field's cluster: each variety with its observations, farms, seasons, mean yield in kg/ha, margin, and a tier of insufficient, low, moderate or good. A note says whether the list is ranked or only shown, and why. A count of results withheld because their farm hasn't opted into sharing.
+
+## How It's Calculated
+
+An **outcome** is one harvest with a yield per hectare, on a field that has a microclimate cluster, attributed to the variety in its planting record. Its season is the harvest year.
+
+Per variety in the cluster: observations is the number of outcomes; farms is the number of distinct farms among them; the mean yield is rounded to the nearest kg/ha; the margin is 1.96 times the standard deviation divided by the square root of the observations, reported only from three observations up.
+
+Tier: insufficient below three observations; low at three or more observations on fewer than three farms; moderate at three or more farms; good at six or more farms. The thresholds count farms, not observations, because three seasons on one farm hold soil, management and machinery constant.
+
+Ranking rule: varieties with a tier above insufficient are ordered by mean yield, and a ranking is shown only when at least two of them clear the bar. With one or none, every variety is listed unranked with its sample size and the note says so. A field with no cluster gets no comparison at all, and the note says the profile builds from sensor readings over time.
+
+Worked example. A variety in the field's cluster with five recorded outcomes on three farms: 8,100, 8,600, 7,900, 9,000 and 8,400 kg/ha.
+
+| Figure | Working | Value |
+|---|---|---|
+| Observations | Five harvests with a yield per hectare | 5 |
+| Farms | Three distinct farms | 3 |
+| Mean yield | 42,000 over 5 | 8,400 kg/ha |
+| Margin | Standard deviation 430; 1.96 times 430 over the square root of 5 | plus or minus 377 kg/ha |
+| Tier | 5 observations on 3 farms | Moderate |
+
+## Where The Numbers Come From
+
+| Input | Record | Label |
+|---|---|---|
+| Yield per hectare, harvest date | The harvest record | Measured value, entered by the farm |
+| Variety | The planting the harvest belongs to | Record |
+| Cluster | The field's microclimate profile, from median soil temperature and moisture readings | Modelled value from readings |
+| Sharing | The farm's outcome-sharing opt-in | Consent |
+| Trial metrics | The Recommended List entry: treated yield, septoria and yellow rust on the 1-9 scale, protein, specific weight, sites, region and harvest year | AHDB Recommended Lists, with edition and last-updated date |
+
+Your own results always count for you. Another farm's result counts only where that farm has opted in, and the withheld count is shown so a small sample is explained. Confidence is a tier word, never a percentage. The [recommender's](/features/farm-management/variety-recommender) yield factor reads a running mean and standard deviation per variety and cluster, updated each time a harvest with a yield per hectare is recorded on a field with a cluster.
+
+## Limits
+
+- The margin is a plain standard error. Results from one farm are correlated, so the tier is the caveat, not the margin.
+- A mean is shown from a single harvest. A margin and a ranking are not.
+- A harvest recorded without a yield per hectare, or on a field with no cluster yet, doesn't become an outcome.
+- Ranking is by mean yield alone. Quality grade, moisture at harvest and disease notes are recorded but not ranked on.
+- The evidence covers the cluster the field is in now. If the profile moves to another cluster, the comparison set moves with it.
+
+<Frame caption="Harvest results from consenting farms pooled into one card with its margin and confidence tier.">
+  <img src="/images/guides/variety-evidence.svg" alt="Harvest results flow from consenting farms into a pooled card while padlocked farms keep theirs out." />
+</Frame>

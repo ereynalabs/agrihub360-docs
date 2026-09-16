@@ -1,0 +1,72 @@
+---
+title: "Quickstart"
+description: "Send your first reading to AgriHub360 with curl."
+---
+
+This guide shows you how to send a reading to AgriHub360 using `curl`. You need an AgriHub360 account with a farm. You don't need hardware yet: send a test reading first, then point a real device at the same endpoint.
+
+<Steps>
+  <Step title="Get a device id and key">
+    In the app, claim a device on your farm and issue its API key. Copy the **device id** and the **API key**.
+
+    <Note>
+      The key is shown once. Issuing a new key revokes the previous one. You need the Manager role or higher on the farm.
+    </Note>
+  </Step>
+
+  <Step title="Send a reading">
+    Post one reading per request.
+
+    ```bash
+    curl -X POST https://devices.agrihub360.example/api/metric-values \
+      -H "Authorization: Bearer $DEVICE_API_KEY" \
+      -H 'Content-Type: application/json' \
+      -d '{
+        "device_id": "77777777-7777-7777-7777-777777777703",
+        "metric_id": 220,
+        "value": 42.5
+      }'
+    ```
+
+    The response is the stored row. The server sets `timestamp`.
+
+    ```json
+    {
+      "device_id": "77777777-7777-7777-7777-777777777703",
+      "metric_id": 220,
+      "value": "42.5",
+      "timestamp": 1784367787126
+    }
+    ```
+  </Step>
+
+  <Step title="Check it in the app">
+    Open the device in the app. The reading appears on the device and on every chart, alert rule and model that uses soil moisture for that field.
+  </Step>
+</Steps>
+
+That's it. You've sent your first reading.
+
+## What To Know
+
+- `metric_id` names what you measured, from the shared [catalogue](/devices/metrics). `220` is soil moisture in percent.
+- The server sets `timestamp`. Anything you send is ignored.
+- One reading per request, 120 requests per 60 seconds per device key. See [Errors and Limits](/api-reference/errors-and-limits).
+- One key per device. See [Authentication](/api-reference/authentication).
+
+## Next Steps
+
+<CardGroup cols={2}>
+  <Card title="Post a Reading" icon="code" href="/api-reference/telemetry/post-a-reading">
+    The endpoint, its fields and every response.
+  </Card>
+  <Card title="Live Updates" icon="bolt" href="/api-reference/live-updates">
+    Receive each stored reading over WebSocket.
+  </Card>
+  <Card title="Bring Your Own Sensor" icon="plug" href="/devices/byod">
+    The contract your sensor has to meet, and two ways to meet it.
+  </Card>
+  <Card title="Metrics" icon="list-ol" href="/devices/metrics">
+    The catalogue of what a reading can measure.
+  </Card>
+</CardGroup>

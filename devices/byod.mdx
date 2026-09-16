@@ -1,0 +1,53 @@
+---
+title: "Bring Your Own Sensor"
+description: "The contract your sensor has to meet to post readings, and two ways to meet it."
+---
+
+Any sensor that can make an HTTPS request, directly or through a bridge, can send readings to AgriHub360. This page covers the contract your sensor has to meet. The pages after it cover two ways to meet it. A device that acts on events rather than producing readings is covered under [Webhooks](/devices/webhooks).
+
+| Path | Use it when |
+|---|---|
+| [Bridge a Vendor API](/devices/bridge-a-vendor-api) | Your readings already sit in another vendor's cloud. |
+| [Map a LoRaWAN Uplink](/devices/map-a-lorawan-uplink) | Your probes report to your own LoRaWAN network server. |
+
+## How It Works
+
+Your device posts one reading to `POST /api/metric-values`, with its bearer key, `device_id`, `metric_id` and `value` in the request. The API answers `201` with the stored row and a server timestamp, and publishes the reading to the field timeline, where charts, alert rules and models update.
+
+## The Endpoint
+
+Post one reading per request to `POST /api/metric-values`.
+
+```bash
+curl -X POST https://devices.agrihub360.example/api/metric-values \
+  -H "Authorization: Bearer $DEVICE_API_KEY" \
+  -H 'Content-Type: application/json' \
+  -d '{"device_id":"<device-uuid>","metric_id":220,"value":42.5}'
+```
+
+| Field | Type | Description |
+|---|---|---|
+| `device_id` | string (uuid) | The id of a device claimed in the app. |
+| `metric_id` | integer | What you measured. See [metric ids](/devices/metrics). |
+| `value` | number or string | The reading. Stored as a string. Units aren't converted. |
+
+The response is the stored row with a server-assigned `timestamp` in epoch milliseconds. There's no batch endpoint.
+
+## Authentication
+
+Send the device's API key as a bearer token: `Authorization: Bearer <api_key>`. You get the key when you claim the device in the app. It's shown once.
+
+Devices behind a TLS-terminating proxy can use a client certificate instead. See [Authentication](/api-reference/authentication).
+
+## Guidelines
+
+* **One device per physical sensor.** Claim each one and give each its own key.
+* **Don't send a timestamp.** The server sets it on arrival. If you buffer readings offline and flush later, they're stored with the time they arrived.
+* **Don't send filler readings.** A device that goes quiet is shown as stale in the app. A repeated old value looks current.
+* **Check your first readings** against a handheld meter in the same soil. A wrong scale factor in a decoder produces plausible numbers.
+
+## Limits
+
+* 120 requests per 60 seconds per device key. Over the limit, the API returns `429` with `retry-after`.
+* A `401` means the key was revoked or rotated. Issue a new key in the app. Retrying won't clear it.
+* WebSocket topics match exactly. There are no wildcards.

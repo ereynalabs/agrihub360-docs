@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 450" role="img" aria-label="Cartoon of three fanned field cards reading open, approaching and closed over a field where a tractor waits">
+  <defs><style>.o{stroke:#1A1E1B;stroke-width:4;stroke-linejoin:round;stroke-linecap:round}</style></defs>
+  <rect width="800" height="450" fill="#EAF3EC"/>
+<circle cx="90" cy="80" r="34" fill="#F5C842" class="o"/><g stroke="#1A1E1B" stroke-width="4" stroke-linecap="round"><line x1="134" y1="80" x2="146" y2="80"/><line x1="121" y1="111" x2="130" y2="120"/><line x1="90" y1="124" x2="90" y2="136"/><line x1="59" y1="111" x2="50" y2="120"/><line x1="46" y1="80" x2="34" y2="80"/><line x1="59" y1="49" x2="50" y2="40"/><line x1="90" y1="36" x2="90" y2="24"/><line x1="121" y1="49" x2="130" y2="40"/></g>
+<path d="M0 300 Q300 230 600 300 T800 280 L800 450 L0 450 Z" fill="#A7D7B4" class="o"/>
+<path d="M0 380 Q400 340 800 380 L800 450 L0 450 Z" fill="#1F9A4D" class="o"/>
+<g transform="rotate(-12 265 300)"><rect x="190" y="150" width="150" height="200" rx="14" fill="#FFFFFF" class="o"/>
+<path d="M0 -18 C-8 -6 -13 0 -13 6 A13 13 0 0 0 13 6 C13 0 8 -6 0 -18 Z" fill="#3B82C4" class="o" transform="translate(265 200) scale(1.2)"/>
+<circle cx="265" cy="270" r="34" fill="#1F9A4D" class="o"/>
+<polyline points="249,270 261,282 284,257" fill="none" stroke="#FFFFFF" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+<rect x="220" y="320" width="90" height="10" rx="5" fill="#C9D3CC"/>
+</g>
+<g transform="rotate(12 535 300)"><rect x="460" y="150" width="150" height="200" rx="14" fill="#FFFFFF" class="o"/>
+<path d="M0 0 C-20 0 -24 -30 0 -32 C4 -54 40 -56 46 -38 C66 -46 86 -30 76 -14 C88 -12 88 4 74 4 Z" fill="#C9D3CC" class="o" transform="translate(500 200) scale(0.8)"/>
+<g stroke="#3B82C4" stroke-width="4" stroke-linecap="round"><line x1="511" y1="209" x2="506" y2="224"/><line x1="528" y1="209" x2="524" y2="224"/><line x1="546" y1="209" x2="541" y2="224"/></g>
+<circle cx="535" cy="270" r="34" fill="#C9D3CC" class="o"/>
+<g stroke="#1A1E1B" stroke-width="6" stroke-linecap="round"><line x1="526" y1="261" x2="544" y2="279"/><line x1="544" y1="261" x2="526" y2="279"/></g>
+<rect x="490" y="320" width="90" height="10" rx="5" fill="#C9D3CC"/>
+</g>
+<rect x="325" y="130" width="150" height="200" rx="14" fill="#FFFFFF" class="o"/>
+<path d="M-14 12 C-14 -8 4 -16 16 -14 C16 4 2 16 -14 12 Z" fill="#1F9A4D" class="o" transform="translate(400 178) scale(1.3)"/>
+<circle cx="400" cy="250" r="34" fill="#E8A33D" class="o"/>
+<line x1="400" y1="250" x2="400" y2="228" stroke="#1A1E1B" stroke-width="5" stroke-linecap="round"/>
+<line x1="400" y1="250" x2="416" y2="260" stroke="#1A1E1B" stroke-width="5" stroke-linecap="round"/>
+<rect x="355" y="300" width="90" height="10" rx="5" fill="#C9D3CC"/>
+<g class="o"><rect x="130" y="350" width="110" height="34" rx="8" fill="#1F9A4D" class="o"/>
+<rect x="150" y="310" width="54" height="44" rx="8" fill="#1F9A4D" class="o"/>
+<rect x="158" y="318" width="38" height="26" rx="6" fill="#BFE0F5" class="o"/>
+<rect x="216" y="320" width="8" height="30" rx="3" fill="#1A1E1B" class="o"/>
+<circle cx="140" cy="390" r="30" fill="#1A1E1B" class="o"/>
+<circle cx="140" cy="390" r="12" fill="#C9D3CC" class="o"/>
+<circle cx="222" cy="400" r="20" fill="#1A1E1B" class="o"/>
+<circle cx="222" cy="400" r="8" fill="#C9D3CC" class="o"/>
+</g>
+</svg>

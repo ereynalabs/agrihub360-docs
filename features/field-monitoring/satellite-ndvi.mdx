@@ -1,0 +1,16 @@
+---
+title: "Satellite NDVI"
+description: "Canopy view alongside ground truth."
+---
+
+## What It Tells You
+
+**NDVI** is a greenness index from satellite imagery. It is high where the canopy is dense and growing, and low where it is thin, bare or stressed. On the field page it shows where the crop is uneven. That is the prompt to walk the thin patch, draw a zone or check the probe in that corner. It sits next to the soil readings and the forecast on the same timeline, so a drop in greenness can be read against the moisture before it.
+
+## How It Works
+
+Each capture is drawn on the field map and on the field timeline. The [field health review](/models/field-health-review) reads the latest capture. The vision model describes each image once and the description is reused.
+
+<Frame caption="An NDVI capture over the field, with the thin corner in amber and the probe that sits in it.">
+  <img src="/images/guides/satellite-ndvi.svg" alt="Cartoon of a field seen from above in green to amber patches under a satellite, with a probe marker and a footpath into the amber corner." />
+</Frame>

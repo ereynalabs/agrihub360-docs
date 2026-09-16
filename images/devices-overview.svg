@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 450" role="img" aria-label="Cartoon of the three kinds of device: AgriHub360 Sensors in a field posting through an AgriHub360 Hub, and your own device posting directly, both to the Device API">
+  <defs><style>.o{stroke:#1A1E1B;stroke-width:4;stroke-linejoin:round;stroke-linecap:round}.t{font-family:Inter, Helvetica, Arial, sans-serif}</style></defs>
+  <rect width="800" height="450" fill="#EAF3EC"/>
+  <path d="M0 340 Q200 320 400 340 T800 340 L800 450 L0 450 Z" fill="#1F9A4D" class="o"/>
+  <g class="o">
+    <rect x="70" y="270" width="40" height="46" rx="9" fill="#1F9A4D"/><rect x="70" y="262" width="40" height="12" rx="5" fill="#1A3A5C"/><line x1="104" y1="262" x2="104" y2="228" stroke="#1A1E1B" stroke-width="5"/>
+    <rect x="150" y="282" width="40" height="46" rx="9" fill="#1F9A4D"/><rect x="150" y="274" width="40" height="12" rx="5" fill="#1A3A5C"/><line x1="184" y1="274" x2="184" y2="240" stroke="#1A1E1B" stroke-width="5"/>
+    <rect x="300" y="250" width="22" height="90" rx="4" fill="#8B5E3C"/>
+    <rect x="266" y="184" width="90" height="72" rx="12" fill="#F4F6F3"/><rect x="280" y="200" width="62" height="10" rx="5" fill="#146134"/>
+    <line x1="342" y1="184" x2="342" y2="130" stroke="#1A1E1B" stroke-width="6"/><circle cx="342" cy="124" r="8" fill="#1A1E1B"/>
+    <rect x="560" y="270" width="70" height="52" rx="10" fill="#F4F6F3"/><rect x="574" y="284" width="42" height="10" rx="5" fill="#5A625B"/><rect x="574" y="300" width="28" height="10" rx="5" fill="#5A625B"/>
+    <path d="M596 90 C560 90 552 40 596 36 C604 6 664 4 674 34 C706 22 738 50 720 76 C742 80 740 108 716 108 Z" fill="#FFFFFF"/>
+  </g>
+  <g fill="none" stroke="#146134" stroke-width="4" stroke-linecap="round" stroke-dasharray="8 8">
+    <path d="M120 240 C170 200 210 200 262 214"/><path d="M200 252 C220 230 240 228 262 232"/>
+    <path d="M356 210 C440 170 520 130 600 108"/><path d="M596 268 C610 200 620 150 640 112"/>
+  </g>
+  <g class="t" fill="#1A1E1B" font-size="15">
+    <text x="60" y="366">AgriHub360 Sensors</text><text x="262" y="366">AgriHub360 Hub</text><text x="548" y="258">Your device</text>
+    <text x="602" y="76" font-weight="600" font-size="16">Device API</text>
+    <text x="392" y="152" fill="#5A625B">HTTPS, one request per reading</text>
+  </g>
+</svg>

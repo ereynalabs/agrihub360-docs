@@ -1,0 +1,63 @@
+---
+title: "Payback Panel"
+description: "What the kit cost, what it has saved so far, and the months to payback at the current rate."
+---
+
+The **payback panel** shows two hard figures and one estimate. The hard figures are the list price of the devices on the farm and the subscription paid to date. The estimate is the fertiliser saving. The panel subtracts the cost from the saving, says whether the kit has paid for itself, and projects how many months that takes at the rate of saving seen so far. The same panel exists for each field, scoped to that field's devices and that field's spend.
+
+## What It Tells You
+
+| Figure | Meaning |
+|---|---|
+| Kit cost | The list price of every active device on the farm, or on the field for the per-field panel |
+| Subscription paid | The total of paid invoices for the farm. Shown as zero on the per-field panel |
+| Savings | One line per source, each with an amount, a confidence label and a method note |
+| Net | Savings minus total cost. Positive once the kit has paid for itself |
+| Months to payback | The months needed to recover the total cost at the savings rate seen so far, to one decimal place. Marked as projected until net is positive |
+
+## How It's Calculated
+
+**Total cost** is kit cost plus subscription paid. Kit cost is the sum of the list price of each device that is active on the farm. Subscription paid is the sum of every invoice with the status paid.
+
+**Fertiliser saving** is a fixed fraction of the fertiliser spend recorded against the farm's fields. The default fraction is 10%. The spend is every cost line in the fertiliser category, whichever way it arrived in the profit and loss. If no fertiliser spend is recorded, the panel shows no savings line at all. This is the only savings line the panel computes.
+
+**Net** is the savings total minus the total cost. The kit has paid back when net is zero or above.
+
+**Months elapsed** is the time since the farm's first paid invoice, in 30-day months, rounded to the nearest whole month and never less than one. A farm with no paid invoice counts as one month.
+
+**Months to payback** is total cost divided by the monthly savings rate, where the rate is the savings total divided by months elapsed. The result is rounded to one decimal place. With no savings there is no rate to project from and the figure is blank.
+
+Worked example. A farm six months on from its first paid invoice, with three devices and £8,000 of recorded fertiliser spend.
+
+| Line | Working | Amount |
+|---|---|---|
+| Kit cost | Three devices at list price | £1,200 |
+| Subscription paid | Six paid invoices | £300 |
+| Fertiliser saving | 10% of £8,000, low confidence | £800 |
+| Net | £800 minus £1,500 | -£700 |
+| Months to payback | £1,500 divided by £133.33 a month (£800 over 6 months) | 11.3, projected |
+
+## Where The Numbers Come From
+
+| Figure | Record | Label |
+|---|---|---|
+| Kit cost | The device list and each device's list price | Hard data. List price, not the amount paid |
+| Subscription paid | Paid invoices for the farm | Hard data |
+| Fertiliser saving | Cost lines in the fertiliser category from the [per-field profit and loss](/features/farm-management/per-field-profit-and-loss) | Estimate, low confidence. The method note on the line states the percentage and the spend it was applied to |
+| Months elapsed | The date of the farm's first paid invoice | Hard data |
+
+Every savings line carries a source, a confidence of high, medium or low, and a one-line method note. Amounts are shown in the farm's currency.
+
+On the per-field panel, kit cost counts only the devices assigned to that field and the fertiliser spend is that field's cost lines. The subscription is left out because it isn't attributable to one field. Months elapsed still runs from the farm's first paid invoice so the two panels are comparable.
+
+## Limits
+
+- The saving is an assumed percentage of spend, not a measured before-and-after. It rises with the fertiliser you record and falls to nothing if you record none.
+- Fertiliser is the only saving counted. Avoided sprays, held dressings and zone-rate savings are not in the figure.
+- Kit cost uses the current list price of the devices, not the invoice you paid, and drops a device as soon as it is deactivated.
+- Months elapsed starts at the first paid invoice, not at installation.
+- The panel sets savings against kit cost only. Revenue and the profit and loss net play no part.
+
+<Frame caption="The payback panel: kit cost against estimated savings, with the months to payback.">
+  <img src="/images/guides/payback-panel.svg" alt="A phone card sets a tall kit-cost bar against a shorter savings bar and shows the months to payback." />
+</Frame>

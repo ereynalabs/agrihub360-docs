@@ -1,0 +1,46 @@
+asyncapi: 3.0.0
+info:
+  title: AgriHub360 Message Bus
+  version: "1.0.0"
+  description: Live updates over WebSocket. Every stored reading is published to its device and metric topic after the POST returns 201.
+servers:
+  production:
+    host: devices.agrihub360.example
+    protocol: wss
+    description: Message bus
+channels:
+  metricValues:
+    address: /messagebus?topic=ahmetricvalue:{device_id}:{metric_id}
+    title: Device metric readings
+    description: One topic per device and metric. Topics match exactly; there are no wildcards.
+    parameters:
+      device_id:
+        description: The id of a device claimed in the app.
+      metric_id:
+        description: The metric id from the catalogue, for example 220 for soil moisture.
+    messages:
+      subscribed:
+        name: Subscribed
+        title: Subscription confirmed
+        summary: The first message on the socket.
+        payload:
+          type: string
+          examples:
+            - "Subscribed to topic: ahmetricvalue:77777777-7777-7777-7777-777777777703:220"
+      reading:
+        name: Reading
+        title: Stored reading
+        summary: The topic, a colon, and the stored row as JSON.
+        payload:
+          type: string
+          examples:
+            - 'ahmetricvalue:77777777-7777-7777-7777-777777777703:220:{"device_id":"77777777-7777-7777-7777-777777777703","metric_id":220,"value":"42.5","timestamp":"1784367787126"}'
+operations:
+  receiveReadings:
+    action: receive
+    channel:
+      $ref: "#/channels/metricValues"
+    summary: Receive each stored reading for one device and metric
+    messages:
+      - $ref: "#/channels/metricValues/messages/subscribed"
+      - $ref: "#/channels/metricValues/messages/reading"

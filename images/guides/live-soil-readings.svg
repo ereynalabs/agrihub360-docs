@@ -1,0 +1,48 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 450" role="img" aria-label="Cartoon cut-away of soil with a probe below ground, a moisture badge reading 42 per cent, a temperature badge, and a hub receiving the readings">
+  <defs><style>.o{stroke:#1A1E1B;stroke-width:4;stroke-linejoin:round;stroke-linecap:round}</style></defs>
+  <rect width="800" height="450" fill="#EAF3EC"/>
+<circle cx="540" cy="70" r="30" fill="#F5C842" class="o"/><g stroke="#1A1E1B" stroke-width="4" stroke-linecap="round"><line x1="580" y1="70" x2="592" y2="70"/><line x1="568" y1="98" x2="577" y2="107"/><line x1="540" y1="110" x2="540" y2="122"/><line x1="512" y1="98" x2="503" y2="107"/><line x1="500" y1="70" x2="488" y2="70"/><line x1="512" y1="42" x2="503" y2="33"/><line x1="540" y1="30" x2="540" y2="18"/><line x1="568" y1="42" x2="577" y2="33"/></g>
+<path d="M0 210 L800 210 L800 450 L0 450 Z" fill="#8B5E3C" class="o"/>
+<line x1="0" y1="210" x2="800" y2="210" stroke="#6E4A2F" stroke-width="6" stroke-linecap="round"/>
+<ellipse cx="120" cy="300" rx="18" ry="10" fill="#6E4A2F"/>
+<ellipse cx="300" cy="400" rx="18" ry="10" fill="#6E4A2F"/>
+<ellipse cx="560" cy="300" rx="18" ry="10" fill="#6E4A2F"/>
+<ellipse cx="700" cy="400" rx="18" ry="10" fill="#6E4A2F"/>
+<ellipse cx="180" cy="420" rx="18" ry="10" fill="#6E4A2F"/>
+<path d="M80 212 C74 192 76 186 80 172 C84 186 86 192 80 212 Z" fill="#1F9A4D" class="o"/>
+<path d="M80 212 C60 202 50 186 52 174 C66 182 76 196 80 212 Z" fill="#1F9A4D" class="o"/>
+<path d="M150 212 C144 192 146 186 150 172 C154 186 156 192 150 212 Z" fill="#1F9A4D" class="o"/>
+<path d="M150 212 C130 202 120 186 122 174 C136 182 146 196 150 212 Z" fill="#1F9A4D" class="o"/>
+<path d="M640 212 C634 192 636 186 640 172 C644 186 646 192 640 212 Z" fill="#1F9A4D" class="o"/>
+<path d="M640 212 C620 202 610 186 612 174 C626 182 636 196 640 212 Z" fill="#1F9A4D" class="o"/>
+<path d="M720 212 C714 192 716 186 720 172 C724 186 726 192 720 212 Z" fill="#1F9A4D" class="o"/>
+<path d="M720 212 C700 202 690 186 692 174 C706 182 716 196 720 212 Z" fill="#1F9A4D" class="o"/>
+<path d="M590 212 C584 192 586 166 590 152 C594 166 596 192 590 212 Z" fill="#1F9A4D" class="o"/>
+<path d="M590 212 C570 202 560 186 562 174 C576 182 586 196 590 212 Z" fill="#1F9A4D" class="o"/>
+<path d="M590 212 L580 260 M590 212 L604 256 M590 212 L590 272" fill="none" stroke="#6E4A2F" stroke-width="3" stroke-linecap="round" stroke-dasharray="6 6"/>
+<rect x="392" y="220" width="16" height="100" rx="6" fill="#C9D3CC" class="o"/>
+<rect x="380" y="300" width="10" height="60" rx="5" fill="#C9D3CC" class="o"/>
+<rect x="410" y="300" width="10" height="60" rx="5" fill="#C9D3CC" class="o"/>
+<rect x="372" y="170" width="56" height="52" rx="10" fill="#1F9A4D" class="o"/>
+<rect x="372" y="150" width="56" height="24" rx="8" fill="#1A3A5C" class="o"/>
+<line x1="420" y1="150" x2="420" y2="108" stroke="#1A1E1B" stroke-width="5" stroke-linecap="round"/>
+<circle cx="420" cy="104" r="6" fill="#1A1E1B"/>
+<path d="M444 96 A36 36 0 0 1 444 154" fill="none" stroke="#146134" stroke-width="4" stroke-linecap="round" stroke-dasharray="8 8"/>
+<path d="M462 78 A60 60 0 0 1 462 172" fill="none" stroke="#146134" stroke-width="4" stroke-linecap="round" stroke-dasharray="8 8"/>
+<rect x="693" y="130" width="14" height="80" rx="4" fill="#8B5E3C" class="o"/>
+<rect x="664" y="86" width="66" height="50" rx="10" fill="#FFFFFF" class="o"/>
+<rect x="676" y="100" width="42" height="8" rx="4" fill="#146134"/>
+<circle cx="682" cy="122" r="5" fill="#1F9A4D" class="o"/>
+<circle cx="700" cy="122" r="5" fill="#F5C842" class="o"/>
+<line x1="720" y1="86" x2="720" y2="50" stroke="#1A1E1B" stroke-width="5" stroke-linecap="round"/>
+<circle cx="720" cy="46" r="6" fill="#1A1E1B"/>
+<line x1="350" y1="280" x2="392" y2="280" stroke="#1A1E1B" stroke-width="3" stroke-linecap="round"/>
+<rect x="220" y="250" width="130" height="60" rx="14" fill="#FFFFFF" class="o"/>
+<path d="M0 -18 C-8 -6 -13 0 -13 6 A13 13 0 0 0 13 6 C13 0 8 -6 0 -18 Z" fill="#3B82C4" class="o" transform="translate(250 282) scale(1.0)"/>
+<text x="300" y="290" font-family="Inter, Arial, sans-serif" font-weight="700" font-size="24" text-anchor="middle" fill="#1A1E1B">42%</text>
+<line x1="420" y1="350" x2="450" y2="350" stroke="#1A1E1B" stroke-width="3" stroke-linecap="round"/>
+<rect x="450" y="320" width="130" height="60" rx="14" fill="#FFFFFF" class="o"/>
+<g class="o" transform="translate(480 348) scale(0.8)"><rect x="-8" y="-32" width="16" height="44" rx="8" fill="#FFFFFF"/><rect x="-4" y="-8" width="8" height="22" fill="#D9534F" stroke="none"/><circle cx="0" cy="20" r="11" fill="#D9534F"/></g>
+<rect x="508" y="340" width="52" height="10" rx="5" fill="#1A1E1B"/>
+<rect x="508" y="358" width="36" height="8" rx="4" fill="#C9D3CC"/>
+</svg>

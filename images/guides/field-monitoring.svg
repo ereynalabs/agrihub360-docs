@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 450" role="img" aria-label="Cartoon of a field page: a phone showing the field map and its timeline in front of a field with a sensor probe, a satellite overhead and a cloud">
+  <defs><style>.o{stroke:#1A1E1B;stroke-width:4;stroke-linejoin:round;stroke-linecap:round}</style></defs>
+  <rect width="800" height="450" fill="#EAF3EC"/>
+<circle cx="110" cy="80" r="34" fill="#F5C842" class="o"/><g stroke="#1A1E1B" stroke-width="4" stroke-linecap="round"><line x1="154" y1="80" x2="166" y2="80"/><line x1="141" y1="111" x2="150" y2="120"/><line x1="110" y1="124" x2="110" y2="136"/><line x1="79" y1="111" x2="70" y2="120"/><line x1="66" y1="80" x2="54" y2="80"/><line x1="79" y1="49" x2="70" y2="40"/><line x1="110" y1="36" x2="110" y2="24"/><line x1="141" y1="49" x2="150" y2="40"/></g>
+<g class="o"><rect x="560" y="64" width="50" height="18" rx="4" fill="#3B82C4" class="o"/>
+<rect x="690" y="64" width="50" height="18" rx="4" fill="#3B82C4" class="o"/>
+<rect x="612" y="52" width="76" height="42" rx="8" fill="#C9D3CC" class="o"/>
+<circle cx="650" cy="73" r="8" fill="#F5C842" class="o"/>
+</g>
+<path d="M636 98 L470 296" fill="none" stroke="#3B82C4" stroke-width="4" stroke-linecap="round" stroke-dasharray="8 8"/>
+<path d="M664 98 L530 296" fill="none" stroke="#3B82C4" stroke-width="4" stroke-linecap="round" stroke-dasharray="8 8"/>
+<path d="M0 0 C-20 0 -24 -30 0 -32 C4 -54 40 -56 46 -38 C66 -46 86 -30 76 -14 C88 -12 88 4 74 4 Z" fill="#FFFFFF" class="o" transform="translate(300 120) scale(0.9)"/>
+<path d="M0 270 Q220 190 440 260 T800 250 L800 450 L0 450 Z" fill="#A7D7B4" class="o"/>
+<path d="M0 330 Q250 296 500 330 T800 320 L800 450 L0 450 Z" fill="#1F9A4D" class="o"/>
+<g stroke="#146134" stroke-width="3" fill="none"><path d="M30 424 Q250 392 520 424"/><path d="M20 384 Q250 352 500 384"/><path d="M40 360 Q250 330 470 356"/></g>
+<rect x="182" y="268" width="36" height="60" rx="10" fill="#1F9A4D" class="o"/>
+<rect x="182" y="258" width="36" height="16" rx="6" fill="#1A3A5C" class="o"/>
+<line x1="212" y1="258" x2="212" y2="218" stroke="#1A1E1B" stroke-width="5" stroke-linecap="round"/><circle cx="212" cy="214" r="6" fill="#1A1E1B"/>
+<path d="M236 226 A34 34 0 0 1 236 282" fill="none" stroke="#146134" stroke-width="4" stroke-linecap="round" stroke-dasharray="8 8"/>
+<path d="M254 208 A58 58 0 0 1 254 300" fill="none" stroke="#146134" stroke-width="4" stroke-linecap="round" stroke-dasharray="8 8"/>
+<rect x="570" y="130" width="180" height="300" rx="24" fill="#1A1E1B" class="o"/>
+<rect x="584" y="146" width="152" height="268" rx="14" fill="#FFFFFF" class="o"/>
+<path d="M600 166 L700 160 L722 236 L640 258 L598 232 Z" fill="#A7D7B4"/>
+<path d="M600 166 L700 160 L722 236 L640 258 L598 232 Z" fill="none" stroke="#146134" stroke-width="3" stroke-linejoin="round"/>
+<path d="M660 172 L700 168 L712 212 L662 222 Z" fill="#1F9A4D" stroke="#146134" stroke-width="3" stroke-linejoin="round"/>
+<line x1="600" y1="296" x2="720" y2="296" stroke="#1A1E1B" stroke-width="3" stroke-linecap="round"/>
+<circle cx="624" cy="296" r="5" fill="#3B82C4" class="o"/>
+<circle cx="660" cy="296" r="5" fill="#1F9A4D" class="o"/>
+<circle cx="696" cy="296" r="5" fill="#F5C842" class="o"/>
+<polyline points="600,346 630,330 660,350 690,324 720,338" fill="none" stroke="#3B82C4" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+<rect x="600" y="372" width="120" height="26" rx="13" fill="#E8A33D" class="o"/>
+<rect x="614" y="380" width="70" height="10" rx="5" fill="#FFFFFF"/>
+</svg>

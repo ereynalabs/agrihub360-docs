@@ -1,0 +1,118 @@
+---
+title: "Spray Window"
+description: "The forecast hours that suit spraying, from delta-T, wind and rain, and a frost risk adjusted for the field's elevation."
+---
+
+The **Spray Window** model tells you which of the coming forecast hours suit spraying on each field, and whether frost is likely on the coming nights. It reads the latest cached hourly forecast for the field (air temperature, humidity, wind and rain) and an elevation fetched once per field. Delta-T, computed from temperature and humidity, is combined with a wind band and rain proximity into suitable or unsuitable hours; frost risk compares the field's elevation with the mean of its farm. Both results are crop-independent and appear on the field-detail card with advisory rows.
+
+## The Science
+
+**Delta-T** is the gap between the dry-bulb and wet-bulb temperatures. The **dry-bulb temperature** is ordinary air temperature. The **wet-bulb temperature** is what a thermometer reads when its bulb is wrapped in wet cloth and water evaporates from it. The drier the air, the more evaporation cools the bulb, and the larger the gap. The Australian Bureau of Meteorology defines delta-T as the dry-bulb temperature minus the wet-bulb temperature. It describes it as an indicator of evaporation rate and droplet lifetime (Bureau of Meteorology, n.d.). The measure was developed in Australia in the early 1990s. Flat-fan nozzles then produced a high share of fine droplets, and evaporation of those droplets threatened both coverage and drift (North Dakota State University Extension, n.d.).
+
+The mechanism is simple. Water evaporates from a droplet in flight. The droplet shrinks. A smaller droplet settles more slowly and travels further on the wind (GRDC, 2025). Very dry air raises drift and loses product. Very humid air isn't safe either. At low delta-T droplets persist. In Australian practice, low values are also read as a sign of a possible surface temperature inversion, a layer of cold air trapped under warmer air, in which fine droplets can move a long way downwind (North Dakota State University Extension, n.d.). The common guideline is to spray when delta-T is between 2 and 8, and to take care below 2 or above 10 (GRDC, 2025). The Bureau of Meteorology gives the same band and states that delta-T should not exceed 10 (Bureau of Meteorology, n.d.).
+
+Wind is the other half of the drift question. UK guidance from the Health and Safety Executive points to the Code of Practice for Using Plant Protection Products. The Code holds that the safest conditions are a steady force 2 light breeze blowing away from sensitive areas and neighbouring land (HSE, n.d.).
+
+Frost forms on clear, calm nights. The ground radiates heat to the sky, the air just above it cools, and that colder, denser air drains downhill and pools in hollows. Laughlin and Kalma (1987) studied 31 sites across 170 km² of undulating land on 30 winter nights. The change in minimum temperature with elevation could be predicted from night-time wind speed, radiation loss and the minimum temperature at an exposed hill site. But sites in concave terrain (hollows) were consistently colder than that elevation model predicted, and sites in convex terrain (ridges and knolls) consistently warmer. Elevation explains part of frost risk. The shape of the ground explains a residual that an elevation number cannot see.
+
+## How It's Applied
+
+Pure functions compute delta-T, the wind band, spray suitability and the frost risk from the latest cached hourly forecast for the field. A separate ingest job writes the forecast. This model only reads the cache.
+
+### Inputs
+
+| Input | Source | If missing |
+|---|---|---|
+| Air temperature, hourly | Latest cached hourly forecast for the field | The hour isn't assessed. Missing for the current hour, the field is skipped |
+| Relative humidity, hourly | Latest cached hourly forecast for the field | As for temperature |
+| Wind speed, hourly | Latest cached hourly forecast for the field | Treated as 0 km/h, which is calm and therefore unsuitable |
+| Rain, hourly | Latest cached hourly forecast for the field | Treated as 0 mm |
+| Field elevation | Fetched once per field and cached on the field record | A frost result with no elevation adjustment, flagged on the card |
+| Farm mean elevation | Mean elevation of the farm's active fields that have one | As for field elevation |
+
+### The Rule
+
+```text
+T_wet          = wet-bulb temperature from air temperature and relative humidity,
+                 by a psychrometric approximation
+delta_t        = T_dry - T_wet
+
+hour_suitable  = delta_t within the spray band
+                 and wind within the acceptable band
+                 and rain close to the hour under 1 mm
+
+effective_min  = forecast night minimum
+                 minus 0.1 °C per 10 m the field sits below the farm mean
+frost_risk     = high if effective_min <= 0 °C
+                 low  if effective_min <= 2 °C
+                 none otherwise
+```
+
+For the current hour, rain is summed over the next three hours. For each later hour in the 48-hour list, that hour's own rain is used. Consecutive suitable hours form a window. The card shows up to five windows ahead. The night minimum is the lowest hourly temperature in each of the next three days. A field above the farm mean gets no adjustment. The model doesn't claim it is warmer.
+
+### Parameters
+
+| Quantity | Value in AgriHub360 | Published guidance |
+|---|---|---|
+| Delta-T spray band | 2 to 8 is suitable; 8 to 10 is marginal and unsuitable; below 2 or above 10 is unsuitable | 2 to 8; care below 2 or above 10 (GRDC, 2025); not greater than 10 (Bureau of Meteorology, n.d.) |
+| Wind band | 3 to 19 km/h is acceptable; below 3 is calm and above 19 too windy, both unsuitable | Steady force 2 light breeze away from sensitive areas (HSE, n.d.) |
+| Rain proximity | 1 mm or more close to the hour marks it unsuitable | |
+| Frost cut-offs | High at or below 0 °C; low at or below 2 °C | |
+| Elevation adjustment | 0.1 °C per 10 m below the farm mean | Gradient varies with wind and radiation loss on the night (Laughlin and Kalma, 1987) |
+
+### The Scheduled Run
+
+1. Every three hours, and once at start-up, the job fetches an elevation for up to 50 active fields that have a centroid and no elevation yet, and stores it on the field record.
+2. For each active field it reads the latest cached hourly forecast and the field's elevation with its farm's mean. No cached forecast, or no temperature or humidity for the current hour: skip.
+3. It evaluates the current hour and the suitable windows over the next 48 hours, and the frost risk for tonight and the next three nights.
+4. If tonight's frost risk is high and the field has no frost advisory from the last 24 hours, it inserts an advisory row and notifies the farm.
+5. If the current hour is suitable, at least one window lies ahead, and the field has no spray advisory from the last 24 hours, it inserts an advisory row and notifies the farm.
+6. The read routes run the same functions on the latest cache whenever the card asks. Only the job writes rows. Both outputs are as fresh as the last ingest. Resolution is the field.
+
+### Worked Example
+
+One field over one day, with the bands above.
+
+| Hour | Delta-T | Wind and rain | Hour suitable? |
+|---|---|---|---|
+| 06:00 | 0.9 | 5 km/h, dry | no, delta-T below the band |
+| 09:00 | 2.1 | 8 km/h, dry | yes |
+| 12:00 | 3.8 | 12 km/h, dry | yes |
+| 15:00 | 6.5 | 22 km/h, dry | no, wind above the band |
+| 18:00 | 5.0 | 9 km/h, 2.4 mm | no, rain close |
+
+Two fields on the same farm on one night, with a forecast minimum of 0.3 °C at the grid cell.
+
+| Field | Height below farm mean | Effective minimum (°C) | Frost risk |
+|---|---|---|---|
+| Top field | 0 m, above the mean | 0.3 | low |
+| Bottom field | 40 m | -0.1 | high |
+
+## External Models
+
+This model calls no language model. Its outputs are numbers and states. Alert text is rendered from templates. The hourly forecast comes from a gridded weather model. The field elevation comes from an elevation dataset, queried once per field. Two language-model features read its output. The [Field Health Review](/models/field-health-review) folds the spray and frost outlook into its summary of the field. The [Assistant](/models/assistant) can answer questions about it.
+
+## Validation
+
+Validation holds out a whole season, a whole region, or both. The held-out spray hours are scored against delta-T and wind computed from observations at weather stations in the held-out region. The held-out frost calls are scored against the minima those stations recorded. The baseline for the spray hours is a wind-only rule, which marks an hour suitable whenever forecast wind is inside the band. The baseline for frost is the forecast minimum at the grid cell with no elevation adjustment.
+
+## Limits
+
+- It does not predict product-specific suitability. Delta-T bands are a general rule of droplet behaviour. Label conditions, buffer zones and tank-mix constraints are not modelled. Nor are boom height or nozzle choice.
+- It is a forecast, not an observation. It inherits the forecast's error, and that error is largest in exactly the marginal conditions the model is used to resolve.
+- Farm-mean elevation is a crude proxy for cold-air drainage. Real frost hollows depend on terrain the model does not see. That is the residual Laughlin and Kalma (1987) attributed to slope and catchment shape.
+- Wind at a forecast grid cell is not wind at the boom.
+
+See the [models overview](/models/overview) for the rules every model inherits.
+
+## References
+
+<div className="refs">
+
+1. [Bureau of Meteorology (Australia), n.d. Delta T](https://www.bom.gov.au/lam/deltat.shtml). Glossary of terms.
+2. [Grains Research and Development Corporation (GRDC), 2025](https://grdc.com.au/resources-and-publications/grownotes/technical-manuals/spray-application-manual/preparing-for-spraying/module-10-weather-monitoring-for-spraying-operations/10.3-temperature-and-humidity). Spray application manual, Module 10: Weather monitoring for spraying operations, 10.3 Temperature and humidity.
+3. [North Dakota State University Extension, n.d](https://www.ndsu.edu/agriculture/sites/default/files/2022-01/DeltaT-WeedGuide.pdf). Delta T: a tool for pesticide application decision making.
+4. [Health and Safety Executive (HSE), n.d](https://www.hse.gov.uk/pesticides/using-pesticides/spray-drift/index.htm). Reducing spray drift: overview.
+5. Laughlin, G.P. and Kalma, J.D., 1987. [Frost hazard assessment from local weather and terrain data. Agricultural and Forest Meteorology, 40(1), 1–16](https://doi.org/10.1016/0168-1923(87). )90050-5.
+
+</div>

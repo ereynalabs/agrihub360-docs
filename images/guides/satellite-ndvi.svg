@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 450" role="img" aria-label="Cartoon of a field seen from above in green to amber patches under a satellite, with a probe marker and a footpath into the amber corner">
+  <defs><style>.o{stroke:#1A1E1B;stroke-width:4;stroke-linejoin:round;stroke-linecap:round}</style></defs>
+  <rect width="800" height="450" fill="#EAF3EC"/>
+<circle cx="720" cy="70" r="30" fill="#F5C842" class="o"/><g stroke="#1A1E1B" stroke-width="4" stroke-linecap="round"><line x1="760" y1="70" x2="772" y2="70"/><line x1="748" y1="98" x2="757" y2="107"/><line x1="720" y1="110" x2="720" y2="122"/><line x1="692" y1="98" x2="683" y2="107"/><line x1="680" y1="70" x2="668" y2="70"/><line x1="692" y1="42" x2="683" y2="33"/><line x1="720" y1="30" x2="720" y2="18"/><line x1="748" y1="42" x2="757" y2="33"/></g>
+<g class="o"><rect x="40" y="72" width="52" height="18" rx="4" fill="#3B82C4" class="o"/>
+<rect x="148" y="72" width="52" height="18" rx="4" fill="#3B82C4" class="o"/>
+<rect x="92" y="60" width="56" height="44" rx="8" fill="#C9D3CC" class="o"/>
+<circle cx="120" cy="82" r="8" fill="#F5C842" class="o"/>
+</g>
+<path d="M110 106 L250 200" fill="none" stroke="#3B82C4" stroke-width="4" stroke-linecap="round" stroke-dasharray="8 8"/>
+<path d="M132 106 L330 176" fill="none" stroke="#3B82C4" stroke-width="4" stroke-linecap="round" stroke-dasharray="8 8"/>
+<path d="M240 150 L560 130 L640 210 L600 400 L280 420 L200 300 Z" fill="#1F9A4D" class="o"/>
+<path d="M300 180 L400 170 L410 250 L300 260 Z" fill="#A7D7B4"/>
+<path d="M250 320 L330 300 L340 380 L280 396 Z" fill="#A7D7B4"/>
+<path d="M470 260 L570 240 L580 300 L500 320 Z" fill="#F5C842"/>
+<path d="M500 320 L580 300 L590 386 L500 398 Z" fill="#E8A33D"/>
+<circle cx="556" cy="352" r="12" fill="#FFFFFF" class="o"/>
+<circle cx="556" cy="352" r="5" fill="#1A1E1B"/>
+<path d="M720 430 Q640 420 556 366" fill="none" stroke="#1A1E1B" stroke-width="4" stroke-linecap="round" stroke-dasharray="3 10"/>
+</svg>

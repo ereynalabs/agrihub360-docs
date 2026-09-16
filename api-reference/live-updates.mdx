@@ -1,0 +1,39 @@
+---
+title: "Live Updates"
+description: "Subscribe to a device metric over WebSocket and receive each stored reading as it lands."
+asyncapi: "api-reference/messagebus.yaml metricValues"
+---
+
+Every stored reading is published to a message bus after the `201`. A WebSocket client subscribed to that device and metric receives the row at once. The publish is best-effort: a failure there never fails the post.
+
+## Subscribe
+
+Open a WebSocket to the message bus with one topic.
+
+```
+wss://devices.agrihub360.example/messagebus?topic=ahmetricvalue:<device_id>:<metric_id>
+```
+
+The first message confirms the subscription:
+
+```
+Subscribed to topic: ahmetricvalue:77777777-7777-7777-7777-777777777703:220
+```
+
+Each message after that is the topic, a colon, and the stored row as JSON:
+
+```
+ahmetricvalue:77777777-7777-7777-7777-777777777703:220:{"device_id":"77777777-7777-7777-7777-777777777703","metric_id":220,"value":"42.5","timestamp":"1784367787126"}
+```
+
+## Topics
+
+A topic names one device and one metric. Topics match exactly. There are no wildcards, so a client that wants three metrics from one device opens three subscriptions.
+
+| Topic | Delivers |
+|---|---|
+| `ahmetricvalue:<device_id>:<metric_id>` | Every stored reading for that device and metric |
+
+## Reconnecting
+
+A dropped socket delivers nothing for the gap. Readings stored while the client was away are not replayed; read them back through the app. Reconnect with the same topic and delivery resumes from the next reading.

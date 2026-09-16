@@ -1,0 +1,114 @@
+---
+title: "Fusarium Head Blight Risk"
+description: "The probability of a Fusarium head blight epidemic in a region, from hours of warmth, humidity and rain around wheat flowering."
+---
+
+**Fusarium Head Blight Risk** gives a region a calibrated probability, with an interval, that wheat flowering there will meet an FHB epidemic. It reads an hourly weather series for the region and the anthesis date from the growth-stage model, and runs daily while a wheat planting is inside its flowering window. The number belongs to the region, not the field.
+
+## The Science
+
+**Fusarium head blight** (FHB) infects wheat ears at flowering, or **anthesis**. It can leave the mycotoxin **deoxynivalenol** (DON) in the grain. Infection is confined to a short window, so weather in the days around anthesis predicts epidemics well. De Wolf, Madden and Lipps (2003) built **logistic regression** models, which estimate the probability of a yes-or-no outcome. They used 50 location-years across four US states and three wheat regions. The predictors were durations of weather conditions in the 7 days before anthesis and the 10 days from anthesis. Prediction accuracy ranged from 62 to 85 per cent. Four models classified 84 per cent of location-years correctly, and a pre-anthesis-only model 70 per cent. The most useful predictors were the hours of rain in the 7 days before anthesis, the hours with temperature between 15 and 30 °C in that week, and the hours with temperature in that range and relative humidity at or above 90 per cent.
+
+Later work confirmed the shape. Shah et al. (2013) linked 527 observations, 31 per cent of them major epidemics (severity at or above 10 per cent), to 380 weather summaries in windows of 5 to 15 days before or after anthesis. The selected predictors were almost all derived from relative humidity or temperature. The final models' average test misclassification rate was 19 per cent lower than that of the models then in national use. Shah et al. (2023) then showed that random forests, which average many decision trees, outperformed the logistic models with no more than 14 predictors. A measure of temperature stability in the 20 days before anthesis was the most frequently selected variable.
+
+All of these predictors are hours at a threshold. Two days with the same daily mean can differ threefold in hours above 90 per cent humidity. Daily aggregates can't stand in for hourly data.
+
+## How It's Applied
+
+The model reads an hourly weather series for the region, because the predictors are durations. Daily aggregates are never used in their place. A number built on daily data would look like the published model and not be it.
+
+Two models read the same duration features. The published logistic model is reproduced as a pure core, unit-tested against worked examples from the papers. It is the baseline. The learned model is gradient-boosted trees or a random forest on the same features, trained off-box. Its probabilities are calibrated by isotonic regression on held-out folds. Calibration means the number that reaches you is a real probability. Where the learned model doesn't beat the baseline, the logistic baseline is the model shown.
+
+### Inputs
+
+| Input | Source | If missing |
+|---|---|---|
+| Anthesis date | Growth-stage model | Skip the field. No anthesis, no window, no output. A low-confidence stage estimate is also skipped |
+| Hours at RH at or above 90 per cent, 7 days before anthesis | Hourly weather | No output for the region |
+| Hours in 15 to 30 °C, 7 days before anthesis | Hourly weather | No output for the region |
+| Temperature stability, 20 days before anthesis | Hourly or daily weather | Degraded feature, flagged |
+| Rainfall in the anthesis window | Hourly weather | Degraded feature, flagged |
+| Previous crop and cultivation | Planting history | Treated as an unknown category |
+| Variety resistance rating | Variety record | Region mean |
+
+### The Rule
+
+```text
+window     = 7 days before anthesis to 10 days after
+coverage   = hours present in the 7 days before anthesis / 168
+             # below 0.90 the model declines and the card says why
+features   = hours of rain, hours in 15 to 30 °C,
+             hours in 15 to 30 °C and RH >= 90 per cent,
+             temperature stability over the 20 days before anthesis
+p_baseline = logistic(features)                 # De Wolf, Madden and Lipps (2003)
+p_learned  = calibrated(trees(features))        # shown only where it beats the baseline
+band       = low | moderate | high              # edges from the reliability curve at validation
+```
+
+### Parameters
+
+| Quantity | Value |
+|---|---|
+| Anthesis window | 7 days before to 10 days after anthesis |
+| Coverage floor | 90 per cent of hours present in the pre-anthesis window. A missing hour can only lower a duration feature, and under-reading FHB risk is the expensive direction |
+| Temperature range | 15 to 30 °C |
+| Humidity threshold | Relative humidity at or above 90 per cent |
+| Band edges | Set from the reliability curve at validation, not in advance |
+| Resolution | `regional`, stored on every row |
+
+### Output and Cadence
+
+Each row carries a calibrated probability with an interval, a band of low, moderate or high, a feature-completeness score, and a resolution of `regional`. The job runs daily during the anthesis window, for winter and spring wheat. The output says "conditions in your region", never "your field". No accuracy figure is quoted per field. Below the coverage floor the card says why it can't answer rather than showing a low number.
+
+### Data Flow
+
+The anthesis date fixes the window and the hourly series fills it. The variety rating and the planting history join the duration features. The row that is written names the model shown, the resolution and the share of features that were present.
+
+### The Scheduled Run
+
+1. The growth-stage job runs at start-up and then daily, and writes a stage row with the anthesis date per planting.
+2. Daily, the FHB job lists the wheat plantings with an anthesis date. A planting with no date, or with a low-confidence stage estimate, is skipped.
+3. For each planting inside its window, the job reads the hourly series for the region from 7 days before to 10 days after anthesis.
+4. Below the coverage floor the job writes no probability and records the reason.
+5. Otherwise it computes the duration features, scores the baseline and the learned model, and writes the risk row with resolution `regional`.
+6. A high band sends a push and an email. The field-detail card reads the latest row.
+
+### Worked Example
+
+The table is an example, not a record. It shows two regions on the same day, one at anthesis and one whose hourly series is short of the coverage floor. Hours are counted over the 7 days before anthesis: hours of rain, hours in 15 to 30 °C, and hours in that range with RH at or above 90 per cent. The probabilities and intervals are illustrative.
+
+| Region and day | Hours of rain, warm, warm and humid | Hours present | Result |
+|---|---|---|---|
+| East, 2 days before anthesis | 18, 96, 41 | 163 of 168, 97 per cent | 0.31, interval 0.22 to 0.41, moderate. Row |
+| East, anthesis | 38, 121, 64 | 166 of 168, 99 per cent | 0.62, interval 0.50 to 0.73, high. Row and notification |
+| West, anthesis | 40, 118, 66 | 141 of 168, 84 per cent | Declines. Row with the reason, card says coverage is below the floor |
+
+In the east, the wet, warm week before flowering pushes the probability into the high band on the day of anthesis, and a notification is sent. In the west the raw hours look similar. But 27 hours are missing from the pre-anthesis window, so the model declines rather than report a number that would under-read the risk.
+
+## External Models
+
+This model calls no language model. Its outputs are numbers and states: a probability, an interval, a band and a completeness score. Alert text is rendered from templates. The hourly temperature, humidity and rain it reads come from a gridded weather model. Two language-model features read its output. The [Field Health Review](/models/field-health-review) folds it into its summary of the field. The [Assistant](/models/assistant) can answer questions about it.
+
+## Validation
+
+The model is validated under leave-one-season-out and leave-one-region-out, and both are reported. Region matters most, because the training data is from the United States. The baseline is the reproduced logistic model of De Wolf, Madden and Lipps (2003). The metrics are AUC (how well the model ranks epidemic years above non-epidemic years), Brier score (the mean squared error of the probabilities) and the reliability curve (predicted probability plotted against observed frequency). Sensitivity at the chosen operating threshold is reported separately, because a missed epidemic costs far more than a wasted pass. The learned model is shown only where it beats the logistic baseline on Brier score under leave-one-region-out, with a monotone reliability curve. Otherwise the logistic baseline is shown alone.
+
+## Limits
+
+- It does not predict whether this field will get FHB. The labels are regional, so a wet hollow and an exposed ridge in the same region get the same number.
+- It does not say whether to spray.
+- It does not predict mycotoxin content or compliance. Only a grain test does that.
+- It does not cover disease on barley and oats.
+- A duration feature under-reads when hours are missing. That is why the coverage floor is high and the model declines rather than under-report.
+
+See the [models overview](/models/overview) for the rules every model inherits.
+
+## References
+
+<div className="refs">
+
+1. De Wolf, E.D., Madden, L.V. and Lipps, P.E., 2003. [Risk assessment models for wheat Fusarium head blight epidemics based on within-season weather data](https://doi.org/10.1094/PHYTO.2003.93.4.428). Phytopathology, 93(4), 428–435.
+2. Shah, D.A., Molineros, J.E., Paul, P.A., Willyerd, K.T., Madden, L.V. and De Wolf, E.D., 2013. [Predicting Fusarium head blight epidemics with weather-driven pre- and post-anthesis logistic regression models](https://doi.org/10.1094/PHYTO-11-12-0304-R). Phytopathology, 103(9), 906–919.
+3. Shah, D.A., De Wolf, E.D., Paul, P.A. and Madden, L.V., 2023. [Into the trees: random forests for predicting Fusarium head blight epidemics of wheat in the United States](https://doi.org/10.1094/PHYTO-10-22-0380-R). Phytopathology, 113(8), 1483–1493.
+
+</div>

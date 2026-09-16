@@ -1,0 +1,119 @@
+---
+title: "Foliar Disease Risk"
+description: "A pressure level per field for Septoria tritici, yellow rust and brown rust, from hours of leaf wetness at temperatures inside each pathogen's range."
+---
+
+**Foliar Disease Risk** gives each wheat field a pressure level for three diseases, Septoria tritici, yellow rust and brown rust, from the hours the leaf was wet at a temperature the pathogen can grow at. It reads a leaf-wetness sensor on the field, the air temperature during those hours, the growth stage and the variety's susceptibility rating, and writes one row per disease per day. Pressure describes conditions, not presence: it says infection was favoured, not that the crop has the disease.
+
+## The Science
+
+Most fungal foliar pathogens need free water on the leaf for a minimum number of hours, at a temperature they can grow at. Magarey, Sutton and Thayer (2005) formalised this as a generic infection model. The **minimum wetness duration**, $W_{min}$, is the hours of surface wetness needed to produce 20 per cent disease incidence or 5 per cent severity at a given temperature. It is scaled by a temperature response between the pathogen's minimum, optimum and maximum temperatures. Validated against 53 laboratory studies, the model gave an average correlation of 0.83 and a root mean square error of 4.9 hours. $W_{min}$ ranged from 1 to 48 hours and was relatively uniform within the rust genus Puccinia. The same paper defines a **critical dry-period interruption**: the length of a dry spell, at relative humidity below 95 per cent, that halves infection compared with continuous wetness.
+
+The wheat pathogens fit this form. AHDB describes **Septoria tritici** as splash-dispersed: rain splashes spores up from infected lower leaves. Germination can take 12 hours. Infection usually follows within 24 hours of a spore landing if conditions are damp. The optimum temperature is 15 to 20 °C. Symptoms appear after a **latent period** of 14 to 28 days, the gap between infection and visible symptoms (AHDB, n.d. a). That latent period is why a spray responds to an infection event weeks earlier, and why a wetness-driven model beats the calendar. **Yellow rust** is a cool-weather disease. Its optimum is 10 to 15 °C with 100 per cent relative humidity. Overnight dew or rain in a cool spring drives epidemics, and temperatures over 20 °C slow the fungus (AHDB, n.d. b). **Brown rust** is warmer and later. Its optimum is 15 to 22 °C and the disease is active from 7 to 25 °C. Surface moisture on the leaf is essential for germination, and UK epidemics occur in mid to late summer (AHDB, n.d. c). In controlled inoculations, de Vallavieille-Pope et al. (1995) found brown rust infected across 5 to 25 °C and yellow rust across a narrower 5 to 12 °C. The minimum continuous dew period rose from 4 to 6 hours at the optimum to at least 16 hours at sub-optimal temperatures. A single dry hour interrupting a 24-hour wet period cut penetration for both.
+
+Every one of these models runs on leaf wetness duration. Rowlandson et al. (2015) review the measurement problem. Warning systems tolerate some error in wetness estimates, but accurate leaf wetness duration data remain a priority for efficient disease management. At the same relative humidity a canopy can be soaking or dry, depending on dew point, wind and canopy density. The error is largest in the marginal conditions where the model has to be right.
+
+## How It's Applied
+
+The model is a mechanistic accumulation, not a learned model. There is no UK-labelled dataset that would support training. Each disease is a pure core with its own constants, ids `septoria_tritici`, `yellow_rust` and `brown_rust`. Leaf wetness comes from a leaf-wetness sensor on the field, validated against manual wetness observation. Relative humidity is never used in its place. An RH-only Septoria risk would produce a number that looks like the real model and isn't, and it would fire in the wrong weeks.
+
+<Warning>
+  A field without a validated leaf-wetness reading gets no foliar disease output, and no estimate is shown in its place.
+</Warning>
+
+| Disease | Conditions |
+|---|---|
+| Septoria tritici | Wet period of roughly 24 to 48 hours at 15 to 25 °C; splash-dispersed on rain, so it moves up the canopy on rain events; latent period roughly 250 to 300 degree-days |
+| Yellow rust | Roughly 10 to 15 °C; needs dew rather than heavy rain; epidemics develop fast; shorter latent period |
+| Brown rust | Roughly 15 to 22 °C; late season |
+
+### Inputs
+
+| Input | Source | If missing |
+|---|---|---|
+| Leaf wetness hours | Leaf-wetness sensor on the field | No output for the field. The row carries the reason skipped |
+| Air temperature during wetness | Own sensors plus weather | Coverage floor applies |
+| Growth stage | Growth-stage model | Skip; thresholds are stage-relative |
+| Variety susceptibility, 1 to 9 | Variety table from the AHDB Recommended List | Crop mean, flagged on the row |
+| Rain-splash events | Rain gauge on the field | The Septoria splash term degrades, flagged on the row |
+| Last fungicide date | Spray record | Assume none, the conservative direction |
+
+### The Rule
+
+```text
+for each disease:
+  qualifying_hour = leaf wet and T_min(disease) <= temperature <= T_max(disease)
+  units_added     = qualifying hours in the day * susceptibility_scale(rating)
+                    # a resistant variety accumulates more slowly; the band edges don't move
+  accumulated    += units_added
+  pressure        = low | medium | high | critical     # band edges per disease
+  days_to_window  = per-disease rule on the accumulated units
+```
+
+### Parameters
+
+| Quantity | Value |
+|---|---|
+| Temperature range per disease | Septoria tritici 15 to 25 °C; yellow rust roughly 10 to 15 °C; brown rust roughly 15 to 22 °C |
+| Susceptibility scale | From the variety's 1 to 9 rating, applied to the accumulation, not to the band edges. Crop mean when there is no rating |
+| Pressure band edges | Per disease |
+| Days-to-window rule | Per disease |
+
+### Output and Cadence
+
+For each disease on each field, the model writes a pressure level of low, medium, high or critical, the accumulated units, days to the spray window, whether inputs were satisfied, the reason skipped if not, and the source citation. The job runs daily in season for wheat, after the growth-stage job. Card copy says "conditions favoured infection", never "your crop has Septoria".
+
+### The Scheduled Run
+
+1. The growth-stage job runs at start-up and then daily, and writes a stage row per planting.
+2. Daily in season, the foliar disease job lists the wheat fields with an active planting.
+3. For each field it reads the leaf-wetness hours, the temperatures during them, the rain gauge, the stage, the variety rating and the spray record.
+4. A field with no leaf-wetness reading or no stage gets a row per disease with the reason skipped.
+5. Otherwise each core returns its pressure, accumulated units, days to window and flags, and the job writes a row per disease.
+6. The pressure timeline on field detail reads the latest row per disease.
+
+### Worked Example
+
+The table is an example, not a record. It walks Septoria tritici on one field with a variety rated 5, for which the example takes the susceptibility scale as 1.0, through five days. The band edges are illustrative.
+
+| Day | Hours wet, and wet at 15 to 25 °C | Units added, accumulated | Pressure |
+|---|---|---|---|
+| 1 | 6, 4 | 4, 4 | Low |
+| 2 | 15, 13 | 13, 17 | Low |
+| 3 | 26, 24 | 24, 41 | Medium, splash term flagged if there is no rain gauge |
+| 4 | 30, 27 | 27, 68 | High |
+| 5 | No reading received | None, 68 | Row with the reason skipped |
+
+Only hours that are both wet and inside the temperature range count. So day 1 adds 4 units from 6 wet hours. Day 3 was wet overnight and through the next morning. The long wet spell on days 3 and 4 lifts the pressure to high. On day 5 the sensor sends nothing. The row records the skip, and the timeline shows the gap rather than a continued climb.
+
+## External Models
+
+This model calls no language model. Its outputs are numbers and states: a pressure level, the accumulated units, days to window and flags. Card text is rendered from templates. Its driving input is the leaf-wetness reading from the sensor on the field. Air temperature comes from the field's own sensors and the weather. Two language-model features read its output. The [Field Health Review](/models/field-health-review) folds it into its summary of the field. The [Assistant](/models/assistant) can answer questions about it.
+
+## Validation
+
+Validation is two-stage. The sensor is validated first, against manual wetness observation across a wet and a dry fortnight. A model validated on a bad sensor is worse than no model. The model is then scored under leave-one-season-out and leave-one-region-out splits. It is scored for agreement with agronomist-confirmed observations, and for lead time between the predicted infection period and observed symptoms. The baseline is calendar spray timing, the real-world alternative.
+
+## Limits
+
+- It does not say that the disease is present. Pressure is conditions, not presence.
+- It does not choose a fungicide or predict yield loss.
+- One sensor stands for a whole field. Wetness varies more within a field than temperature does.
+- A fouled or badly placed sensor is systematically wrong.
+- It reports pressure during the latent period, when no symptoms are visible. That is its main value and the card explains it.
+- Without a rain gauge on the field, the Septoria splash-dispersal term is degraded and the row says so.
+
+See the [models overview](/models/overview) for the rules every model inherits.
+
+## References
+
+<div className="refs">
+
+1. Magarey, R.D., Sutton, T.B. and Thayer, C.L., 2005. [A simple generic infection model for foliar fungal plant pathogens](https://doi.org/10.1094/PHYTO-95-0092). Phytopathology, 95(1), 92–100.
+2. de Vallavieille-Pope, C., Huber, L., Leconte, M. and Goyeau, H., 1995. [Comparative effects of temperature and interrupted wet periods on germination, penetration, and infection of Puccinia recondita f. sp. tritici and P. striiformis on wheat seedlings](https://doi.org/10.1094/Phyto-85-409). Phytopathology, 85(4), 409–415.
+3. Rowlandson, T., Gleason, M., Sentelhas, P., Gillespie, T., Thomas, C. and Hornbuckle, B., 2015. [Reconsidering leaf wetness duration determination for plant disease management](https://doi.org/10.1094/PDIS-05-14-0529-FE). Plant Disease, 99(3), 310–319.
+4. [AHDB, n.d. a. Septoria tritici in winter wheat](https://ahdb.org.uk/knowledge-library/septoria-tritici-in-winter-wheat). Agriculture and Horticulture Development Board.
+5. [AHDB, n.d. b. Yellow rust symptoms and management in wheat](https://ahdb.org.uk/yellowrust). Agriculture and Horticulture Development Board.
+6. [AHDB, n.d. c. Brown rust in cereals](https://ahdb.org.uk/brownrust). Agriculture and Horticulture Development Board.
+
+</div>

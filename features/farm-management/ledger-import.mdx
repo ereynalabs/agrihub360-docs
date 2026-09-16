@@ -1,0 +1,79 @@
+---
+title: "Ledger Import"
+description: "A CSV from your accounts package, checked for duplicates and scored against existing costs, posted only when you decide."
+---
+
+**Ledger import** reads the export your accounts package produces, whatever it calls its columns, and turns each row into a ledger line held for review. A row it can't read is reported with its line number and reason, never dropped silently. A line only becomes a cost in a field's profit and loss when someone with the manager role imports it against a field.
+
+## What It Tells You
+
+For every line, the review screen shows the date, description, amount, counterparty, reference and tag from the file, the field it resolved to (or unassigned), a guessed cost category, and any existing costs it might duplicate, each with a score, a confidence and the reasons in plain words.
+
+The import summary reports how many lines were imported, how many were skipped as re-uploads, how many have no field, each unreadable row with its line number and reason, and each column header the import didn't recognise.
+
+## How It's Calculated
+
+**Reading the file.** The header row is matched against the column names listed below. A file needs a date column and either an amount column or a debit and credit pair. Without those the import stops and says so.
+
+**Amounts.** Currency symbols, thousands separators and spaces are stripped. A value in brackets, such as `(123.45)`, is negative. Money out is positive and a credit arrives negative. When there is no amount column, the amount is debit minus credit. A row with no readable amount, or a zero amount, is skipped and listed.
+
+**Dates.** `2026-03-12` is read as ISO. `12/03/2026` and `12-03-26` are read day first. A two-digit year below 70 is 20xx, otherwise 19xx. An unreadable date skips the row.
+
+**Duplicates across uploads.** Each line is hashed from its date, its amount to two decimal places, and its description and reference in lower case. A line whose hash already exists for the farm is counted as a duplicate and not created again. Re-uploading the same export is safe.
+
+**Field.** The tag column (a Xero tracking category, a QuickBooks class, a Sage department, or a column named field or enterprise) is compared, case-insensitively, with the tags you have mapped to fields. A mapped tag assigns the field. An unmapped or missing tag leaves the line unassigned. The field is never guessed from the description. When you map a tag later, every waiting line with that tag and no field picks up the field.
+
+**Category.** A first guess from keywords in the description and counterparty: fertiliser, spray, seed, fuel, labour, machinery or irrigation, and other when nothing matches. You can change it when you import.
+
+**Match suggestions.** Each waiting line is scored against costs already in the profit and loss for the same farm, dated within 60 days either side, and on the same field when the line has one. Points:
+
+- Amount: exact 50, within 1% 30, within 5% 15. Further apart, the pair is dropped.
+- Date: 3 days or fewer 30, 14 days or fewer 20, 45 days or fewer 10. Further apart, dropped.
+- Description: 5 per shared word, up to 10. Words of three letters or more, ignoring common ledger words such as ltd, invoice and farm.
+- The existing cost was mirrored from the applications log or an earlier ledger line: 10.
+
+A score of 80 or more is high confidence, 55 or more medium, and below that low. Suggestions are listed best first.
+
+**Decision.** Every line waits as unmatched. A manager imports it (a field is required and the category can be changed), marks it as a duplicate of an existing cost, or ignores it. An imported line becomes a read-only cost line with the source `derived_ledger`, carrying the counterparty and reference as its note. A decided line can't be decided again.
+
+Worked example. A ledger line for £1,240.00 dated 12 March, described "Fertiliser Yara 34.5N", scored against an application cost of £1,240.00 dated 10 March, described "Application cost (fertiliser, kg)".
+
+| Check | Result | Points |
+|---|---|---|
+| Amount | £1,240.00 against £1,240.00, exact | 50 |
+| Date | 2 days apart | 30 |
+| Description | One shared word, "fertiliser" | 5 |
+| Already in the profit and loss | Mirrored from the applications log | 10 |
+| Score | High confidence | 95 |
+
+## Where The Numbers Come From
+
+Column headers the import recognises, in any order and any case:
+
+| Column | Accepted headers |
+|---|---|
+| Date | date, transaction date, invoice date, txn date, dateposted |
+| Description | description, details, memo, narrative, memo/description |
+| Amount | amount, total, gross, value |
+| Debit and credit | debit, debit amount, spent, money out; credit, credit amount, received, money in |
+| Tag | tracking, tracking category, tracking1, class, department, field, enterprise |
+| Counterparty | contact, supplier, payee, name, vendor, customer |
+| Reference | reference, ref, invoice number, doc number, no. |
+
+The candidates a line is scored against are the existing cost lines on the farm, from whichever source: typed in, mirrored from the [applications log](/features/nutrient-planning/applications-log), or imported earlier. A match suggestion is a score with reasons and is never applied on its own. A line's status is one of unmatched, imported, duplicate or ignored, and the line records who decided it and when.
+
+<Warning>
+Slash dates are read day first. A file written month first imports with day and month swapped and no error. Check the parsed dates on the review screen before you import.
+</Warning>
+
+## Limits
+
+- Lines arrive by CSV upload only.
+- One currency is assumed. Amounts are taken as written and set against the farm's currency.
+- The field mapping is the only thing the import trusts. Category and match suggestions are guesses for you to confirm or change.
+- A line with no field can't be imported. It waits until a tag mapping or your decision gives it one.
+- Revenue isn't imported. A credit line can be imported, but it lands as a negative cost, not as a revenue line.
+
+<Frame caption="Ledger lines from an accounts export flow onto the field map; an unassigned line waits.">
+  <img src="/images/guides/ledger-import.svg" alt="A spreadsheet page whose rows flow onto a field map while one row waits unassigned." />
+</Frame>

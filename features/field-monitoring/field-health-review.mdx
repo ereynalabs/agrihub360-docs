@@ -1,0 +1,16 @@
+---
+title: "Field Health Review"
+description: "A score, its drivers and prioritised actions per field."
+---
+
+## What It Tells You
+
+The **field health review** is a written summary of one field: a status, a headline, the factors behind it and the actions to take, in order. It reads the soil readings, the forecast, the soil sample, the NDVI capture and the outputs of the field models, and says what they add up to. Each review carries a confidence of high, medium or low, computed from how complete the field's data was. A field with no readings and no NDVI gets a low-confidence review or none. The review is produced by the [Field Health Review](/models/field-health-review) model.
+
+## How It Works
+
+A scheduled job runs every three hours for every field. It sends the inputs to the main text model and checks the answer against a fixed schema. Each action states a metric, a comparison and a threshold. The server re-checks it against live readings before the action can be marked resolved.
+
+<Frame caption="A review on a clipboard: the status, its drivers and the actions in order.">
+  <img src="/images/guides/field-health-review.svg" alt="Cartoon of a clipboard with a green status mark, three factor rows and a numbered list of actions, fed by a probe, a cloud and a satellite." />
+</Frame>

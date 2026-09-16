@@ -1,0 +1,36 @@
+---
+title: "Device Standards"
+description: "The radio, data model and hardware standards AgriHub360 devices follow."
+---
+
+AgriHub360 devices and the Device API follow open standards where one exists, so a device built or bought elsewhere can post readings without an adapter written for it alone.
+
+## Radio
+
+| Standard | How it's used |
+|---|---|
+| **LoRaWAN** | The AgriHub360 Sensor and third-party LoRaWAN probes reach a gateway over LoRaWAN. [Map a LoRaWAN Uplink](/devices/map-a-lorawan-uplink) covers decoding an uplink from your own network server. |
+| **Regional frequency plans** | Europe uses EU868 and North America US915. Both limit airtime, so sensors report every 15 minutes or slower. |
+
+## Data Model
+
+The AgriHub360 device model maps onto the **OGC SensorThings API**, the open standard for internet-connected sensors. The mapping is what lets a SensorThings-aware system read AgriHub360 devices without a custom translation.
+
+| SensorThings | AgriHub360 |
+|---|---|
+| Thing | A device, claimed on a farm |
+| Location | The field the device is assigned to |
+| Sensor | The probe or channel on the device |
+| ObservedProperty | An entry in the metric catalogue, such as soil moisture |
+| Datastream | One device posting one metric |
+| Observation | A reading: device, metric, value, server timestamp |
+
+Above the sensor layer, the farm entities follow the **FIWARE Smart Agrifood** data models: a field is an AgriParcel, a field's record an AgriParcelRecord, a soil sample AgriSoil, a pest observation AgriPest, and the weather for a field WeatherObserved.
+
+## Units
+
+Every metric in the catalogue carries one unit, and a reading is stored in that unit without conversion. Units are SI or the agronomic convention for the quantity: degrees Celsius, percent volumetric water content, millisiemens per centimetre, pH, millimetres of rain, kilometres per hour of wind.
+
+## Hardware
+
+The AgriHub360 Sensor is an open device: [Open Hardware](/devices/open-hardware) lists its modules and how to repair it. A device is never tied to AgriHub360's servers by anything other than the API key it holds.

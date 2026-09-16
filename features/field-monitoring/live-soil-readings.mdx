@@ -1,0 +1,16 @@
+---
+title: "Live Soil Readings"
+description: "Soil moisture and temperature from in-ground sensors."
+---
+
+## What It Tells You
+
+A **live soil reading** is a measured value from a probe in the field: soil moisture as a percentage and soil temperature in °C, with the device and the time it came from. Soil moisture tells you whether the crop can take up nitrogen this week and whether the ground will carry a spreader. Soil temperature tells you whether the seedbed is warm enough to drill and whether the soil is warm enough for an application. The same readings feed the [drilling window](/models/drilling-window), [nitrogen timing](/models/nitrogen-timing) and [water stress](/models/water-status) models. A field with a probe gets those answers from its own soil.
+
+## How It Works
+
+An [AgriHub360 Sensor](/devices/sensor) reports every 15 minutes or slower over LoRa to the Hub. The Hub posts each reading to the Device API. A [device you bring](/devices/byod) posts to the same endpoint. Each reading is labelled **measured** and shown on the field timeline next to the modelled value it replaces. A sensor that stops reporting is shown as stale.
+
+<Frame caption="A probe in the soil, with its moisture and temperature readings and the Hub that receives them.">
+  <img src="/images/guides/live-soil-readings.svg" alt="Cartoon cut-away of soil with a probe below ground, a moisture badge, a temperature badge and a hub receiving the readings." />
+</Frame>
