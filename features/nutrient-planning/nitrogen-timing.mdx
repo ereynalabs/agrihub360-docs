@@ -1,0 +1,16 @@
+---
+title: "Nitrogen Timing"
+description: "When to apply, from soil temperature and growth stage."
+---
+
+## What It Tells You
+
+The plan gives the rate. **Nitrogen timing** gives the day. RB209 ties each dressing to a growth stage. The main winter wheat dressings go on at early stem extension, GS30 to 31. Calendar dates drift with the season. The stage does not. Timing reads the field's stage with its soil temperature, its soil moisture and the rain ahead. It says apply, marginal or hold, with the leaching risk next to it. A dressing on a hold day is lost to leaching or sits on cold soil. A dressing on an apply day is where the roots can reach it. The state is computed by the [Nitrogen Timing](/models/nitrogen-timing) model. The full rule is on the [Decision Windows](/features/decision-windows/nitrogen-timing) page.
+
+## How It Works
+
+The model runs every three hours after the growth-stage job. It reads the stage, the last ten days of soil temperature, the latest soil moisture reading and the three-day forecast rain. The state shows on the field card. An apply advisory is raised at most once per field every three days.
+
+<Frame caption="The field card shows the growth stage, the soil temperature and the apply state, with rain in the forecast.">
+  <img src="/images/guides/nitrogen-timing.svg" alt="A phone over a wheat field shows a growth stage, a thermometer and a three-state pill set to apply, with a rain cloud beside it." />
+</Frame>

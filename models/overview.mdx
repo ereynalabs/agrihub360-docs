@@ -1,0 +1,65 @@
+---
+title: "Models Overview"
+description: "What each AgriHub360 model predicts, what it reads, and how it is validated."
+---
+
+AgriHub360 runs a set of models on each field. Each has its own page: what it predicts, the published science behind it, how it's applied, which external models it touches, how it's validated, and what it doesn't do.
+
+Most of the models are **mechanistic** or **rule-based**. They apply published relationships, such as thermal time or the FAO-56 evapotranspiration equations, to the weather and readings for a field. None of them measures soil nutrients, and none of them calls a language model.
+
+## Models
+
+### Crop Development
+
+| Model | Type | Resolution | Predicts |
+|---|---|---|---|
+| [Growth Stage](/models/growth-stage) | Mechanistic | Field | The current Zadoks stage of a planting and the date of the next, from accumulated degree-days |
+| [Drilling Window](/models/drilling-window) | Rule | Field | Whether soil temperature has held above a crop's threshold for long enough to drill |
+
+### Field Conditions
+
+| Model | Type | Resolution | Predicts |
+|---|---|---|---|
+| [Spray Window](/models/spray-frost) | Rule | Field | Hours when delta-T, wind and rain allow spraying, and a frost risk |
+| [Water Stress](/models/water-status) | Rule | Field | Reference evapotranspiration and a banded drought-stress index |
+| [Nitrogen Timing](/models/nitrogen-timing) | Rule | Field | Whether to apply or hold nitrogen, from growth stage, soil temperature, soil moisture and the forecast rain |
+
+### Disease & Pest Risk
+
+| Model | Type | Resolution | Predicts |
+|---|---|---|---|
+| [BYDV Risk](/models/bydv) | Mechanistic | Field | When accumulated day-degrees since emergence pass the treatment threshold |
+| [Fusarium Head Blight Risk](/models/fusarium-head-blight) | Published logistic, with a learned model scored against it | Regional | The probability of an FHB epidemic in the region, from hours of warmth, humidity and rain around flowering |
+| [Foliar Disease Risk](/models/foliar-disease) | Mechanistic | Field | A pressure level per disease for Septoria tritici, yellow rust and brown rust, from hours of leaf wetness at infective temperatures |
+
+## Language & Vision Models
+
+A second group reads what the field models write and turns it into text, or reads a photo. The [Assistant](/models/assistant) answers questions about your farm from its records. [Scout Photo Diagnosis](/models/scout-diagnosis) names a disease or pest from a leaf photo. The [Field Health Review](/models/field-health-review) synthesises a field's readings, forecast, NDVI and model outputs into a status and actions. [EUDR Document Drafting](/models/document-drafting) writes the due-diligence statement from the farm's records.
+
+| Model | Type | Reads | Produces |
+|---|---|---|---|
+| [Assistant](/models/assistant) | Language model with retrieval | Your question, the farm's records and the knowledge base | An answer with sources |
+| [Scout Photo Diagnosis](/models/scout-diagnosis) | Vision model | A leaf photo, location data stripped and downscaled | A species from a curated list, a confidence and what the model saw |
+| [Field Health Review](/models/field-health-review) | Language model | Readings, the weather outlook, the soil sample, the NDVI capture and the field models' outputs | A status, headline, factors and actions, each action with a condition the server checks |
+| [EUDR Document Drafting](/models/document-drafting) | Language model | Parcels and dates from the record, your answers and the farm's metadata | Sections with headings and body text, rendered to PDF |
+
+## How the Models Run
+
+The field models share one pipeline. Every model reads the same field inputs: the weather, the readings, the soil sample, the planting record and the growth stage. Each input carries the name of its source. A model whose required input is missing skips the field and writes nothing for it, rather than filling the gap with a zero or an estimate. Each model's pure core writes its own row for each run and raises advisories and notifications, so the history of stages, indices and risk values for a field is kept and the field screens read the latest.
+
+## Rules Every Model Follows
+
+* **Skip, don't approximate.** If a required input is missing for a field, the model emits nothing for that field.
+* **State the resolution.** A model trained on regional data is labelled regional and is never shown as a per-field result.
+* **Report skill against a baseline.** A model that doesn't beat its baseline is shown as its baseline only.
+* **Show the uncertainty.** If a number is shown, its interval or confidence is shown with it.
+* **Cite the source.** Every threshold traces to AHDB, a peer-reviewed paper or validated field data, named on the model's page.
+* **Respect coverage floors.** A model over patchy data under-reads. Below a stated floor, it declines to answer.
+
+## Validation
+
+Models are validated by leaving out a whole season, a whole region, or both, and scoring the held-out predictions against a named baseline. Random cross-validation isn't used: nearby fields in the same season are correlated, so a random split leaks. Each model page states how it's validated and which baseline it's scored against.
+
+## Inputs
+
+Inputs are a gridded weather archive and forecast, an hourly weather series, elevation, your devices and your soil samples. Nutrient values come from soil samples, not from a sensor reading. Each model page lists its inputs, their source, and what the model does when one is missing.

@@ -1,0 +1,17 @@
+---
+title: "EUDR Document Drafting"
+description: "The due-diligence statement is drafted by a language model from the farm's records and the grower's answers, then rendered to PDF."
+---
+
+The **EUDR due-diligence document** is drafted by a language model from the farm's parcels, records and the grower's answers to a short questionnaire. The output is a list of sections with headings and body text, rendered to PDF.
+
+## How It's Applied
+
+Parcels and their dates come straight from the record. No model touches them. The grower's answers and the farm details are screened, then sent to the language model. It returns the sections with their headings. The assembled document is rendered to PDF.
+
+| Rule | Detail |
+|---|---|
+| Geolocation | Parcel coordinates and dates are written from the record directly. No model touches them. |
+| Prompt | Forbids invented certifications, figures or legal claims, and requires assumptions to be flagged in the text. |
+| Inputs | The grower's answers pass the same prompt screen as the assistant. Farm metadata is sanitised. |
+| Availability | If the language model is unavailable, no document is produced. You never get a document with the drafted sections missing. |

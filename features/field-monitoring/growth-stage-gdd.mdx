@@ -1,0 +1,16 @@
+---
+title: "Growth Stage (GDD)"
+description: "Thermal-time stage names, method shown for the agronomist."
+---
+
+## What It Tells You
+
+The **growth stage** is where the crop is on the Zadoks scale: GS31 for the first node, GS39 for flag leaf, GS65 for flowering. It comes with the projected date of the next stage. Nitrogen dressings, fungicide timings and the end of the BYDV window are all written against these stages. The stage tells you which job is next. It is computed by the [Growth Stage](/models/growth-stage) model from accumulated degree-days since sowing. The method and the running total are shown so an agronomist can check them.
+
+## How It Works
+
+A daily job sums degree-days above the crop's base temperature from the sowing date in the planting record. It uses daily air temperature from a gridded weather archive and forecast. The running total maps to the highest stage target reached for that crop. The next date is projected over the forecast.
+
+<Frame caption="Degree-days accumulate along the bar and the crop moves from GS31 to GS39 to GS65.">
+  <img src="/images/guides/growth-stage-gdd.svg" alt="Cartoon of three wheat plants at first node, flag leaf and flowering under a thermal-time bar filling towards a calendar date." />
+</Frame>

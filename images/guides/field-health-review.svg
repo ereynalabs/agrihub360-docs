@@ -1,0 +1,45 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 450" role="img" aria-label="Cartoon of a clipboard with a green status mark, three factor rows and a numbered list of actions, fed by a probe, a cloud and a satellite">
+  <defs><style>.o{stroke:#1A1E1B;stroke-width:4;stroke-linejoin:round;stroke-linecap:round}</style></defs>
+  <rect width="800" height="450" fill="#EAF3EC"/>
+<circle cx="730" cy="70" r="28" fill="#F5C842" class="o"/><g stroke="#1A1E1B" stroke-width="4" stroke-linecap="round"><line x1="768" y1="70" x2="780" y2="70"/><line x1="757" y1="97" x2="765" y2="105"/><line x1="730" y1="108" x2="730" y2="120"/><line x1="703" y1="97" x2="695" y2="105"/><line x1="692" y1="70" x2="680" y2="70"/><line x1="703" y1="43" x2="695" y2="35"/><line x1="730" y1="32" x2="730" y2="20"/><line x1="757" y1="43" x2="765" y2="35"/></g>
+<path d="M0 0 C-20 0 -24 -30 0 -32 C4 -54 40 -56 46 -38 C66 -46 86 -30 76 -14 C88 -12 88 4 74 4 Z" fill="#FFFFFF" class="o" transform="translate(60 130) scale(0.9)"/>
+<rect x="90" y="230" width="36" height="60" rx="10" fill="#1F9A4D" class="o"/>
+<rect x="90" y="220" width="36" height="16" rx="6" fill="#1A3A5C" class="o"/>
+<line x1="120" y1="220" x2="120" y2="180" stroke="#1A1E1B" stroke-width="5" stroke-linecap="round"/><circle cx="120" cy="176" r="6" fill="#1A1E1B"/>
+<rect x="40" y="320" width="50" height="18" rx="4" fill="#3B82C4" class="o"/>
+<rect x="92" y="312" width="56" height="34" rx="6" fill="#C9D3CC" class="o"/>
+<circle cx="120" cy="329" r="7" fill="#F5C842" class="o"/>
+<path d="M150 118 L204 118" fill="none" stroke="#1A1E1B" stroke-width="3" stroke-linecap="round" stroke-dasharray="8 8"/>
+<path d="M150 250 L204 250" fill="none" stroke="#1A1E1B" stroke-width="3" stroke-linecap="round" stroke-dasharray="8 8"/>
+<path d="M154 330 L204 330" fill="none" stroke="#1A1E1B" stroke-width="3" stroke-linecap="round" stroke-dasharray="8 8"/>
+<rect x="210" y="46" width="380" height="392" rx="16" fill="#8B5E3C" class="o"/>
+<rect x="234" y="84" width="332" height="332" rx="10" fill="#FFFFFF" class="o"/>
+<rect x="340" y="30" width="120" height="40" rx="12" fill="#C9D3CC" class="o"/>
+<circle cx="268" cy="124" r="18" fill="#1F9A4D" class="o"/>
+<polyline points="258,124 266,132 280,116" fill="none" stroke="#FFFFFF" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+<rect x="300" y="116" width="150" height="12" rx="6" fill="#1A1E1B"/>
+<rect x="300" y="136" width="100" height="8" rx="4" fill="#C9D3CC"/>
+<rect x="470" y="108" width="80" height="30" rx="15" fill="#A7D7B4" class="o"/>
+<g fill="#146134"><rect x="488" y="124" width="8" height="8" rx="2"/><rect x="502" y="118" width="8" height="14" rx="2"/></g><rect x="516" y="112" width="8" height="20" rx="2" fill="#C9D3CC"/>
+<line x1="252" y1="162" x2="548" y2="162" stroke="#C9D3CC" stroke-width="3" stroke-linecap="round"/>
+<path d="M0 -18 C-8 -6 -13 0 -13 6 A13 13 0 0 0 13 6 C13 0 8 -6 0 -18 Z" fill="#3B82C4" class="o" transform="translate(270 190) scale(0.9)"/>
+<rect x="296" y="184" width="190" height="10" rx="5" fill="#C9D3CC"/>
+<rect x="506" y="178" width="40" height="16" rx="8" fill="#E8A33D" class="o"/>
+<circle cx="270" cy="226" r="10" fill="#F5C842" class="o"/><g stroke="#1A1E1B" stroke-width="3" stroke-linecap="round"><line x1="270" y1="211" x2="270" y2="205"/><line x1="270" y1="241" x2="270" y2="247"/><line x1="255" y1="226" x2="249" y2="226"/><line x1="285" y1="226" x2="291" y2="226"/></g>
+<rect x="296" y="220" width="160" height="10" rx="5" fill="#C9D3CC"/>
+<rect x="506" y="214" width="40" height="16" rx="8" fill="#1F9A4D" class="o"/>
+<path d="M-14 12 C-14 -8 4 -16 16 -14 C16 4 2 16 -14 12 Z" fill="#1F9A4D" class="o" transform="translate(270 262) scale(0.9)"/>
+<rect x="296" y="256" width="200" height="10" rx="5" fill="#C9D3CC"/>
+<rect x="506" y="250" width="40" height="16" rx="8" fill="#D9534F" class="o"/>
+<line x1="252" y1="288" x2="548" y2="288" stroke="#C9D3CC" stroke-width="3" stroke-linecap="round"/>
+<circle cx="270" cy="316" r="14" fill="#E8A33D" class="o"/>
+<rect x="296" y="304" width="24" height="24" rx="6" fill="#FFFFFF" class="o"/>
+<rect x="334" y="311" width="150" height="10" rx="5" fill="#C9D3CC"/>
+<circle cx="270" cy="352" r="14" fill="#F5C842" class="o"/>
+<rect x="296" y="340" width="24" height="24" rx="6" fill="#FFFFFF" class="o"/>
+<rect x="334" y="347" width="180" height="10" rx="5" fill="#C9D3CC"/>
+<circle cx="270" cy="388" r="14" fill="#A7D7B4" class="o"/>
+<rect x="296" y="376" width="24" height="24" rx="6" fill="#FFFFFF" class="o"/>
+<rect x="334" y="383" width="180" height="10" rx="5" fill="#C9D3CC"/>
+<polyline points="300,316 306,322 317,309" fill="none" stroke="#1F9A4D" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>

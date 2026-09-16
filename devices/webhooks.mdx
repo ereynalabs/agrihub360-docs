@@ -1,0 +1,159 @@
+---
+title: "Webhooks"
+description: "Farm events pushed to a device or system of yours as they happen, signed and retried."
+---
+
+A sensor sends readings in. A device that acts, an irrigation controller, a valve, an alarm or a system of your own, needs the events coming out. A webhook posts each farm event to an HTTPS endpoint that device or its controller exposes, signed, with retries. This guide shows you how to set one up. You need the Manager role or higher on the farm and an HTTPS endpoint.
+
+Create a webhook under **Settings → Webhooks** in the app.
+
+## How Delivery Works
+
+Each stored event is posted to your endpoint as a JSON body with a signature header; a `2xx` response counts as delivered, and anything else, or a timeout, is retried on the schedule below.
+
+## Events
+
+| Event | Fires when |
+|---|---|
+| `metric.value` | A sensor reading is stored |
+| `device.offline` | A device stops reporting and is marked offline |
+| `trigger.fired` | One of your automation triggers fires |
+| `recommendation.created` | An agronomist writes a recommendation |
+
+<Note>
+  `metric.value` is high volume. Ten sensors reporting every 15 minutes is around a thousand events a day. For a dashboard that refreshes on a timer, poll the API instead.
+</Note>
+
+## Receive The Request
+
+Each delivery is a `POST` to your endpoint with a JSON body.
+
+```
+POST https://your-endpoint.example.com/agrihub
+Content-Type: application/json
+User-Agent: AgriHub360-Webhooks/1.0
+X-Agrihub-Signature: t=1784369411172,v1=9f86d081884c7d659a2feaa0c55ad015a3bf4f1b2b0b822cd15d6c15b0f00a08
+X-Agrihub-Delivery: 4d1b2c3e-...
+```
+
+```json
+{
+  "id": "evt_6e146482-2f18-4927-8a1c-9d0b7e4f3a21",
+  "type": "metric.value",
+  "farm_id": "22222222-2222-2222-2222-222222222201",
+  "occurred_at_ms": 1784369411000,
+  "data": {
+    "device_id": "77777777-7777-7777-7777-777777777703",
+    "metric_id": 220,
+    "value": "37.4",
+    "timestamp": 1784369411000
+  }
+}
+```
+
+Return any `2xx` to acknowledge. The response body isn't inspected.
+
+## Verify The Signature
+
+`X-Agrihub-Signature` is `t=<epoch-ms>,v1=<hex>`. `v1` is the HMAC-SHA256 of `"<t>.<raw-body>"`, keyed with your signing secret.
+
+<Warning>
+  Sign the raw request body, not a re-serialised object, or the signature won't match. Reject any `t` older than a few minutes, or a captured delivery can be replayed.
+</Warning>
+
+<CodeGroup>
+
+```js Node
+import { createHmac, timingSafeEqual } from 'node:crypto'
+
+export function verify(rawBody, header, secret, toleranceMs = 5 * 60 * 1000) {
+  const parts = Object.fromEntries(
+    header.split(',').map((p) => {
+      const i = p.indexOf('=')
+      return [p.slice(0, i).trim(), p.slice(i + 1).trim()]
+    }),
+  )
+  const t = Number(parts.t)
+  if (!Number.isFinite(t) || !parts.v1) return false
+  if (Math.abs(Date.now() - t) > toleranceMs) return false
+
+  const expected = createHmac('sha256', secret).update(`${t}.${rawBody}`).digest('hex')
+  const a = Buffer.from(expected)
+  const b = Buffer.from(parts.v1)
+  // Constant time: a normal === leaks the correct prefix byte by byte.
+  return a.length === b.length && timingSafeEqual(a, b)
+}
+```
+
+```js Express
+import express from 'express'
+
+const app = express()
+
+// express.json() would consume the stream and leave you unable to verify.
+app.post('/agrihub', express.raw({ type: 'application/json' }), (req, res) => {
+  const raw = req.body.toString('utf8')
+  if (!verify(raw, req.get('X-Agrihub-Signature') ?? '', process.env.WEBHOOK_SECRET)) {
+    return res.status(401).send('bad signature')
+  }
+  const event = JSON.parse(raw)
+
+  // Acknowledge FIRST, then do the work. We time out after 10 seconds and
+  // retry, so slow processing turns into duplicate deliveries.
+  res.status(200).json({ received: true })
+  void handle(event)
+})
+
+app.listen(3000)
+```
+
+```python Python
+import hashlib, hmac, json, os, time
+from flask import Flask, request, abort
+
+SECRET = os.environ["WEBHOOK_SECRET"].encode()
+app = Flask(__name__)
+
+def verify(raw: bytes, header: str, tolerance_s: int = 300) -> bool:
+    try:
+        parts = dict(p.strip().split("=", 1) for p in header.split(","))
+        t = int(parts["t"])
+        v1 = parts["v1"]
+    except (ValueError, KeyError):
+        return False
+    if abs(time.time() * 1000 - t) > tolerance_s * 1000:
+        return False
+    expected = hmac.new(SECRET, f"{t}.".encode() + raw, hashlib.sha256).hexdigest()
+    return hmac.compare_digest(expected, v1)
+
+@app.post("/agrihub")
+def receive():
+    # request.get_data() is the raw body; request.json would re-serialise.
+    raw = request.get_data()
+    if not verify(raw, request.headers.get("X-Agrihub-Signature", "")):
+        abort(401)
+    event = json.loads(raw)
+    print(event["type"], event["id"])
+    return {"received": True}, 200
+```
+
+</CodeGroup>
+
+## Retries
+
+- Delivery times out after **10 seconds**. Acknowledge first, then process.
+- Failed deliveries retry at 30s, 2m, 10m, 30m, 2h, 6h, 12h: **8 attempts over about 21 hours**.
+- `5xx`, `408`, `429`, timeouts and connection failures are retried. Other `4xx` aren't.
+- After **5 consecutive failed chains** the webhook is disabled. Re-enable it in settings. That resets the counter.
+- The delivery log keeps every attempt, with response status and body, for **30 days**.
+
+Deliveries are at-least-once and can arrive concurrently. Deduplicate on the event `id`. Sort on `occurred_at_ms` if order matters.
+
+## Security
+
+- Endpoints must be HTTPS and can't point at localhost, private ranges or link-local addresses.
+- Redirects aren't followed. A `302` is a failed delivery.
+- To rotate a secret, delete the endpoint and create it again.
+- The signing secret can be re-read in settings. A device API key can't.
+
+That's it. You have signed events arriving at your endpoint. Next: [AgriHub360 Sensor](/devices/sensor).

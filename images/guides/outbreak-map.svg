@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 450" role="img" aria-label="Cartoon of the outbreak map: the farm's fields at the centre of a map, red rings spreading from the top left with arrows pointing towards the farm, and a restrict-access button with a gate">
+  <defs><style>.o{stroke:#1A1E1B;stroke-width:4;stroke-linejoin:round;stroke-linecap:round}</style></defs>
+  <rect width="800" height="450" fill="#EAF3EC"/>
+  <g fill="none" stroke="#C9D3CC" stroke-width="3"><path d="M0 120 Q200 100 400 120 T800 110"/><path d="M0 330 Q200 350 400 330 T800 340"/><path d="M120 0 Q140 200 120 450"/><path d="M660 0 Q640 200 660 450"/></g>
+  <path d="M0 260 Q150 250 220 300 T400 380 T600 450" fill="none" stroke="#3B82C4" stroke-width="10" stroke-linecap="round"/>
+  <g class="o">
+    <path d="M420 170 L500 164 L506 224 L426 230 Z" fill="#1F9A4D"/>
+    <path d="M510 162 L580 156 L586 220 L516 224 Z" fill="#1F9A4D"/>
+    <path d="M428 236 L586 226 L592 290 L434 300 Z" fill="#A7D7B4"/>
+    <rect x="458" y="128" width="26" height="24" rx="4" fill="#8B5E3C"/><path d="M452 130 L471 112 L490 130 Z" fill="#D9534F"/>
+  </g>
+  <g fill="none" stroke="#D9534F" stroke-width="4" stroke-linecap="round">
+    <circle cx="150" cy="110" r="30" fill="#D9534F"/><circle cx="150" cy="110" r="12" fill="#FFFFFF"/>
+    <circle cx="150" cy="110" r="70" stroke-dasharray="8 8"/>
+    <circle cx="150" cy="110" r="110" stroke-dasharray="8 8"/>
+  </g>
+  <g fill="none" stroke="#D9534F" stroke-width="5" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M250 150 L380 190"/><path d="M362 172 L380 190 L356 198"/>
+    <path d="M230 210 L400 250"/><path d="M382 232 L400 250 L376 258"/>
+  </g>
+  <g class="o">
+    <rect x="560" y="330" width="200" height="90" rx="16" fill="#FFFFFF"/>
+    <rect x="584" y="360" width="6" height="40" rx="3" fill="#8B5E3C"/><rect x="646" y="360" width="6" height="40" rx="3" fill="#8B5E3C"/>
+    <line x1="586" y1="372" x2="650" y2="372" stroke-width="5"/><line x1="586" y1="392" x2="650" y2="392" stroke-width="5"/>
+    <circle cx="618" cy="382" r="16" fill="#D9534F"/><line x1="608" y1="372" x2="628" y2="392" stroke="#FFFFFF" stroke-width="5"/>
+    <rect x="672" y="366" width="66" height="14" rx="7" fill="#D9534F"/>
+    <rect x="672" y="392" width="44" height="10" rx="5" fill="#C9D3CC" stroke="none"/>
+  </g>
+</svg>

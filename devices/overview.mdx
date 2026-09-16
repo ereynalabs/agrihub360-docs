@@ -1,0 +1,25 @@
+---
+title: "Overview"
+description: "The AgriHub360 Sensor, the AgriHub360 Hub, and your own hardware."
+---
+
+AgriHub360 works with sensors that post readings and with devices that act on events. Every sensor, ours or yours, posts to the same [Device API](/quickstart). A device that acts receives events by [webhook](/devices/webhooks).
+
+| Device | What it is |
+|---|---|
+| [**AgriHub360 Sensor**](/devices/sensor) | Our solar LoRa soil probe. Measures soil moisture, temperature, conductivity and pH. |
+| [**AgriHub360 Hub**](/devices/hub) | Our gateway. Receives AgriHub360 Sensor uplinks and posts them to the Device API. One or more per farm, by area. |
+| [**Your own sensor**](/devices/byod) | A vendor API you already use or a LoRaWAN probe on your own network server, posting through a bridge. |
+| [**Your own device**](/devices/webhooks) | An irrigation controller, a valve or any system of yours that acts when a farm event fires. |
+
+<Frame caption="AgriHub360 Sensors post through the Hub. Your own device posts directly. Both reach the Device API.">
+  <img src="/images/devices-overview.svg" alt="" />
+</Frame>
+
+## How Readings Flow
+
+Every route ends at the same Device API over HTTPS, one request per reading. The field timeline, the alerts and the models read from there.
+
+Each physical sensor is one device in AgriHub360, with its own id and API key. A Hub posts on behalf of the sensors it serves.
+
+Events can also flow out. See [Webhooks](/devices/webhooks).

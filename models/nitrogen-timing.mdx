@@ -1,0 +1,116 @@
+---
+title: "Nitrogen Timing"
+description: "Whether a field is ready for a nitrogen application, from the crop's growth stage, its soil temperature and moisture readings and the forecast rain."
+---
+
+**Nitrogen Timing** tells you whether a field is ready for a nitrogen application. It reads the crop's growth stage, the last ten days of soil temperature, the latest soil moisture reading and the forecast rain, and returns one of three states: apply, marginal or hold. It times the application. It doesn't set a rate and doesn't measure soil nitrogen.
+
+## The Science
+
+Nitrogen recommendations in the AHDB Nutrient Management Guide, RB209, are tied to growth stage, not to the calendar. The stages are the **Zadoks decimal code** (Zadoks, Chang and Konzak, 1974). Principal stages 0 to 9 run from germination to ripening, and each is split into secondary stages. GS30 is the start of stem extension. GS31 is the first detectable node. For winter wheat, RB209 gives no requirement for seedbed nitrogen. Below 120 kg N/ha, the whole dressing goes on by early stem extension, not before early April. At 120 kg N/ha or more, about 40 kg N/ha goes on between mid-February and mid-March, except where take-all risk is low and shoot numbers are very high. The balance goes on in one or two dressings during early stem extension. Where more than 120 kg N/ha remains, half goes on at the start of stem extension, not before April, and half at least two weeks later, not after early May (AHDB, 2023). Winter barley follows the same pattern. Below 100 kg N/ha, a single dressing goes on by GS30 to 31. For 100 to 200 kg N/ha, the dressing is split between late tillering and GS30 to 31. Above that, it is split three ways: late tillering, GS30 to 31 and GS32 (AHDB, 2023). The calendar dates growers use as shorthand drift with the season. The stage doesn't.
+
+Whether a given day is fit for spreading is a separate question. In England the Farming Rules for Water prohibit applying manufactured fertiliser on waterlogged, flooded or snow-covered soil. They also prohibit it when the soil has been frozen for more than 12 hours in the past 24. They require you to take the forecast and the conditions at the time of application into account (Environment Agency, 2026). RB209 makes the same point in the other direction for late protein dressings: if soils are drying and rain isn't forecast, bring the application forward (AHDB, 2023).
+
+Behind both sits the soil's own nitrogen supply. RB209 gives each field a **Soil Nitrogen Supply** index from 0 to 6, estimated from field history or measured (AHDB, 2023). Part of that supply is **mineralisation**, the microbial conversion of organic nitrogen into forms a crop can take up. Stanford and Smith (1972) showed that net mineralisation follows first-order kinetics from a pool of potentially mineralisable nitrogen. In plain terms, the rate is proportional to what is left in the pool. The rate roughly doubles for each 10 °C rise in soil temperature, a temperature coefficient (Q10) of about 2 across 5 to 35 °C (Stanford, Frere and Schwaninger, 1973, as reported by Cassman and Munns, 1980). It falls as the soil dries, and moisture and temperature interact significantly (Cassman and Munns, 1980). This is why the window is anchored to crop development, and why soil temperature and moisture gate the day. The model doesn't compute mineralisation and doesn't read soil nitrogen.
+
+## How It's Applied
+
+A stage test decides whether the crop is still inside its application window. Three condition tests, on soil temperature, soil moisture and forecast rain, decide whether the coming days suit an application. Each test can only lower the state. The "stage past the nitrogen window" test is shared with the [Water Stress](/models/water-status) model.
+
+### Inputs
+
+| Input | Source | If missing |
+|---|---|---|
+| Growth stage | Growth-stage model, the latest row for the planting | The job runs after the growth-stage job, so the row it reads is current |
+| Soil temperature | Metric `70`, daily means over the last 10 days, with a rising-trend check | Hold. The field is skipped only when soil moisture is also absent |
+| Soil moisture | Metric `220`, the latest reading from a device on the field, for example the [AgriHub360 Sensor](/devices/sensor) or a [device you bring](/devices/byod) | Hold. The field is skipped only when soil temperature is also absent |
+| Forecast rain over the next 3 days | The field's cached forecast, refreshed every 4 hours from a gridded weather model | Read from the cache; there is no fallback estimate |
+
+### The Rule
+
+```text
+past_window   = stage >= GS55                              # no lower bound
+soil_temp     = mean of the daily means over the last 10 days
+temp_rising   = the 10-day means trend upward
+moisture_ok   = 20 <= soil_moisture <= 85                  # per cent
+rain_3d       = forecast rain over the next 3 days, mm
+leaching_risk = low    if rain_3d < 10
+                medium if 10 <= rain_3d < 25
+                high   if rain_3d >= 25
+
+state = hold      if past_window
+                  or (soil_temp < 5.5 and not temp_rising)
+                  or soil_moisture > 85
+        marginal  if soil_temp < 5.5 and temp_rising
+                  or soil_moisture < 20
+                  or leaching_risk == high
+        apply     otherwise
+```
+
+### Parameters
+
+| Quantity | Value |
+|---|---|
+| Stage past the application window | GS55 and later. There is no lower bound: RB209 anchors the main winter wheat dressings to early stem extension, GS30 to 31, and winter barley's splits to late tillering, GS30 to 31 and GS32 (AHDB, 2023), and the calendar dates it attaches to them are the baseline the model is scored against |
+| Soil temperature floor | 5.5 °C on the 10-day daily means. Below the floor and rising is marginal; below and not rising is hold |
+| Soil moisture band | 20 to 85 per cent. Above the band is hold, following the Farming Rules for Water on waterlogged soil (Environment Agency, 2026). Below the band is marginal |
+| Leaching thresholds | 10 and 25 mm of forecast rain over the next 3 days, the edges of medium and high risk. High risk marks the state marginal |
+
+### Output and Cadence
+
+The model returns one state per field: apply, marginal or hold. It also returns a leaching risk of low, medium or high, and the reasons for each test. The leaching risk is reported next to the state, whatever the state is. Resolution is the field. The job runs every three hours, after the growth-stage job. It writes an apply advisory at most once per field every three days, and a leaching advisory at most once a day. Each comes with a push and an email. The field-detail card reads the live value on request, so it never waits for the next run.
+
+### The Scheduled Run
+
+1. The weather ingest job refreshes the forecast every four hours, per grid cell, and writes it to each field in the cell.
+2. The growth-stage job runs at start-up and then daily, and writes a stage row per planting.
+3. Every three hours, and never at start-up, the nitrogen timing job lists the fields with an active planting. It reads the stage row, the soil readings, the cached forecast and the thresholds for each.
+4. A field with neither a soil temperature nor a soil moisture reading is skipped and nothing is written. Otherwise the rule returns the state, the leaching risk and the reasons.
+5. On apply, or on high leaching risk, the job writes an advisory row and sends a push and an email. Apply fires at most once per field every three days, leaching at most once a day. A state that persists across runs raises one notification, not one per run.
+6. The field-detail card asks the field route for the live result, so it never waits for the next run.
+
+### Worked Example
+
+The table is an example, not a record. It walks one winter wheat field through five runs against the parameters above. Each run lists the stage, the 10-day soil temperature mean and its trend, the soil moisture and the forecast rain over three days.
+
+| Run | Stage and readings | State | Written |
+|---|---|---|---|
+| Monday | GS30, 4.8 °C falling, 55 per cent, 4 mm | Hold, soil below the floor | Nothing |
+| Wednesday | GS30, 5.2 °C rising, 58 per cent, 6 mm | Marginal, below the floor but rising | Nothing |
+| Friday | GS31, 6.4 °C rising, 60 per cent, 5 mm | Apply | Advisory and notification, apply window open |
+| Saturday | GS31, 6.6 °C rising, 62 per cent, 31 mm | Marginal, leaching risk high | Advisory and notification, leaching risk |
+| Later in the season | GS65, 9.1 °C rising, 48 per cent, 8 mm | Hold, past the window | Nothing |
+
+On Friday every test passes and the crop is inside its window. The state is apply and the notification fires. On Saturday the crop is still inside the window, but 31 mm of rain is forecast. The leaching risk is high, the state drops to marginal and a leaching advisory is raised instead. At GS65 the stage test alone holds the crop, whatever the readings say.
+
+## External Models
+
+This model calls no language model. Its outputs are numbers and states: apply, marginal or hold, a leaching risk and the reasons. Alert text is rendered from templates. The forecast rain it reads comes from a gridded weather model, cached per field and refreshed every four hours. Two language-model features read its output. The [Field Health Review](/models/field-health-review) folds it into its summary of the field. The [Assistant](/models/assistant) can answer questions about it.
+
+## Validation
+
+Validation holds out a whole season, a whole region, or both. The held-out window is scored against growth stages an agronomist observed in the field. So the window is judged on whether the crop was in fact at the stage RB209 names. The baseline is the calendar: the date shorthand RB209 attaches to each dressing, such as mid-February to mid-March for the first winter wheat dressing and not before early April for the main one (AHDB, 2023).
+
+## Limits
+
+- It gives timing only, no rate. The rate to apply is a matter for RB209 and the nutrient plan. That is a separate surface with its own compliance obligations.
+- It times applications. It does not measure soil nitrogen. No soil nitrogen, nitrate or other nutrient reading is an input, and no such reading is a supported channel on any AgriHub360 device.
+- It does not model mineralisation or the Soil Nitrogen Supply index.
+- It uses a thermal stage estimate, so a stressed crop is placed further on than it is.
+- It does not know what has already been applied unless it is recorded.
+- One soil temperature and one soil moisture reading stand for the whole field.
+
+See the [models overview](/models/overview) for the rules every model inherits.
+
+## References
+
+<div className="refs">
+
+1. AHDB, 2023. [Nutrient Management Guide (RB209), Section 4: Arable crops, updated June 2023](https://projectblue.blob.core.windows.net/media/Default/Imported%20Publication%20Thumbs/RB209/2023/NutManGuideRB209S4_230526_WEB.pdf). Agriculture and Horticulture Development Board.
+2. Environment Agency, 2026. [How to comply with the Farming Rules for Water](https://www.gov.uk/guidance/rules-for-farmers-and-land-managers-to-prevent-water-pollution). GOV.UK, published 2 April 2018, updated 4 February 2026.
+3. Zadoks, J.C., Chang, T.T. and Konzak, C.F., 1974. [A decimal code for the growth stages of cereals](https://doi.org/10.1111/j.1365-3180.1974.tb01084.x). Weed Research, 14(6), 415–421.
+4. Stanford, G. and Smith, S.J., 1972. [Nitrogen mineralization potentials of soils](https://doi.org/10.2136/sssaj1972.03615995003600030029x). Soil Science Society of America Journal, 36(3), 465–472.
+5. Stanford, G., Frere, M.H. and Schwaninger, D.H., 1973. [Temperature coefficient of soil nitrogen mineralization](https://doi.org/10.1097/00010694-197304000-00009). Soil Science, 115(4), 321–323.
+6. Cassman, K.G. and Munns, D.N., 1980. [Nitrogen mineralization as affected by soil moisture, temperature, and depth](https://doi.org/10.2136/sssaj1980.03615995004400060020x). Soil Science Society of America Journal, 44(6), 1233–1237.
+
+</div>

@@ -1,0 +1,50 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 450" role="img" aria-label="Cartoon of ledger import: a CSV spreadsheet page with rows of ledger lines, dashed arrows carrying rows onto a top-down field map while one grey row waits unassigned">
+  <defs><style>.o{stroke:#1A1E1B;stroke-width:4;stroke-linejoin:round;stroke-linecap:round}</style></defs>
+  <rect width="800" height="450" fill="#EAF3EC"/>
+  <g class="o">
+    <path d="M430 60 L640 44 L690 150 L470 170 Z" fill="#1F9A4D"/>
+    <path d="M470 186 L700 166 L730 280 L500 300 Z" fill="#A7D7B4"/>
+    <path d="M500 316 L740 296 L760 410 L530 428 Z" fill="#146134"/>
+    <ellipse cx="610" cy="236" rx="34" ry="20" fill="#3B82C4"/>
+  </g>
+  <g fill="none" stroke-width="3" stroke-linecap="round">
+    <g stroke="#146134"><line x1="480" y1="80" x2="504" y2="150"/><line x1="530" y1="76" x2="554" y2="146"/><line x1="580" y1="72" x2="604" y2="142"/><line x1="630" y1="68" x2="654" y2="138"/></g>
+    <g stroke="#1F9A4D"><line x1="550" y1="330" x2="574" y2="410"/><line x1="600" y1="326" x2="624" y2="406"/><line x1="650" y1="322" x2="674" y2="402"/><line x1="700" y1="318" x2="724" y2="398"/></g>
+  </g>
+  <g class="o">
+    <rect x="60" y="50" width="280" height="350" rx="14" fill="#FFFFFF"/>
+    <path d="M60 64 Q60 50 74 50 L326 50 Q340 50 340 64 L340 92 L60 92 Z" fill="#C9D3CC"/>
+  </g>
+  <g stroke="#C9D3CC" stroke-width="3" stroke-linecap="round">
+    <line x1="150" y1="92" x2="150" y2="398"/><line x1="245" y1="92" x2="245" y2="398"/>
+    <line x1="62" y1="136" x2="338" y2="136"/><line x1="62" y1="180" x2="338" y2="180"/><line x1="62" y1="224" x2="338" y2="224"/><line x1="62" y1="268" x2="338" y2="268"/><line x1="62" y1="312" x2="338" y2="312"/><line x1="62" y1="356" x2="338" y2="356"/>
+  </g>
+  <text x="84" y="79" font-family="Inter, Arial, sans-serif" font-size="20" font-weight="700" fill="#1A1E1B">CSV</text>
+  <g fill="#C9D3CC">
+    <rect x="100" y="109" width="40" height="10" rx="5"/><rect x="162" y="109" width="70" height="10" rx="5"/>
+    <rect x="100" y="153" width="40" height="10" rx="5"/><rect x="162" y="153" width="56" height="10" rx="5"/>
+    <rect x="100" y="197" width="40" height="10" rx="5"/><rect x="162" y="197" width="64" height="10" rx="5"/>
+    <rect x="100" y="241" width="40" height="10" rx="5"/><rect x="162" y="241" width="48" height="10" rx="5"/>
+    <rect x="100" y="285" width="40" height="10" rx="5"/><rect x="162" y="285" width="70" height="10" rx="5"/>
+    <rect x="100" y="329" width="40" height="10" rx="5"/><rect x="162" y="329" width="60" height="10" rx="5"/>
+    <rect x="100" y="373" width="40" height="10" rx="5"/><rect x="162" y="373" width="52" height="10" rx="5"/>
+  </g>
+  <g fill="#E8A33D">
+    <rect x="262" y="109" width="60" height="10" rx="5"/><rect x="262" y="153" width="44" height="10" rx="5"/><rect x="262" y="197" width="52" height="10" rx="5"/><rect x="262" y="241" width="60" height="10" rx="5"/><rect x="262" y="285" width="36" height="10" rx="5"/><rect x="262" y="329" width="48" height="10" rx="5"/><rect x="262" y="373" width="56" height="10" rx="5"/>
+  </g>
+  <g class="o">
+    <circle cx="82" cy="114" r="7" fill="#1F9A4D"/><circle cx="82" cy="158" r="7" fill="#1F9A4D"/><circle cx="82" cy="202" r="7" fill="#C9D3CC"/><circle cx="82" cy="246" r="7" fill="#1F9A4D"/><circle cx="82" cy="290" r="7" fill="#C9D3CC"/><circle cx="82" cy="334" r="7" fill="#D9534F"/><circle cx="82" cy="378" r="7" fill="#1F9A4D"/>
+  </g>
+  <g fill="none" stroke="#146134" stroke-width="4" stroke-linecap="round" stroke-dasharray="8 8">
+    <path d="M348 114 Q430 108 540 100"/>
+    <path d="M348 246 Q420 252 520 258"/>
+    <path d="M348 378 Q440 384 610 364"/>
+  </g>
+  <path d="M348 202 L396 202" fill="none" stroke="#C9D3CC" stroke-width="4" stroke-linecap="round" stroke-dasharray="8 8"/>
+  <circle cx="414" cy="202" r="10" fill="#C9D3CC" class="o"/>
+  <g class="o">
+    <rect x="546" y="88" width="40" height="22" rx="11" fill="#FFFFFF"/><circle cx="558" cy="99" r="5" fill="#E8A33D"/>
+    <rect x="526" y="248" width="40" height="22" rx="11" fill="#FFFFFF"/><circle cx="538" cy="259" r="5" fill="#E8A33D"/>
+    <rect x="616" y="354" width="40" height="22" rx="11" fill="#FFFFFF"/><circle cx="628" cy="365" r="5" fill="#E8A33D"/>
+  </g>
+</svg>

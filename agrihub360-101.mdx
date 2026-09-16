@@ -1,0 +1,48 @@
+---
+title: "AgriHub360 101"
+description: "How the app turns your fields, public data and readings into a plan, a record and a compliance pack."
+---
+
+AgriHub360 works in four steps. You **map** your fields once. The app **models** each field from public data. A sensor **measures** the field where the model isn't good enough. You **act** on the rate and the date, and the app records it. The plan, the checks and the compliance pack are built from the record.
+
+## Map
+
+Draw each field once. The app loads what the public datasets for its country hold: soil type, slope, watercourses within fifty metres, and designations such as a nitrate vulnerable zone. Those four layers make up the **field profile**. A field can be split into zones for sub-field work.
+
+<Frame caption="A mapped farm with fields, a watercourse buffer and a designation.">
+  <img src="/images/guides/101-map.svg" alt="Three fields from above, a stream with a dashed buffer alongside, hatching over one field and a pen finishing a boundary." />
+</Frame>
+
+## Model
+
+For every field, every day, the app models the weather, soil temperature, evapotranspiration and crop growth stage from public data. The models are documented in [AI Models](/models/overview). Each modelled value is labelled **modelled** and names the model behind it.
+
+The weather archive and forecast, the elevation and the planting record are combined into one **feature snapshot** per field per day. The four models read from it. The field view shows what they return.
+
+## Measure
+
+Where the model isn't good enough, a sensor replaces it with a reading from that field. Use an [AgriHub360 Sensor](/devices/sensor) or [bring your own sensor](/devices/byod). A measured value is labelled **measured**, with the device and the time it came from. The app shows it next to the modelled value it replaced.
+
+The reading and the modelled value meet on the field timeline. Each field gets one chart comparing the two.
+
+<Frame caption="The modelled value and the measured value on one chart for one field.">
+  <img src="/images/guides/101-measure.svg" alt="A sensor probe in the soil beside a chart where a dashed modelled line runs next to a solid measured line." />
+</Frame>
+
+## Act
+
+The app gives you the rate and the date. You record the application as you do it, in the field, with or without signal. The record feeds the RB209 nutrient plan, the NVZ and Nmax checks, the SFI evidence and the spray log with its MAPP check. The compliance pack is built from the record, in the shape each regime asks for.
+
+Each application and each spray goes into its own log. The nitrogen checks, the plan and the SFI evidence read from the logs. The pack is built from all four as a PDF or a share link.
+
+<Frame caption="From the application record to the four logs to the compliance pack.">
+  <img src="/images/guides/101-act.svg" alt="A phone entry with a tick flows into four log blocks and on into a PDF document with a share link." />
+</Frame>
+
+## Who Does What
+
+| Role | Does | Sees |
+|---|---|---|
+| **Farmer** | Maps the farm, records applications, reads the alerts | Every field, every plan, every check |
+| **Agronomist** | Drafts plans across client farms, approves crop protection advice | Every client farm that has granted access, with the author recorded on each plan |
+| **Inspector** | Receives the pack | The pack, by share link, for the period asked for |

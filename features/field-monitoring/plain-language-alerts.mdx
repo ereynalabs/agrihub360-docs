@@ -1,0 +1,16 @@
+---
+title: "Plain-language Alerts"
+description: "What to do and by when, with the reading behind it."
+---
+
+## What It Tells You
+
+An **alert** is one sentence about one field: the window that has opened or closed, the risk that has crossed a threshold, or the sensor that has gone quiet, and what to do about it. It names the reading or the modelled value behind it, so you can check the number before you act. A frost alert says which night and how cold. A nitrogen alert says the window is open and why. A leaching alert says how much rain is coming.
+
+## How It Works
+
+Every model writes an advisory row when its state changes and sends a push notification and an email. Alert text is rendered from templates. A language model never writes it. A state that persists across runs raises a single alert. The alert links to the field, where the reading and the model behind it are shown.
+
+<Frame caption="A frost alert names the night and the temperature, and points at the probe behind it.">
+  <img src="/images/guides/plain-language-alerts.svg" alt="Cartoon of a phone with a frost alert bubble that shows a temperature chip and points at a probe in the field." />
+</Frame>

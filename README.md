@@ -1,55 +1,41 @@
-# Mintlify Starter Kit
+# AgriHub360 documentation
 
-Use the starter kit to get your docs deployed and ready to customize.
+The product and developer documentation for AgriHub360, published with [Mintlify](https://mintlify.com) at docs.agrihub360.com.
 
-Click the green **Use this template** button at the top of this repo to copy the Mintlify starter kit. The starter kit contains examples with
+## Layout
 
-- Guide pages
-- Navigation
-- Customizations
-- API reference pages
-- Use of popular components
+| Path | Holds |
+|---|---|
+| `docs.json` | Site configuration and the navigation for the four tabs |
+| `index.mdx`, `agrihub360-101.mdx` | The Guides tab's Getting Started pages |
+| `features/` | One overview page per Guides group and one page per feature under it |
+| `devices/` | The AgriHub360 Sensor and Hub, Connect Your Sensor, Connect Your Device, Standards |
+| `quickstart.mdx`, `api-reference/` | The API Reference tab: guides, the OpenAPI document (`device-api.yaml`) and the AsyncAPI document for live updates (`messagebus.yaml`) |
+| `models/` | The AI Models tab: one page per model, science first, then how it is applied |
+| `images/` | Cartoon SVG illustrations; `images/guides/` holds one per feature page |
+| `style.css` | Justified body text, centred figures, the small reference lists |
+| `AGENTS.md` | Writing rules for anyone, human or agent, editing the pages |
 
-**[Follow the full quickstart guide](https://starter.mintlify.com/quickstart)**
+Endpoint pages are generated from `api-reference/device-api.yaml`. Keep it in step with the Device API's own OpenAPI document.
 
-## AI-assisted writing
-
-Set up your AI coding tool to work with Mintlify:
-
-```bash
-npx skills add https://mintlify.com/docs
-```
-
-This command installs Mintlify's documentation skill for your configured AI tools like Claude Code, Cursor, Windsurf, and others. The skill includes component reference, writing standards, and workflow guidance.
-
-See the [AI tools guides](/ai-tools) for tool-specific setup.
-
-## Development
-
-Install the [Mintlify CLI](https://www.npmjs.com/package/mint) to preview your documentation changes locally. To install, use the following command:
+## Run it locally
 
 ```
-npm i -g mint
+npx mint dev --port 3333
 ```
 
-Run the following command at the root of your documentation, where your `docs.json` is located:
+Open `http://localhost:3333`. Run the command from the repository root, where `docs.json` is. Restart it after changing `device-api.yaml` or `messagebus.yaml`; page edits reload on their own.
+
+To check links and navigation entries:
 
 ```
-mint dev
+npx mint broken-links
 ```
 
-View your local preview at `http://localhost:3000`.
+## Branches
 
-## Publishing changes
+`main` publishes to docs.agrihub360.com. Work on a branch and merge when the site is ready to change.
 
-Install our GitHub app from your [dashboard](https://dashboard.mintlify.com/settings/organization/github-app) to propagate changes from your repo to your deployment. Changes are deployed to production automatically after pushing to the default branch.
+## Writing rules
 
-## Need help?
-
-### Troubleshooting
-
-- If your dev environment isn't running: Run `mint update` to ensure you have the most recent version of the CLI.
-- If a page loads as a 404: Make sure you are running in a folder with a valid `docs.json`.
-
-### Resources
-- [Mintlify documentation](https://mintlify.com/docs)
+See `AGENTS.md`. The short version: describe the product by what it does, and write in plain British English with no em-dashes.

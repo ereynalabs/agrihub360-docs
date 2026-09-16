@@ -1,0 +1,24 @@
+---
+title: "API Standards"
+description: "The conventions the Device API and webhooks follow: OpenAPI, transport, authentication, timestamps, limits and delivery."
+---
+
+The Device API is a small REST surface. These are the conventions it follows, so a client written against one endpoint behaves correctly against the rest.
+
+| Convention | What AgriHub360 does |
+|---|---|
+| **Specification** | The API publishes an OpenAPI 3.1 document at `GET /api/openapi.json`. The [API Reference](/quickstart) is generated from it, and clients can be generated from it. |
+| **Transport** | HTTPS only. Request and response bodies are JSON. |
+| **Authentication** | A per-device bearer API key, or a client certificate verified by the TLS-terminating proxy (mTLS). One key per device. A rotated key revokes the previous one. |
+| **Timestamps** | Set by the server on arrival, in epoch milliseconds. Client timestamps are ignored. |
+| **Identifiers** | Devices are UUIDs. Metrics are integer ids from a shared catalogue. |
+| **Idempotency** | One reading per request. A repeated request stores a second reading; clients don't retry a `2xx`. |
+| **Rate limiting** | 120 requests per 60 seconds per device credential. Over the limit, `429` with a `retry-after` header. |
+| **Errors** | `401` for a missing or revoked credential, with `{ "error": "unauthorized", "reason": "..." }`. `4xx` errors aren't retried by the client; `5xx` and connection errors are retried with backoff. |
+| **Health** | `GET /healthz` for liveness and `GET /readyz` for readiness, both unauthenticated. See [Errors and Limits](/api-reference/errors-and-limits#health-probes). |
+| **Live updates** | A WebSocket message bus with exact-match topics, one topic per device and metric. |
+| **Webhooks** | Outbound events are signed with a shared secret over the raw body, delivered with retries on a fixed schedule, and never sent to private or link-local addresses. See [Webhooks](/devices/webhooks). |
+
+## Versioning
+
+The API path carries no version. Additive changes, such as a new metric id or a new optional field, ship without notice. A change that would break an existing client is announced to every device owner before it ships, with the old behaviour kept until the date given.

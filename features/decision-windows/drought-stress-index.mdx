@@ -1,0 +1,16 @@
+---
+title: "Drought-stress Index"
+description: "ETo-based, confidence-labelled."
+---
+
+## What It Tells You
+
+The **drought-stress index** is a number from 0 to 100, banded low, moderate or high. It sets the water the air will draw from the field against the water the soil holds. **Reference evapotranspiration** (ETo) is the demand side: how much a well-watered grass surface would lose in the next 24 hours at the forecast temperature. The probe's soil moisture and the rain ahead are the supply side. A high band at a stage where water still drives yield is the signal to look at the crop. The index is a stress signal. It is not a soil water balance and does not say how much to irrigate. Every index carries a confidence of low or moderate. The index is computed by the [Water Stress](/models/water-status) model.
+
+## How It Works
+
+Every six hours the model computes ETo with the Hargreaves equation from the field's forecast temperature and latitude. It sets ETo against the latest soil moisture reading and the three-day forecast rain. Band edges are 30 and 60. A high band at a sensitive growth stage raises an advisory at most once per field every three days.
+
+<Frame caption="The sun draws water from the crop while the gauge sits in the moderate band and rain is on the way.">
+  <img src="/images/guides/drought-stress-index.svg" alt="Cartoon of a banded gauge with its needle in the moderate band, the sun drawing water up from a crop, a probe in cracked soil and a rain cloud." />
+</Frame>

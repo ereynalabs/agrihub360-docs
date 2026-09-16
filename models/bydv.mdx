@@ -1,0 +1,125 @@
+---
+title: "BYDV Risk"
+description: "When the second aphid generation is expected in an autumn-sown cereal, from degree-days above 3 °C accumulated since emergence toward the 170 degree-day threshold."
+---
+
+The **BYDV Risk** model tells you when the second aphid generation is expected in an autumn-sown cereal. From crop emergence, or from the last aphicide application, it accumulates daily degree-days above 3 °C from a gridded weather archive and forecast and reports progress toward the 170 °C day threshold as a field-level state, with one notification when the threshold is reached. It is a timing signal for the autumn aphicide decision, not an observation of aphids, their infectivity or yield loss.
+
+## The Science
+
+**Barley yellow dwarf virus (BYDV)** is the main virus disease of cereals in the UK. It can cause yield losses of up to 80% in winter barley and 84% in winter wheat. Two aphids carry most of it: the bird cherry-oat aphid, *Rhopalosiphum padi*, and the grain aphid, *Sitobion avenae* (White et al., 2023). In autumn, winged aphids fly into a newly emerged crop, settle on a few plants and infect them. This is **primary infection**. Those aphids then reproduce. Their wingless offspring move to neighbouring plants and carry the virus with them. This is **secondary spread**, and it causes the greatest yield losses in mild winters. Primary infection is very hard to prevent. Foliar insecticide is therefore best aimed at slowing secondary spread, which means targeting the second, wingless generation (White et al., 2023; AHDB, n.d. a).
+
+Aphids develop faster as temperature rises. The arrival of the second generation can therefore be approximated by a temperature sum, or **T-Sum**: the accumulated daily air temperature above a base, in degree-days. The AHDB BYDV tool for cereals accumulates temperature above a base of 3 °C from the day of crop emergence, or from the last pyrethroid application. It states that the second generation may be in the crop when the sum reaches 170 °C days. The tool flags 150 °C days as the point at which frequent crop monitoring should start. It notes that aphid flights are limited when temperatures fall below about 11 °C (AHDB, n.d. b; AHDB, n.d. a). Temperature-driven simulation models of BYDV epidemiology and of *R. padi* populations in UK winter cereals have a longer history (Kendall et al., 1992; Morgan, 2000). The T-Sum rule is a deliberately simple summary of that tradition.
+
+The rule's simplicity is also its limit. The AHDB tool assumes aphids are present at the start date and that all aphids carry BYDV. It states that it overlooks many factors affecting BYDV risk, that it is conservative, and that it tends to suggest more sprays than may be required (AHDB, n.d. b). Both assumptions are generous. Field-specific monitoring across English farms found that 24% of fields had no aphid immigration at all, even on the same farm as fields that did (Holland et al., 2021). Suction-trap testing over the autumns of 2021 to 2023 found that the mean proportion of aphids carrying the virus never exceeded 30% (AHDB, 2024). The AHDB-funded project that reviewed the tool reported that the origin of the 170 value is unknown. It is unclear whether the value relates to *R. padi*, *S. avenae* or both, and there is no evidence it has been validated (White et al., 2023).
+
+## How It's Applied
+
+The maths and every threshold sit in a pure core. Each threshold is a named constant. A scheduled job fetches the inputs, keeps one row per field and decides when to notify. The degree-day arithmetic is imported from the [growth stage](/models/growth-stage) model, not re-implemented.
+
+### Inputs
+
+| Input | Source | If missing |
+|---|---|---|
+| Daily minimum and maximum air temperature | Gridded weather archive plus forecast, shared per grid cell of roughly 11 km | The day contributes zero degree-days and counts against coverage. Below the coverage floor the state is `unknown`. |
+| Sowing date, crop and field centroid | The planting record | The planting isn't selected for the run |
+| Crop base temperature, upper cap, GS10 and GS31 targets | Per-crop parameter table | A crop with no GS10 target is skipped. With no GS31 target the window never closes. |
+| Last aphicide application | Spray records: the latest insecticide, or any spray naming aphids as the target | The start date is emergence |
+
+Emergence is inferred, not observed.
+
+### The Rule
+
+```
+T_BASE_C        = 3
+T_SUM_THRESHOLD = 170      degree-days
+MIN_COVERAGE    = 0.8
+
+emergence = the first day on which the crop's own degree-days from sowing,
+            at the crop's base and cap, reach its GS10 target
+start     = emergence, or the last aphicide application if that is later
+
+GDD_day   = max(0, (Tmax + Tmin) / 2 - T_BASE_C)
+T_sum     = sum of GDD_day from start to today
+coverage  = days with real temperatures / days from start to today
+
+if the crop has not emerged:                    state = unknown
+else if crop degree-days >= the GS31 target:    state = past_window
+else if coverage < MIN_COVERAGE:                state = unknown
+else if T_sum >= T_SUM_THRESHOLD:               state = at_threshold
+else if T_sum >= 0.75 * T_SUM_THRESHOLD:        state = approaching
+else:                                           state = accumulating
+```
+
+Two accumulations run one after the other. The crop's own degree-days, at its own base and cap, fix the emergence date and the end of susceptibility. The aphid degree-days above 3 °C, with no cap, run from the start date. Mixing the two up would silently shift the spray threshold.
+
+**Coverage** is the fraction of days between the start date and today that carry real temperature data. A missing day is treated as zero degree-days. That is right for growth staging, because a gap must never subtract accumulated heat. It is wrong here. It makes the sum under-read on patchy data, and an under-read spray threshold tells a grower they are safer than they are. Below 80% coverage the state is `unknown` rather than a confidently low number.
+
+The `approaching` state begins at 0.75 of the threshold, 127.5 °C days. That leaves time to plan a spray, or a decision to skip one, rather than the state flipping straight to `at_threshold`. Guidance marks 150 °C days as the point at which frequent crop monitoring should start (AHDB, n.d. b). The window closes when the crop's own degree-days reach its GS31 target. By stem extension the yield penalty from a new infection is slight and no aphicide is justified. Without that bound, a January-emerged crop read in July would show well over a thousand degree-days and present as at threshold weeks from harvest.
+
+### Thresholds
+
+| Constant | Value | Source |
+|---|---|---|
+| Base temperature | 3 °C | AHDB BYDV tool |
+| Threshold | 170 °C days | AHDB BYDV tool |
+| Approaching | 0.75 of the threshold | AgriHub360 house rule |
+| Window closes | The crop's GS31 target, on the crop's own degree-days | AgriHub360 house rule |
+| Coverage floor | 0.8 of days with real data | AgriHub360 house rule for accumulation models |
+
+### The Scheduled Run
+
+1. Daily, and once at start-up, the job selects the latest unharvested planting on each active field of wheat, barley or oats that has a centroid and crop parameters, plus the last aphicide per field: the latest insecticide, or any spray naming aphids as the target.
+2. It fetches one archive-plus-forecast series per grid cell from the earliest sowing date in the cell. A failed fetch skips the cell.
+3. For each planting it replays the crop's own degree-days from sowing to the GS10 target to fix the emergence date. It checks them against the GS31 target to see whether the window has closed. A crop with no GS10 target is skipped rather than given an invented emergence date. A crop that hasn't emerged gets an `unknown` row so the card can say so.
+4. It runs the rule from the start date and writes or updates one row per field: the start date and its reason, the sum, the coverage, the state and a caveat. Days taken from the forecast count toward the sum, and the caveat says so.
+5. On the first entry into `at_threshold` it notifies the farm once. Repeats are suppressed. A state that persists for weeks would turn a useful signal into noise. A new aphicide record moves the start date. That clears the notification record, so the next crossing of 170 notifies again. The spray that moved it is stored and shown, so you can see the date and disagree with it.
+6. The card reads the field's row. Resolution is the field.
+
+The card frames the output around how far off the threshold is, not around alarm. The decision it is meant to change is the reflex autumn pyrethroid, sprayed before the aphids are moving. That spray wastes money and selects for resistance. A grower looking at 40 of 170 degree-days has a defensible reason to hold off.
+
+### Worked Example
+
+Winter wheat counted from emergence, base 3 °C, every day present, with 150.0 °C days accumulated before day 1.
+
+| Day | Mean temperature (°C) | Sum (°C days) | State |
+|---|---|---|---|
+| 1 | 10.0 | 157.0 | approaching |
+| 2 | 11.0 | 165.0 | approaching |
+| 3 | 2.0 | 165.0 | approaching |
+| 4 | 8.0 | 170.0 | at_threshold, notified |
+| 5 | 9.0 | 176.0 | at_threshold, repeat suppressed |
+
+## External Models
+
+This model calls no language model. Its outputs are numbers and states. Alert text is rendered from templates. The daily temperature series comes from a gridded weather model, which supplies both the archive and the forecast. Two language-model features read its output. The [Field Health Review](/models/field-health-review) folds the field's BYDV state into its summary. The [Assistant](/models/assistant) can answer questions about it.
+
+## Validation
+
+Validation holds out a whole season, a whole region, or both. The held-out threshold dates are scored against aphid counts and virus incidence from monitored fields in the held-out set. The baseline is a fixed calendar date for the first autumn aphicide, the reflex spray the model is meant to replace.
+
+The underlying rule has been tested in UK field trials. Seven tramline trials ran in Yorkshire, Suffolk and Devon over 2020/21 and 2021/22. Spraying to the AHDB T-Sum tool reduced BYDV symptoms and raised yield relative to untreated tramlines where virus was present. But it recommended about 1.3 times as many sprays as the comparison decision tool, ACroBAT, which achieved control that was as good or better with fewer applications. Virus pressure was generally low in those seasons. That limits what the trials can say about either tool under high pressure (White et al., 2023).
+
+## Limits
+
+- It does not observe aphids. No trap, suction-tower or migration data is used. It is a thermal proxy for aphid activity, not a measurement of it.
+- It does not know whether any aphids present carry the virus. Most do not (AHDB, 2024).
+- It does not predict yield loss, and it is not a diagnosis of BYDV.
+- The emergence date is inferred, not observed. An error there shifts the whole sum.
+- The aphicide match is by product type or target name. An insecticide aimed at another pest can reset the clock when it should not, which makes the sum read low. The spray that caused the reset is shown so you can check it.
+- Regional aphid pressure varies for reasons temperature does not capture, including landscape, field boundaries and wind (Holland et al., 2021).
+- Weather comes from a gridded source shared across fields in a cell. An in-field sensor does not feed this model.
+
+## References
+
+<div className="refs">
+
+1. AHDB (n.d. a). [Basic biology of the bird cherry–oat aphid](https://ahdb.org.uk/knowledge-library/basic-biology-of-the-bird-cherry-oat-aphid). AHDB Knowledge Library.
+2. AHDB (n.d. b). [Barley yellow dwarf virus (BYDV) tool for cereals](https://ahdb.org.uk/bydv). Agriculture and Horticulture Development Board.
+3. White, S., Telling, S., Griffiths, H. G., Skirvin, D. J., Williamson, M., Ellis, S., Schaare, T., Granger, R. E. and Potter, O. (2023). [*Management of aphid and BYDV risk in winter cereals*](https://projectblue.blob.core.windows.net/media/Default/Research%20Papers/Cereals%20and%20Oilseed/2023/PR646%20final%20project%20report.pdf). AHDB Project Report No. 646. Agriculture and Horticulture Development Board.
+4. AHDB (2024). [Barley yellow dwarf virus (BYDV) in autumn 2024 aphids](https://ahdb.org.uk/news/barley-yellow-dwarf-virus-bydv-in-autumn-2024-aphids). Agriculture and Horticulture Development Board.
+5. Kendall, D. A., Brain, P. and Chinn, N. E. (1992). [A simulation model of the epidemiology of barley yellow dwarf virus in winter sown cereals and its application to forecasting](https://doi.org/10.2307/2404510). *Journal of Applied Ecology*, 29(2), 414–426.
+6. Morgan, D. (2000). [Population dynamics of the bird cherry-oat aphid, *Rhopalosiphum padi* (L.), during the autumn and winter: a modelling approach](https://doi.org/10.1046/j.1461-9563.2000.00079.x). *Agricultural and Forest Entomology*, 2(4), 297–304.
+7. Holland, J. M., McHugh, N. M. and Salinari, F. (2021). [Field specific monitoring of cereal yellow dwarf virus aphid vectors and factors influencing their immigration within fields](https://doi.org/10.1002/ps.6435). *Pest Management Science*, 77(9), 4100–4108.
+
+</div>

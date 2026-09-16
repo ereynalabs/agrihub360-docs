@@ -1,72 +1,251 @@
 {
   "$schema": "https://mintlify.com/docs.json",
   "theme": "mint",
-  "name": "Mintlify Starter Kit",
+  "name": "AgriHub360",
+  "description": "Developer documentation for AgriHub360: the device API, bringing your own hardware, and how each model works.",
   "colors": {
-    "primary": "#16A34A",
-    "light": "#07C983",
-    "dark": "#15803D"
+    "primary": "#146134",
+    "light": "#1F9A4D",
+    "dark": "#146134"
   },
   "favicon": "/favicon.svg",
-  "navigation": {
-    "pages": [
-      {
-        "group": "Getting Started",
-        "pages": [
-          "index",
-          "quickstart"
-        ]
-      }
-    ],
-    "global": {
-      "anchors": [
-        {
-          "anchor": "Documentation",
-          "href": "https://mintlify.com/docs",
-          "icon": "book-open-cover"
-        },
-        {
-          "anchor": "Blog",
-          "href": "https://mintlify.com/blog",
-          "icon": "newspaper"
-        }
-      ]
-    }
-  },
   "logo": {
     "light": "/logo/light.svg",
-    "dark": "/logo/dark.svg"
+    "dark": "/logo/dark.svg",
+    "href": "https://www.agrihub360.com"
+  },
+  "fonts": {
+    "family": "Inter"
+  },
+  "navigation": {
+    "tabs": [
+      {
+        "tab": "Guides",
+        "icon": "book-open",
+        "groups": [
+          {
+            "group": "Getting Started",
+            "pages": [
+              "index",
+              "agrihub360-101"
+            ]
+          },
+          {
+            "group": "Field Monitoring",
+            "pages": [
+              "features/field-monitoring",
+              "features/field-monitoring/live-soil-readings",
+              "features/field-monitoring/plain-language-alerts",
+              "features/field-monitoring/field-health-review",
+              "features/field-monitoring/sub-field-zones",
+              "features/field-monitoring/satellite-ndvi",
+              "features/field-monitoring/one-timeline-fusion",
+              "features/field-monitoring/growth-stage-gdd",
+              "features/field-monitoring/7-day-weather-and-frost",
+              "features/field-monitoring/field-map-first"
+            ]
+          },
+          {
+            "group": "Decision Windows",
+            "pages": [
+              "features/decision-windows",
+              "features/decision-windows/drilling-window",
+              "features/decision-windows/spray-window",
+              "features/decision-windows/nitrogen-timing",
+              "features/decision-windows/bydv-day-degrees",
+              "features/decision-windows/drought-stress-index",
+              "features/decision-windows/custom-triggers",
+              "features/decision-windows/trafficability"
+            ]
+          },
+          {
+            "group": "Nutrient Planning",
+            "pages": [
+              "features/nutrient-planning",
+              "features/nutrient-planning/rb209-nutrient-plans",
+              "features/nutrient-planning/nitrogen-timing",
+              "features/nutrient-planning/applications-log",
+              "features/nutrient-planning/zone-rate-planning"
+            ]
+          },
+          {
+            "group": "Crop Protection",
+            "pages": [
+              "features/crop-protection",
+              "features/crop-protection/scout-photo-diagnosis",
+              "features/crop-protection/pest-forecasts",
+              "features/crop-protection/regional-outbreak-alerts",
+              "features/crop-protection/outbreak-map"
+            ]
+          },
+          {
+            "group": "Compliance & Records",
+            "pages": [
+              "features/compliance-and-records",
+              "features/compliance-and-records/nvz-nitrogen-records",
+              "features/compliance-and-records/sfi-2026-evidence",
+              "features/compliance-and-records/spray-log-with-mapp-check",
+              "features/compliance-and-records/eudr-dossier",
+              "features/compliance-and-records/one-compliance-vault",
+              "features/compliance-and-records/nation-specific-rules"
+            ]
+          },
+          {
+            "group": "Farm Management",
+            "pages": [
+              "features/farm-management",
+              "features/variety-selection",
+              "features/farm-management/variety-recommender",
+              "features/farm-management/variety-evidence",
+              "features/farm-management/per-field-profit-and-loss",
+              "features/farm-management/ledger-import",
+              "features/farm-management/payback-panel",
+              "features/farm-management/team-and-roles",
+              "features/farm-management/agronomist-access"
+            ]
+          },
+          {
+            "group": "Account & Data",
+            "pages": [
+              "features/account-and-data",
+              "features/account-and-data/consent-first-data-sharing",
+              "features/account-and-data/two-factor-sign-in",
+              "features/account-and-data/farmer-sharing-groups",
+              "features/account-and-data/offline-action-queue"
+            ]
+          }
+        ]
+      },
+      {
+        "tab": "Devices",
+        "icon": "microchip",
+        "groups": [
+          {
+            "group": "AgriHub360",
+            "pages": [
+              "devices/overview",
+              "devices/sensor",
+              "devices/hub",
+              "devices/open-hardware"
+            ]
+          },
+          {
+            "group": "Connect Your Sensor",
+            "pages": [
+              "devices/byod",
+              "devices/bridge-a-vendor-api",
+              "devices/map-a-lorawan-uplink",
+              "devices/metrics"
+            ]
+          },
+          {
+            "group": "Connect Your Device",
+            "pages": [
+              "devices/webhooks"
+            ]
+          },
+          {
+            "group": "Standards",
+            "pages": [
+              "devices/device-standards",
+              "devices/api-standards"
+            ]
+          }
+        ]
+      },
+      {
+        "tab": "API Reference",
+        "icon": "code",
+        "groups": [
+          {
+            "group": "Getting Started",
+            "pages": [
+              "quickstart",
+              "api-reference/authentication",
+              "api-reference/errors-and-limits"
+            ]
+          },
+          {
+            "group": "Telemetry API",
+            "openapi": "api-reference/device-api.yaml",
+            "pages": [
+              "POST /api/metric-values",
+              "api-reference/live-updates"
+            ]
+          },
+          {
+            "group": "Platform Health",
+            "openapi": "api-reference/device-api.yaml",
+            "pages": [
+              "GET /healthz",
+              "GET /readyz"
+            ]
+          }
+        ]
+      },
+      {
+        "tab": "AI Models",
+        "icon": "chart-line",
+        "groups": [
+          {
+            "group": "Overview",
+            "pages": [
+              "models/overview"
+            ]
+          },
+          {
+            "group": "Crop Development",
+            "pages": [
+              "models/growth-stage",
+              "models/drilling-window"
+            ]
+          },
+          {
+            "group": "Field Conditions",
+            "pages": [
+              "models/spray-frost",
+              "models/water-status",
+              "models/nitrogen-timing"
+            ]
+          },
+          {
+            "group": "Disease & Pest Risk",
+            "pages": [
+              "models/bydv",
+              "models/fusarium-head-blight",
+              "models/foliar-disease"
+            ]
+          },
+          {
+            "group": "Language & Vision Models",
+            "pages": [
+              "models/assistant",
+              "models/scout-diagnosis",
+              "models/field-health-review",
+              "models/document-drafting"
+            ]
+          }
+        ]
+      }
+    ]
   },
   "navbar": {
     "links": [
       {
         "label": "Support",
-        "href": "mailto:hi@mintlify.com"
+        "href": "https://www.agrihub360.com/support"
       }
     ],
     "primary": {
       "type": "button",
-      "label": "Dashboard",
-      "href": "https://app.mintlify.com"
+      "label": "Open the app",
+      "href": "https://app.agrihub360.com"
     }
   },
   "contextual": {
     "options": [
       "copy",
-      "view",
-      "chatgpt",
-      "claude",
-      "perplexity",
-      "mcp",
-      "cursor",
-      "vscode"
+      "view"
     ]
-  },
-  "footer": {
-    "socials": {
-      "x": "https://x.com/mintlify",
-      "github": "https://github.com/mintlify",
-      "linkedin": "https://linkedin.com/company/mintlify"
-    }
   }
 }

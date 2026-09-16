@@ -1,0 +1,16 @@
+---
+title: "7-day Weather and Frost"
+description: "Per-field forecast with a 72-hour frost banner."
+---
+
+## What It Tells You
+
+The **field forecast** is the week ahead for that field: temperature, humidity, wind and rain. The spray, nitrogen and drought models read it. The forecast on screen is the forecast behind the windows. The **frost banner** appears when frost is likely on one of the next three nights. It shows the night and the effective minimum. The minimum is adjusted for how far the field sits below the farm's mean elevation, because cold air drains into the low fields first. The frost risk is computed by the [Spray Window](/models/spray-frost) model.
+
+## How It Works
+
+The forecast is refreshed every four hours from a gridded weather model and cached per field. Frost risk is high at an effective minimum at or below 0 °C and low at or below 2 °C. A high risk raises an advisory and a notification once in 24 hours.
+
+<Frame caption="The week's forecast with a frost banner, and cold air draining into the low field.">
+  <img src="/images/guides/7-day-weather-and-frost.svg" alt="Cartoon of a seven day forecast strip with one frosty night and a frost banner above it, with cold air draining into a low field below." />
+</Frame>

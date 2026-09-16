@@ -1,0 +1,16 @@
+---
+title: "Pest Forecasts"
+description: "Degree-day risk windows, specific to UK crops."
+---
+
+## What It Tells You
+
+A **pest forecast** says when the weather has favoured a pest or a disease on a field, before symptoms show. Aphids develop with temperature, so the [BYDV](/models/bydv) count runs on degree-days. Septoria, yellow rust and brown rust need hours of leaf wetness inside each pathogen's temperature range. The [Foliar Disease Risk](/models/foliar-disease) model gives each wheat field a pressure level per disease during the latent period, when nothing is visible. Fusarium head blight infects at flowering. The [Fusarium Head Blight Risk](/models/fusarium-head-blight) model gives a probability for the week around anthesis. A forecast describes conditions. It says infection was favoured. It does not say the crop has the disease.
+
+## How It Works
+
+Each forecast runs a degree-day or published risk model. BYDV sums degree-days above 3 °C from emergence. Foliar disease accumulates wet hours at infective temperatures from a leaf-wetness sensor on the field, scaled by the variety's susceptibility rating. FHB reproduces a published logistic regression on hours of warmth, humidity and rain around anthesis. Each model writes a row per field per day. The field card shows the result, or the reason when the model cannot answer.
+
+<Frame caption="Degree-days build up on the field card and each disease gets a pressure level.">
+  <img src="/images/guides/pest-forecasts.svg" alt="A card with rising degree-day bars and a thermometer, a wet leaf with an aphid, and three pressure pills." />
+</Frame>

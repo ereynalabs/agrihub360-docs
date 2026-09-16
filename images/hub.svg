@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 450" role="img" aria-label="Cartoon of an AgriHub360 Hub: a box on a post with an antenna, receiving LoRa uplinks from sensors and sending them on">
+  <defs><style>.o{stroke:#1A1E1B;stroke-width:4;stroke-linejoin:round;stroke-linecap:round}</style></defs>
+  <rect width="800" height="450" fill="#EAF3EC"/>
+  <path d="M0 330 Q200 310 400 330 T800 330 L800 450 L0 450 Z" fill="#1F9A4D" class="o"/>
+  <g class="o">
+    <rect x="386" y="230" width="28" height="100" rx="4" fill="#8B5E3C"/>
+    <rect x="340" y="140" width="120" height="100" rx="14" fill="#F4F6F3"/>
+    <rect x="356" y="160" width="88" height="14" rx="6" fill="#146134"/>
+    <circle cx="364" cy="200" r="7" fill="#1F9A4D"/><circle cx="386" cy="200" r="7" fill="#F5C842"/>
+    <rect x="404" y="192" width="40" height="16" rx="6" fill="#1A3A5C"/>
+    <line x1="440" y1="140" x2="440" y2="60" stroke="#1A1E1B" stroke-width="6"/>
+    <circle cx="440" cy="52" r="9" fill="#1A1E1B"/>
+    <path d="M460 236 C520 236 540 300 600 300 L640 300" fill="none" stroke="#1A1E1B" stroke-width="6"/>
+  </g>
+  <g fill="none" stroke="#146134" stroke-width="4" stroke-linecap="round" stroke-dasharray="8 8">
+    <path d="M300 80 A70 70 0 0 1 300 200"/><path d="M270 60 A100 100 0 0 1 270 220"/>
+    <path d="M200 120 A50 50 0 0 1 200 210"/>
+  </g>
+  <g class="o">
+    <rect x="96" y="250" width="46" height="52" rx="10" fill="#1F9A4D"/><rect x="96" y="242" width="46" height="14" rx="6" fill="#1A3A5C"/><line x1="134" y1="242" x2="134" y2="200" stroke="#1A1E1B" stroke-width="5"/>
+    <rect x="180" y="262" width="46" height="52" rx="10" fill="#1F9A4D"/><rect x="180" y="254" width="46" height="14" rx="6" fill="#1A3A5C"/><line x1="218" y1="254" x2="218" y2="212" stroke="#1A1E1B" stroke-width="5"/>
+  </g>
+  <g class="o">
+    <path d="M660 300 C640 300 636 270 660 268 C664 246 700 244 706 262 C726 254 746 270 736 286 C748 288 748 304 734 304 Z" fill="#FFFFFF"/>
+  </g>
+  <g font-family="Inter, Helvetica, Arial, sans-serif" font-size="18" fill="#1A1E1B">
+    <text x="640" y="336" font-size="15" fill="#5A625B">Device API</text>
+    <text x="40" y="60" font-size="15" fill="#5A625B">AgriHub360 Sensors send LoRa uplinks</text>
+    <text x="480" y="120" font-weight="600">AgriHub360 Hub</text><text x="480" y="146" font-size="15" fill="#5A625B">wired or cellular backhaul</text>
+  </g>
+</svg>

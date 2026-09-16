@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 450" role="img" aria-label="Cartoon of a field boundary with three drawn zones, a wet corner, a sandy headland and a green strip, and a pencil placing a corner point">
+  <defs><style>.o{stroke:#1A1E1B;stroke-width:4;stroke-linejoin:round;stroke-linecap:round}</style></defs>
+  <rect width="800" height="450" fill="#EAF3EC"/>
+<circle cx="720" cy="60" r="26" fill="#F5C842" class="o"/><g stroke="#1A1E1B" stroke-width="4" stroke-linecap="round"><line x1="756" y1="60" x2="768" y2="60"/><line x1="745" y1="85" x2="754" y2="94"/><line x1="720" y1="96" x2="720" y2="108"/><line x1="695" y1="85" x2="686" y2="94"/><line x1="684" y1="60" x2="672" y2="60"/><line x1="695" y1="35" x2="686" y2="26"/><line x1="720" y1="24" x2="720" y2="12"/><line x1="745" y1="35" x2="754" y2="26"/></g>
+<path d="M120 120 L520 90 L560 330 L140 360 Z" fill="#A7D7B4" class="o"/>
+<path d="M520 90 L560 330 L520 336 L484 96 Z" fill="#F5C842" class="o"/>
+<path d="M146 322 L520 296 L524 336 L140 360 Z" fill="#1F9A4D" class="o"/>
+<circle cx="220" cy="336" r="6" fill="#FFFFFF" class="o"/>
+<circle cx="220" cy="336" r="3" fill="#F5C842"/>
+<circle cx="330" cy="328" r="6" fill="#FFFFFF" class="o"/>
+<circle cx="330" cy="328" r="3" fill="#F5C842"/>
+<circle cx="440" cy="320" r="6" fill="#FFFFFF" class="o"/>
+<circle cx="440" cy="320" r="3" fill="#F5C842"/>
+<path d="M120 120 L260 110 L250 210 L132 240 Z" fill="#BFE0F5" class="o"/>
+<path d="M0 -18 C-8 -6 -13 0 -13 6 A13 13 0 0 0 13 6 C13 0 8 -6 0 -18 Z" fill="#3B82C4" class="o" transform="translate(190 170) scale(1.0)"/>
+<circle cx="120" cy="120" r="8" fill="#FFFFFF" class="o"/>
+<circle cx="260" cy="110" r="8" fill="#FFFFFF" class="o"/>
+<circle cx="132" cy="240" r="8" fill="#FFFFFF" class="o"/>
+<circle cx="250" cy="210" r="10" fill="#FFFFFF" class="o"/>
+<g class="o" transform="translate(250 210) rotate(40)"><path d="M0 0 L-5 -12 L5 -12 Z" fill="#1A1E1B"/><path d="M-5 -12 L-14 -36 L14 -36 L5 -12 Z" fill="#E8A33D"/><rect x="-14" y="-236" width="28" height="200" rx="3" fill="#F5C842"/><rect x="-14" y="-252" width="28" height="16" fill="#C9D3CC"/><rect x="-14" y="-274" width="28" height="22" rx="6" fill="#D9534F"/></g>
+</svg>

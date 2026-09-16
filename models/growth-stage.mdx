@@ -1,0 +1,97 @@
+---
+title: "Growth Stage"
+description: "The current Zadoks growth stage of each planting, and the date of the next stage, from degree-days accumulated since sowing."
+---
+
+The **Growth Stage** model estimates the current Zadoks decimal growth stage of each active planting and projects the date of the next stage. It works from thermal time, the running sum of daily degree-days above a crop-specific base temperature since sowing, using daily air temperature from a gridded weather archive and forecast, the sowing date from the planting record and a per-crop parameter table. The result is shown on the field-detail card, and the other temperature-driven models import the same degree-day arithmetic.
+
+## The Science
+
+The **Zadoks decimal code** is the standard way to describe where a cereal crop is in its life (Zadoks et al., 1974). It is a two-digit number. The first digit is the principal stage. The principal stages run from germination through tillering (the production of side shoots), stem elongation, booting, ear emergence, flowering and grain filling to ripening. The second digit subdivides the principal stage. GS31, for example, is stem elongation with the first node detectable. AHDB growth guides and spray timings for UK crops are written against this code (AHDB, 2023).
+
+**Thermal time** is the sum of daily temperatures above a **base temperature**. The base temperature is the point below which the process in question stops. Thermal time is measured in degree-days (°C days). The AHDB Wheat growth guide defines it this way. It uses the mean of the daily maximum and minimum, with a base of 0 °C for leaf development (AHDB, 2023). Its benchmarks are stated in thermal time: about 150 °C days from sowing to emergence, and one leaf emerging every 122 °C days on the main shoot. That interval between leaves is the **phyllochron** (AHDB, 2023; AHDB, n.d. a). Development runs on accumulated heat, not calendar days. A crop sown in a cold autumn takes longer to reach the same stage, but it needs roughly the same number of degree-days to get there. Porter and Gawith (1999) review how wheat development responds to temperature, including the cardinal temperatures at which processes stop or reach their optimum.
+
+The simple degree-day equation is mean temperature minus base. The literature uses it in two different ways, and the two can give very different totals. McMaster and Wilhelm (1997) compared them for wheat at a 0 °C base. One way compares the daily mean to the base before clamping (raising any value below the base up to the base). The other clamps the maximum and the minimum to the base first. The difference reached 83%. An implementation has to state which it uses. A further refinement fits a sine curve through the daily maximum and minimum to approximate the temperature path within the day (Allen, 1976). It is marginally more accurate near the base temperature. But it needs assumptions about the daily cycle that daily archive data do not support.
+
+## How It's Applied
+
+The core is a pure, stateless function: it takes inputs, returns outputs and keeps nothing between runs. Every constant is exported. It follows the AHDB Wheat growth guide method, a simple daily average with an optional upper cap. The [BYDV](/models/bydv) model imports it, so its assumptions carry over.
+
+### Inputs
+
+| Input | Source | If missing |
+|---|---|---|
+| Daily minimum and maximum air temperature | Gridded weather archive plus forecast, fetched once per grid cell of roughly 11 km (0.1 degrees) and shared by every field in that cell | The day contributes zero degree-days. The total under-reads and every downstream model inherits that bias. |
+| Sowing date | The planting record, entered by the user | No output for that planting: the shared rule is to skip, not approximate |
+| Base temperature, upper cap and stage targets | Per-crop parameter table | No output for that crop |
+
+### The Rule
+
+```
+Tmax' = min(Tmax, Tcap)
+Tmin' = min(Tmin, Tcap)
+GDD_day = max(0, (Tmax' + Tmin') / 2 - Tbase)
+```
+
+The cap is applied to the maximum and the minimum separately. Then the mean is compared to the base. In the terms of McMaster and Wilhelm (1997) this is the first interpretation: the daily mean, not each extreme, is clamped at the base. A day with no temperature contributes zero.
+
+Degree-days are summed from the sowing date to today. The running total is matched to the highest Zadoks target it has reached in the crop's stage-target list. The next target is the first one above it. To date the next stage, the model walks the forecast forward day by day. Each day's degree-days are subtracted from the amount still needed. Beyond the forecast horizon, the remaining amount is divided by the mean daily degree-day rate over the last 14 days, and that many days are added. If that rate is zero, no date is given.
+
+### Parameters
+
+| Parameter | Value | Note |
+|---|---|---|
+| Base temperature | Per crop, set in the parameter table | The AHDB Wheat growth guide uses 0 °C for leaf development in wheat (AHDB, 2023) |
+| Upper cap | Unset for cereals and oilseed rape; 30 °C for maize; set per crop for sugar beet | Cereals and oilseed rape are conventionally uncapped |
+| Stage targets | Per crop, degree-days to each Zadoks stage | Per crop, not per variety |
+
+### The Scheduled Run
+
+1. Daily, and once at start-up, the job selects the active plantings that have a sowing date, a field centroid and crop parameters. A planting missing any of these isn't selected.
+2. It fetches one archive-plus-forecast series per 0.1 degree grid cell, from the earliest sowing date in the cell. A cell whose fetch fails is skipped until the next run.
+3. For each planting it sums degree-days from sowing and finds the current and next stage. It then projects the next date over the forecast, and beyond it at the trailing 14-day rate.
+4. It inserts one growth-stage row per planting, kept as history, with the accumulated total, the current and next stage, the projected date and the trailing daily rate.
+5. The card reads the latest row, so it is only as current as the last run. Resolution is the field.
+
+### Worked Example
+
+Winter wheat, base 0 °C, no cap, GS10 at 150 °C days and GS21 at 450 °C days, with 138.0 °C days accumulated before day 1. At a 0 °C base the day's degree-days equal its mean temperature.
+
+| Day | Tmin / Tmax (°C) | Running total (°C days) | Stage |
+|---|---|---|---|
+| 1 | 4.0 / 12.0 | 146.0 | Before GS10 |
+| 2 | 3.0 / 9.0 | 152.0 | GS10 |
+| 3 | -2.0 / 2.0 | 152.0 | GS10 |
+| 4 | missing | 152.0 | GS10 |
+| 5 | 5.0 / 13.0 | 161.0 | GS10, 289 to GS21 |
+
+## External Models
+
+This model calls no language model. Its outputs are numbers and states. Alert text is rendered from templates. The daily temperature series comes from a gridded weather model, which supplies both the archive and the forecast. Two language-model features read its output. The [Field Health Review](/models/field-health-review) folds the stage into its summary of the field. The [Assistant](/models/assistant) can answer questions about it.
+
+## Validation
+
+Validation holds out a whole season, a whole region, or both. The held-out stage estimates are scored against growth stages observed in the field. The baseline is the calendar: the benchmark dates the AHDB Wheat growth guide gives for each stage in a typical season (AHDB, 2023). Skill is the error in days between the projected and the observed date of each stage. The projected date is shown with its interval.
+
+## Limits
+
+- It tracks thermal development only. A crop held back by drought or nutrient shortage is reported as further on than it is. Degree-days keep accumulating while real development slows.
+- The sowing date is user-entered. A wrong date shifts every downstream estimate, including the flowering window that other models rely on.
+- Stage targets are per crop. Differences between varieties are not represented.
+- A missing weather day counts as zero. The [BYDV model](/models/bydv) compensates with an explicit coverage floor. This model does not, so its totals under-read on patchy data.
+- It says nothing about yield, disease or nutrient status. Nutrient sensing is not a supported reading.
+- Weather comes from a gridded source, so two fields in the same 0.1 degree cell see identical temperatures. An in-field [AgriHub360 Sensor](/devices/sensor) or a [bring-your-own device](/devices/byod) does not feed this model. Its air-temperature input is the gridded series only.
+
+## References
+
+<div className="refs">
+
+1. Zadoks, J. C., Chang, T. T. and Konzak, C. F. (1974). [A decimal code for the growth stages of cereals](https://doi.org/10.1111/j.1365-3180.1974.tb01084.x). *Weed Research*, 14(6), 415–421.
+2. [AHDB (2023, updated 2025). *Wheat growth guide*](https://projectblue.blob.core.windows.net/media/Default/Imported%20Publication%20Docs/WheatGrowthGuide4470_UPDATE_250627_WEB.pdf). Agriculture and Horticulture Development Board.
+3. AHDB (n.d. a). [Leaf emergence and tillering growth stages in winter wheat (GS1–GS2)](https://ahdb.org.uk/knowledge-library/leaf-emergence-and-tillering-growth-stages-in-winter-wheat-gs1-gs2). AHDB Knowledge Library.
+4. AHDB (n.d. b). [Cereal growth guide: a glossary of terms](https://ahdb.org.uk/knowledge-library/cereal-growth-guide-a-glossary-of-terms). AHDB Knowledge Library.
+5. McMaster, G. S. and Wilhelm, W. W. (1997). [Growing degree-days: one equation, two interpretations](https://doi.org/10.1016/S0168-1923(97). *Agricultural and Forest Meteorology*, 87(4), 291–300. )00027-0.
+6. Allen, J. C. (1976). [A modified sine wave method for calculating degree days](https://doi.org/10.1093/ee/5.3.388). *Environmental Entomology*, 5(3), 388–396.
+7. Porter, J. R. and Gawith, M. (1999). [Temperatures and the growth and development of wheat: a review](https://doi.org/10.1016/S1161-0301(98). *European Journal of Agronomy*, 10(1), 23–36. )00047-1.
+
+</div>

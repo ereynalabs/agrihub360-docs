@@ -1,0 +1,26 @@
+---
+title: "Overview"
+description: "Drilling, spray and nitrogen windows, BYDV risk, drought index and custom triggers."
+---
+
+A **decision window** is a yes-or-no answer to one question: is now the time? The windows cover drilling, spraying, applying nitrogen, treating for aphids and irrigating.
+
+Each window is a model that runs every day on the field's weather, readings and growth stage. The method behind each one is in [AI Models](/models/overview). Custom triggers add your own thresholds on any reading, on frost, wind or rain, or on a sensor that has gone quiet.
+
+Each window reports open, approaching or closed. Every alert names the reading behind it.
+
+<Frame caption="Three field cards reading open, approaching and closed, with the tractor waiting on the answer.">
+  <img src="/images/guides/decision-windows.svg" alt="Cartoon of three fanned field cards showing a green tick, an amber clock and a grey cross over a field where a tractor waits." />
+</Frame>
+
+## What's Included
+
+| Feature | What it does |
+|---|---|
+| [Drilling Window](/features/decision-windows/drilling-window) | Soil temperature held N days, per crop and soil type |
+| [Spray Window](/features/decision-windows/spray-window) | Delta-T band plus frost cut-off, hour by hour |
+| [Nitrogen Timing](/features/decision-windows/nitrogen-timing) | Apply or hold, from temperature, moisture and rain |
+| [BYDV Day-degrees](/features/decision-windows/bydv-day-degrees) | Degree-days from emergence towards the 170 °C day threshold |
+| [Drought-stress Index](/features/decision-windows/drought-stress-index) | ETo-based, confidence-labelled |
+| [Custom Triggers](/features/decision-windows/custom-triggers) | Your own thresholds on readings, frost, wind, rain or a silent sensor |
+| [Trafficability](/features/decision-windows/trafficability) | Whether the ground can carry the kit, on heavy soils |

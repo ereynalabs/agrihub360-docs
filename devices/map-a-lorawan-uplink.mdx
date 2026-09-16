@@ -1,0 +1,117 @@
+---
+title: "Map a LoRaWAN Uplink"
+description: "Turn the decoded fields of a LoRaWAN uplink into readings on the Device API."
+---
+
+A LoRaWAN probe sends a few bytes per uplink. Your network server decodes them into named fields. A small bridge maps each field to a `metric_id`, converts it to the catalogue unit and posts it to the Device API, one reading per field. This page covers the mapping. The [bridge template](/devices/bridge-a-vendor-api) covers the posting.
+
+You need a claimed device and its key from the [quickstart](/quickstart), a probe registered on your network server, and a payload formatter for it. Every mainstream probe vendor publishes a formatter for The Things Stack and ChirpStack. Use the vendor's rather than decoding the byte table yourself.
+
+## What The Server Hands You
+
+A webhook from the network server carries the decoded fields under a single object. On The Things Stack that object is `uplink_message.decoded_payload`; on ChirpStack it is `object`. A soil probe reporting moisture, temperature, conductivity and battery arrives like this:
+
+```json
+{
+  "end_device_ids": { "device_id": "probe-north-field" },
+  "uplink_message": {
+    "decoded_payload": {
+      "water_soil": 31.6,
+      "temp_soil": 12.4,
+      "conduct_soil": 0.42,
+      "bat_v": 3.62
+    },
+    "received_at": "2026-04-14T06:15:03Z"
+  }
+}
+```
+
+Field names are the vendor's. Only the four values matter.
+
+## The Mapping
+
+Each decoded field becomes one reading with a `metric_id` from the shared catalogue. Pick the id whose unit matches what you post. The catalogue does not convert units, so the bridge does it before posting.
+
+| Decoded field | Reads as | `metric_id` | Catalogue unit | Conversion |
+|---|---|---|---|---|
+| `water_soil` | Soil moisture | `220` | % | none |
+| `temp_soil` | Soil temperature | `70` | °C | none, or divide by 10 if the probe reports tenths |
+| `conduct_soil` | Conductivity | `224` | mS/cm | divide by 1000 if the probe reports µS/cm |
+| `bat_v` | Battery | `2` | V | none |
+
+The full catalogue is on the [quickstart](/devices/metrics). The ids you are most likely to use:
+
+| `metric_id` | Metric | Unit |
+|---|---|---|
+| `70` | Temperature | °C |
+| `110` | Humidity | % |
+| `120` | pH | pH |
+| `140` | Luminosity | lux |
+| `200` | Battery | % |
+| `201` | Signal | % |
+| `220` | Soil moisture | % |
+| `224` | Conductivity | mS/cm |
+| `2` | Voltage | V |
+
+Battery has two ids on purpose. Post `200` when the probe reports a percentage and `2` when it reports volts. Never scale one into the other with a guessed curve.
+
+<Warning>
+  Ids `221` to `223` (nitrogen, phosphorus, potassium) exist in the catalogue but aren't a supported reading. Don't map a nutrient probe onto them.
+</Warning>
+
+## The Bridge
+
+The network server calls your bridge on every uplink. The bridge looks up the AgriHub360 device for that probe, walks the mapping and posts one request per field.
+
+```ts
+const MAP: Record<string, { metric_id: number; scale?: number }> = {
+  water_soil:   { metric_id: 220 },
+  temp_soil:    { metric_id: 70 },
+  conduct_soil: { metric_id: 224 },
+  bat_v:        { metric_id: 2 },
+}
+
+export async function onUplink(body: any) {
+  const probe = body.end_device_ids.device_id
+  const { device_id, key } = devices[probe]          // one AgriHub360 device per probe
+  const fields = body.uplink_message.decoded_payload
+
+  for (const [name, { metric_id, scale = 1 }] of Object.entries(MAP)) {
+    if (fields[name] === undefined) continue
+    await fetch('https://devices.agrihub360.example/api/metric-values', {
+      method: 'POST',
+      headers: { Authorization: `Bearer ${key}`, 'Content-Type': 'application/json' },
+      body: JSON.stringify({ device_id, metric_id, value: fields[name] * scale }),
+    })
+  }
+}
+```
+
+A field that is missing from an uplink is skipped, not posted as zero. A probe that sends nothing is shown as stale in the app, which is the right signal.
+
+## Connect The Network Server
+
+<Steps>
+  <Step title="Register the probe">
+    OTAA, with the DevEUI and AppKey from the probe's label.
+  </Step>
+  <Step title="Add the payload formatter">
+    The vendor's decoder for that model. Send a test uplink and check the decoded fields appear with sensible values.
+  </Step>
+  <Step title="Add a webhook">
+    Point the uplink event at your bridge's URL.
+  </Step>
+  <Step title="Map and run">
+    Fill in the mapping for the decoded field names, set the device id and key, and start the bridge.
+  </Step>
+</Steps>
+
+## Check The First Readings
+
+- **Scale.** A wrong scale factor gives plausible numbers that are wrong by ten. Compare the first readings with a handheld meter in the same soil.
+- **Unit.** Conductivity arrives in µS/cm from some decoders and mS/cm from others. Check which before you post to `224`.
+- **Timestamp.** The server sets the timestamp on arrival. A delayed uplink or a backlog flushed after an outage is stored at the time it reached the API.
+- **Interval.** The EU868 and US915 plans both limit airtime. Fifteen minutes is the fastest sensible interval for soil; hourly is enough.
+- **One device per probe.** Claim each probe as its own device and give each its own key, so one lost key exposes one probe.
+
+Next: [Webhooks](/devices/webhooks) to push events out of AgriHub360.

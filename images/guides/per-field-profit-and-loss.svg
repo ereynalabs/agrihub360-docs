@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 450" role="img" aria-label="Cartoon of a per-field profit and loss on a clipboard: a small field at the top, cost bars by category below it, and a stacked cost bar set against a shorter green revenue bar with a red shortfall block">
+  <defs><style>.o{stroke:#1A1E1B;stroke-width:4;stroke-linejoin:round;stroke-linecap:round}</style></defs>
+  <rect width="800" height="450" fill="#EAF3EC"/>
+  <g class="o">
+    <rect x="200" y="40" width="400" height="400" rx="18" fill="#8B5E3C"/>
+    <rect x="222" y="86" width="356" height="336" rx="10" fill="#FFFFFF"/>
+    <rect x="340" y="24" width="120" height="46" rx="12" fill="#C9D3CC"/>
+    <rect x="372" y="40" width="56" height="14" rx="7" fill="#1A1E1B"/>
+    <path d="M244 106 L336 100 L346 158 L252 164 Z" fill="#1F9A4D"/>
+  </g>
+  <g stroke="#146134" stroke-width="3" stroke-linecap="round"><line x1="268" y1="110" x2="272" y2="156"/><line x1="292" y1="108" x2="296" y2="154"/><line x1="316" y1="106" x2="320" y2="152"/></g>
+  <rect x="366" y="112" width="120" height="12" rx="6" fill="#C9D3CC"/>
+  <rect x="366" y="136" width="80" height="12" rx="6" fill="#C9D3CC"/>
+  <g class="o">
+    <rect x="248" y="190" width="220" height="22" rx="8" fill="#E8A33D"/>
+    <rect x="248" y="222" width="160" height="22" rx="8" fill="#F5C842"/>
+    <rect x="248" y="254" width="100" height="22" rx="8" fill="#3B82C4"/>
+    <rect x="248" y="286" width="56" height="22" rx="8" fill="#C9D3CC"/>
+  </g>
+  <line x1="244" y1="326" x2="556" y2="326" stroke="#C9D3CC" stroke-width="3" stroke-linecap="round"/>
+  <circle cx="254" cy="357" r="10" fill="#F5C842" class="o"/>
+  <path d="M254 380 C240 390 240 406 254 414 C268 406 268 390 254 380 Z" fill="#1F9A4D" class="o"/>
+  <rect x="276" y="344" width="270" height="26" rx="8" fill="#E8A33D"/>
+  <rect x="386" y="344" width="80" height="26" fill="#F5C842"/>
+  <rect x="466" y="344" width="50" height="26" fill="#3B82C4"/>
+  <rect x="510" y="344" width="36" height="26" rx="8" fill="#C9D3CC"/>
+  <rect x="276" y="344" width="270" height="26" rx="8" fill="none" class="o"/>
+  <rect x="276" y="384" width="246" height="26" rx="8" fill="#1F9A4D" class="o"/>
+  <rect x="522" y="384" width="24" height="26" rx="6" fill="#D9534F" class="o"/>
+  <g transform="rotate(-35 660 380)" class="o">
+    <rect x="590" y="368" width="150" height="24" rx="8" fill="#F5C842"/>
+    <path d="M590 368 L566 380 L590 392 Z" fill="#FFFFFF"/>
+    <path d="M572 377 L566 380 L572 383 Z" fill="#1A1E1B"/>
+    <rect x="700" y="368" width="40" height="24" rx="8" fill="#146134"/>
+  </g>
+</svg>

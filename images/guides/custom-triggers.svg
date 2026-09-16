@@ -1,0 +1,41 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 450" role="img" aria-label="Cartoon of a phone with a threshold slider, a comparison chip and a toggle, ringed by moisture, temperature, frost, wind, rain and silent sensor icons, with a webhook line out">
+  <defs><style>.o{stroke:#1A1E1B;stroke-width:4;stroke-linejoin:round;stroke-linecap:round}</style></defs>
+  <rect width="800" height="450" fill="#EAF3EC"/>
+<rect x="300" y="40" width="200" height="380" rx="24" fill="#1A1E1B" class="o"/>
+<rect x="314" y="56" width="172" height="348" rx="14" fill="#FFFFFF" class="o"/>
+<rect x="330" y="76" width="110" height="22" rx="11" fill="#A7D7B4" class="o"/>
+<path d="M0 -18 C-8 -6 -13 0 -13 6 A13 13 0 0 0 13 6 C13 0 8 -6 0 -18 Z" fill="#3B82C4" class="o" transform="translate(348 130) scale(0.9)"/>
+<rect x="368" y="124" width="90" height="12" rx="6" fill="#C9D3CC"/>
+<rect x="330" y="170" width="140" height="12" rx="6" fill="#C9D3CC"/>
+<rect x="330" y="170" width="60" height="12" rx="6" fill="#3B82C4"/>
+<circle cx="390" cy="176" r="12" fill="#FFFFFF" class="o"/>
+<path d="M350 190 L342 204 L358 204 Z" fill="#1A1E1B" class="o"/>
+<rect x="330" y="216" width="60" height="26" rx="13" fill="#FFFFFF" class="o"/>
+<polyline points="366,221 352,229 366,237" fill="none" stroke="#1A1E1B" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+<rect x="410" y="216" width="60" height="28" rx="14" fill="#1F9A4D" class="o"/>
+<circle cx="454" cy="230" r="10" fill="#FFFFFF" class="o"/>
+<g class="o" transform="translate(400 300) scale(1.0)"><path d="M0 -24 C-14 -24 -20 -12 -20 0 L-24 16 L24 16 L20 0 C20 -12 14 -24 0 -24 Z" fill="#E8A33D"/><circle cx="0" cy="22" r="5" fill="#1A1E1B"/></g>
+<rect x="330" y="344" width="140" height="26" rx="13" fill="#E8A33D" class="o"/>
+<rect x="344" y="352" width="80" height="10" rx="5" fill="#FFFFFF"/>
+<circle cx="130" cy="110" r="32" fill="#FFFFFF" class="o"/>
+<circle cx="100" cy="230" r="32" fill="#FFFFFF" class="o"/>
+<circle cx="140" cy="350" r="32" fill="#FFFFFF" class="o"/>
+<circle cx="660" cy="110" r="32" fill="#FFFFFF" class="o"/>
+<circle cx="700" cy="230" r="32" fill="#FFFFFF" class="o"/>
+<circle cx="660" cy="350" r="32" fill="#FFFFFF" class="o"/>
+<path d="M0 -18 C-8 -6 -13 0 -13 6 A13 13 0 0 0 13 6 C13 0 8 -6 0 -18 Z" fill="#3B82C4" class="o" transform="translate(130 112) scale(1.2)"/>
+<g class="o" transform="translate(100 226) scale(0.9)"><rect x="-8" y="-32" width="16" height="44" rx="8" fill="#FFFFFF"/><rect x="-4" y="-10" width="8" height="24" fill="#D9534F" stroke="none"/><circle cx="0" cy="20" r="11" fill="#D9534F"/></g>
+<g stroke="#3B82C4" stroke-width="4" stroke-linecap="round"><line x1="158" y1="350" x2="122" y2="350"/><line x1="149" y1="366" x2="131" y2="334"/><line x1="131" y1="366" x2="149" y2="334"/></g>
+<g fill="none" stroke="#1A1E1B" stroke-width="4" stroke-linecap="round"><path d="M640 100 L672 100 A8 8 0 1 0 664 92"/><path d="M640 116 L680 116 A8 8 0 1 1 672 124"/></g>
+<path d="M0 0 C-20 0 -24 -30 0 -32 C4 -54 40 -56 46 -38 C66 -46 86 -30 76 -14 C88 -12 88 4 74 4 Z" fill="#C9D3CC" class="o" transform="translate(676 224) scale(0.6)"/>
+<g stroke="#3B82C4" stroke-width="4" stroke-linecap="round"><line x1="684" y1="231" x2="680" y2="242"/><line x1="697" y1="231" x2="694" y2="242"/><line x1="710" y1="231" x2="707" y2="242"/></g>
+<rect x="650" y="336" width="20" height="30" rx="6" fill="#C9D3CC" class="o"/>
+<rect x="650" y="328" width="20" height="10" rx="4" fill="#C9D3CC" class="o"/>
+<line x1="666" y1="328" x2="666" y2="312" stroke="#C9D3CC" stroke-width="4" stroke-linecap="round"/>
+<line x1="646" y1="372" x2="680" y2="326" stroke="#D9534F" stroke-width="5" stroke-linecap="round"/>
+<path d="M500 404 L556 412" fill="none" stroke="#1A1E1B" stroke-width="3" stroke-linecap="round" stroke-dasharray="6 6"/>
+<rect x="560" y="394" width="110" height="50" rx="10" fill="#FFFFFF" class="o"/>
+<circle cx="580" cy="419" r="6" fill="#1F9A4D" class="o"/>
+<circle cx="600" cy="419" r="6" fill="#F5C842" class="o"/>
+<path d="M626 406 L654 406 A12 12 0 0 1 654 430" fill="none" stroke="#1A1E1B" stroke-width="4" stroke-linecap="round"/>
+</svg>

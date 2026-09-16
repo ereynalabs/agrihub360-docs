@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 450" role="img" aria-label="Cartoon of the spray log with MAPP check: a product bottle with the number on its label matched against a row in the approval register, and a large green tick">
+  <defs><style>.o{stroke:#1A1E1B;stroke-width:4;stroke-linejoin:round;stroke-linecap:round}</style></defs>
+  <rect width="800" height="450" fill="#EAF3EC"/>
+  <g class="o">
+    <rect x="150" y="40" width="60" height="30" rx="8" fill="#1A1E1B"/>
+    <rect x="130" y="66" width="100" height="26" rx="8" fill="#146134"/>
+    <path d="M110 110 Q110 88 132 88 L228 88 Q250 88 250 110 L250 380 Q250 400 230 400 L130 400 Q110 400 110 380 Z" fill="#FFFFFF"/>
+    <rect x="130" y="150" width="120" height="160" rx="12" fill="#A7D7B4"/>
+    <rect x="146" y="170" width="60" height="10" rx="5" fill="#146134"/>
+    <rect x="146" y="194" width="88" height="8" rx="4" fill="#C9D3CC" stroke="none"/><rect x="146" y="212" width="70" height="8" rx="4" fill="#C9D3CC" stroke="none"/><rect x="146" y="230" width="84" height="8" rx="4" fill="#C9D3CC" stroke="none"/>
+    <rect x="146" y="256" width="88" height="34" rx="8" fill="#FFFFFF"/>
+    <rect x="158" y="269" width="64" height="8" rx="4" fill="#E8A33D"/>
+    <rect x="130" y="330" width="120" height="30" rx="8" fill="#D9534F"/>
+    <path d="M146 345 L162 345 M182 345 L234 345" fill="none" stroke="#FFFFFF" stroke-width="4"/>
+  </g>
+  <g fill="none" stroke="#146134" stroke-width="4" stroke-linecap="round" stroke-dasharray="8 8"><path d="M262 272 C330 272 340 180 400 180"/></g>
+  <path d="M388 168 L402 180 L388 192" fill="none" stroke="#146134" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+  <g class="o">
+    <rect x="420" y="70" width="330" height="320" rx="16" fill="#FFFFFF"/>
+    <path d="M420 86 Q420 70 436 70 L734 70 Q750 70 750 86 L750 118 L420 118 Z" fill="#146134"/>
+    <rect x="440" y="88" width="90" height="12" rx="6" fill="#FFFFFF"/>
+    <rect x="530" y="150" width="40" height="12" rx="6" fill="#C9D3CC" stroke="none"/><rect x="584" y="152" width="120" height="8" rx="4" fill="#C9D3CC" stroke="none"/><circle cx="730" cy="156" r="12" fill="#1F9A4D"/><path d="M720 156 L727 164 L741 148" fill="none" stroke="#FFFFFF" stroke-width="5"/><rect x="530" y="196" width="40" height="12" rx="6" fill="#C9D3CC" stroke="none"/><rect x="584" y="198" width="120" height="8" rx="4" fill="#C9D3CC" stroke="none"/><circle cx="730" cy="202" r="12" fill="#1F9A4D"/><path d="M720 202 L727 210 L741 194" fill="none" stroke="#FFFFFF" stroke-width="5"/><rect x="530" y="242" width="40" height="12" rx="6" fill="#E8A33D"/><rect x="584" y="244" width="120" height="8" rx="4" fill="#C9D3CC" stroke="none"/><rect x="530" y="288" width="40" height="12" rx="6" fill="#C9D3CC" stroke="none"/><rect x="584" y="290" width="120" height="8" rx="4" fill="#C9D3CC" stroke="none"/><rect x="530" y="334" width="40" height="12" rx="6" fill="#C9D3CC" stroke="none"/><rect x="584" y="336" width="120" height="8" rx="4" fill="#C9D3CC" stroke="none"/>
+    <rect x="514" y="224" width="220" height="42" rx="10" fill="none" stroke="#1F9A4D" stroke-width="4"/>
+  </g>
+  <g class="o"><circle cx="700" cy="380" r="44" fill="#1F9A4D"/><path d="M690 380 L697 388 L711 372" fill="none" stroke="#FFFFFF" stroke-width="5"/></g>
+</svg>

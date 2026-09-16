@@ -1,0 +1,16 @@
+---
+title: "Spray Window"
+description: "Delta-T band plus frost cut-off, hour by hour."
+---
+
+## What It Tells You
+
+The **spray window** is the run of forecast hours in which a spray will land and stay where it is put. **Delta-T** is the gap between air temperature and wet-bulb temperature. Too low and droplets persist and drift in still air. Too high and they evaporate in flight. An hour is suitable when delta-T is between 2 and 8, the wind is between 3 and 19 km/h and less than 1 mm of rain is close. The card shows up to five windows over the next 48 hours. The windows are computed by the [Spray Window](/models/spray-frost) model. The same model gives the frost risk for the next three nights.
+
+## How It Works
+
+Every three hours the model reads the field's cached hourly forecast. It evaluates each of the next 48 hours against the delta-T, wind and rain bands and joins contiguous suitable hours into windows. A suitable current hour with a window ahead raises an advisory once in 24 hours.
+
+<Frame caption="Green bands mark the suitable hours over the next 48, the frost cuts one short, and the sprayer waits.">
+  <img src="/images/guides/spray-window.svg" alt="Cartoon of a phone card with green spray bands on a 48-hour strip ending in a frost mark, a sprayer waiting on the field and a windsock." />
+</Frame>

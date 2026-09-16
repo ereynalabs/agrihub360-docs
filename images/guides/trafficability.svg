@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 450" role="img" aria-label="Cartoon of deep wheel ruts and puddles in heavy wet soil, a spreader stopped on the headland, and a field card showing a tyre with a red cross">
+  <defs><style>.o{stroke:#1A1E1B;stroke-width:4;stroke-linejoin:round;stroke-linecap:round}</style></defs>
+  <rect width="800" height="450" fill="#EAF3EC"/>
+<path d="M0 0 C-20 0 -24 -30 0 -32 C4 -54 40 -56 46 -38 C66 -46 86 -30 76 -14 C88 -12 88 4 74 4 Z" fill="#C9D3CC" class="o" transform="translate(110 110) scale(1.2)"/>
+<g stroke="#3B82C4" stroke-width="4" stroke-linecap="round"><line x1="126" y1="124" x2="119" y2="146"/><line x1="153" y1="124" x2="146" y2="146"/><line x1="179" y1="124" x2="172" y2="146"/></g>
+<rect x="400" y="40" width="300" height="120" rx="14" fill="#FFFFFF" class="o"/>
+<circle cx="450" cy="100" r="32" fill="#1A1E1B" class="o"/>
+<circle cx="450" cy="100" r="12" fill="#C9D3CC" class="o"/>
+<g stroke="#FFFFFF" stroke-width="4" stroke-linecap="round"><line x1="470" y1="100" x2="478" y2="100"/><line x1="464" y1="114" x2="470" y2="120"/><line x1="450" y1="120" x2="450" y2="128"/><line x1="436" y1="114" x2="430" y2="120"/><line x1="430" y1="100" x2="422" y2="100"/><line x1="436" y1="86" x2="430" y2="80"/><line x1="450" y1="80" x2="450" y2="72"/><line x1="464" y1="86" x2="470" y2="80"/></g>
+<rect x="500" y="76" width="100" height="12" rx="6" fill="#1A1E1B"/>
+<rect x="500" y="98" width="70" height="8" rx="4" fill="#C9D3CC"/>
+<rect x="500" y="118" width="84" height="26" rx="13" fill="#BFE0F5" class="o"/>
+<path d="M0 -18 C-8 -6 -13 0 -13 6 A13 13 0 0 0 13 6 C13 0 8 -6 0 -18 Z" fill="#3B82C4" class="o" transform="translate(518 132) scale(0.7)"/>
+<rect x="534" y="127" width="40" height="8" rx="4" fill="#1A1E1B"/>
+<circle cx="650" cy="100" r="28" fill="#D9534F" class="o"/>
+<g stroke="#FFFFFF" stroke-width="6" stroke-linecap="round"><line x1="641" y1="91" x2="659" y2="109"/><line x1="659" y1="91" x2="641" y2="109"/></g>
+<path d="M0 230 Q400 210 800 230 L800 300 L0 300 Z" fill="#1F9A4D" class="o"/>
+<path d="M0 300 L800 300 L800 450 L0 450 Z" fill="#8B5E3C" class="o"/>
+<line x1="0" y1="300" x2="800" y2="300" stroke="#6E4A2F" stroke-width="6" stroke-linecap="round"/>
+<g fill="none" stroke="#6E4A2F" stroke-width="16" stroke-linecap="round"><path d="M120 450 Q220 380 330 300"/><path d="M180 450 Q270 380 350 300"/><path d="M680 450 Q580 380 470 300"/><path d="M620 450 Q530 380 450 300"/></g>
+<ellipse cx="236" cy="372" rx="34" ry="9" fill="#BFE0F5" class="o"/>
+<ellipse cx="296" cy="342" rx="26" ry="9" fill="#BFE0F5" class="o"/>
+<ellipse cx="580" cy="372" rx="34" ry="9" fill="#BFE0F5" class="o"/>
+<ellipse cx="508" cy="342" rx="26" ry="9" fill="#BFE0F5" class="o"/>
+<path d="M560 244 L620 244 L610 290 L570 290 Z" fill="#E8A33D" class="o"/>
+<g class="o"><rect x="670" y="230" width="110" height="34" rx="8" fill="#1F9A4D" class="o"/>
+<rect x="690" y="190" width="54" height="44" rx="8" fill="#1F9A4D" class="o"/>
+<rect x="698" y="198" width="38" height="26" rx="6" fill="#BFE0F5" class="o"/>
+<rect x="756" y="200" width="8" height="30" rx="3" fill="#1A1E1B" class="o"/>
+<circle cx="680" cy="270" r="30" fill="#1A1E1B" class="o"/>
+<circle cx="680" cy="270" r="12" fill="#C9D3CC" class="o"/>
+<circle cx="762" cy="280" r="20" fill="#1A1E1B" class="o"/>
+<circle cx="762" cy="280" r="8" fill="#C9D3CC" class="o"/>
+</g>
+</svg>

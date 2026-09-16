@@ -1,0 +1,16 @@
+---
+title: "Custom Triggers"
+description: "Your own thresholds on readings, frost, wind, rain or a silent sensor."
+---
+
+## What It Tells You
+
+A **custom trigger** is a threshold you set yourself on a field. It can be soil moisture below a value, soil temperature above one, a forecast frost, wind or rain over a limit, or a sensor that has stopped reporting. The built-in windows answer the common questions. A trigger answers yours, such as the moisture at which a clay field needs a look, or the wind above which you want warning before the contractor arrives. When it fires you get an alert that names the reading that crossed the line.
+
+## How It Works
+
+Set the field, the reading or forecast value, the comparison and the threshold. A trigger that fires raises an alert. If you have a webhook, it also sends a `trigger.fired` event. A silent sensor is the same `device.offline` state the app shows as stale.
+
+<Frame caption="A trigger set on a phone, the readings it can watch, and the webhook it can call.">
+  <img src="/images/guides/custom-triggers.svg" alt="Cartoon of a phone with a threshold slider, a comparison chip and a toggle, ringed by moisture, temperature, frost, wind, rain and silent sensor icons, with a webhook line out." />
+</Frame>

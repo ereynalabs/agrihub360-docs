@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 450" role="img" aria-label="Cartoon of a hand holding a phone whose screen opens on a field map with zones, with the timeline and window chips beneath it">
+  <defs><style>.o{stroke:#1A1E1B;stroke-width:4;stroke-linejoin:round;stroke-linecap:round}</style></defs>
+  <rect width="800" height="450" fill="#EAF3EC"/>
+<circle cx="700" cy="80" r="34" fill="#F5C842" class="o"/><g stroke="#1A1E1B" stroke-width="4" stroke-linecap="round"><line x1="744" y1="80" x2="756" y2="80"/><line x1="731" y1="111" x2="740" y2="120"/><line x1="700" y1="124" x2="700" y2="136"/><line x1="669" y1="111" x2="660" y2="120"/><line x1="656" y1="80" x2="644" y2="80"/><line x1="669" y1="49" x2="660" y2="40"/><line x1="700" y1="36" x2="700" y2="24"/><line x1="731" y1="49" x2="740" y2="40"/></g>
+<path d="M0 360 Q200 320 400 360 T800 350 L800 450 L0 450 Z" fill="#1F9A4D" class="o"/>
+<path d="M270 450 L270 300 Q270 262 308 262 L520 262 Q560 262 560 300 L560 450 Z" fill="#E8A33D" class="o"/>
+<rect x="500" y="232" width="52" height="62" rx="26" fill="#E8A33D" class="o"/>
+<rect x="500" y="302" width="52" height="62" rx="26" fill="#E8A33D" class="o"/>
+<rect x="300" y="50" width="220" height="390" rx="24" fill="#1A1E1B" class="o"/>
+<rect x="314" y="66" width="192" height="358" rx="14" fill="#FFFFFF" class="o"/>
+<path d="M336 96 L470 88 L492 170 L440 250 L346 236 Z" fill="#A7D7B4"/>
+<path d="M336 96 L470 88 L492 170 L440 250 L346 236 Z" fill="none" stroke="#146134" stroke-width="3" stroke-linejoin="round"/>
+<path d="M400 100 L470 92 L484 150 L410 156 Z" fill="#1F9A4D" stroke="#146134" stroke-width="3" stroke-linejoin="round"/>
+<path d="M346 190 L396 186 L420 236 L352 232 Z" fill="#F5C842" stroke="#146134" stroke-width="3" stroke-linejoin="round"/>
+<circle cx="430" cy="200" r="8" fill="#D9534F" class="o"/>
+<line x1="330" y1="290" x2="490" y2="290" stroke="#C9D3CC" stroke-width="3" stroke-linecap="round"/>
+<line x1="330" y1="316" x2="490" y2="316" stroke="#1A1E1B" stroke-width="3" stroke-linecap="round"/>
+<circle cx="356" cy="316" r="5" fill="#3B82C4" class="o"/>
+<circle cx="400" cy="316" r="5" fill="#1F9A4D" class="o"/>
+<circle cx="452" cy="316" r="5" fill="#F5C842" class="o"/>
+<rect x="330" y="338" width="160" height="10" rx="5" fill="#C9D3CC"/>
+<rect x="330" y="356" width="110" height="10" rx="5" fill="#C9D3CC"/>
+<rect x="330" y="382" width="72" height="24" rx="12" fill="#1F9A4D" class="o"/>
+<rect x="414" y="382" width="72" height="24" rx="12" fill="#C9D3CC" class="o"/>
+<path d="M262 336 Q250 282 292 278 Q332 276 338 320 L334 372 Q298 384 262 366 Z" fill="#E8A33D" class="o"/>
+</svg>

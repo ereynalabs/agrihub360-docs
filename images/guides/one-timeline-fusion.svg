@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 450" role="img" aria-label="Cartoon of a tablet timeline with weather icons, NDVI squares, growth stage flags and a measured line beside a dashed modelled line, a red cursor lining up a hot day with a moisture dip">
+  <defs><style>.o{stroke:#1A1E1B;stroke-width:4;stroke-linejoin:round;stroke-linecap:round}</style></defs>
+  <rect width="800" height="450" fill="#EAF3EC"/>
+<rect x="50" y="50" width="700" height="350" rx="22" fill="#1A1E1B" class="o"/>
+<rect x="70" y="70" width="660" height="310" rx="14" fill="#FFFFFF" class="o"/>
+<line x1="110" y1="340" x2="700" y2="340" stroke="#1A1E1B" stroke-width="4" stroke-linecap="round"/>
+<line x1="110" y1="334" x2="110" y2="346" stroke="#1A1E1B" stroke-width="3" stroke-linecap="round"/>
+<line x1="194" y1="334" x2="194" y2="346" stroke="#1A1E1B" stroke-width="3" stroke-linecap="round"/>
+<line x1="278" y1="334" x2="278" y2="346" stroke="#1A1E1B" stroke-width="3" stroke-linecap="round"/>
+<line x1="362" y1="334" x2="362" y2="346" stroke="#1A1E1B" stroke-width="3" stroke-linecap="round"/>
+<line x1="446" y1="334" x2="446" y2="346" stroke="#1A1E1B" stroke-width="3" stroke-linecap="round"/>
+<line x1="530" y1="334" x2="530" y2="346" stroke="#1A1E1B" stroke-width="3" stroke-linecap="round"/>
+<line x1="614" y1="334" x2="614" y2="346" stroke="#1A1E1B" stroke-width="3" stroke-linecap="round"/>
+<line x1="698" y1="334" x2="698" y2="346" stroke="#1A1E1B" stroke-width="3" stroke-linecap="round"/>
+<circle cx="150" cy="110" r="10" fill="#F5C842" class="o"/><g stroke="#1A1E1B" stroke-width="3" stroke-linecap="round"><line x1="150" y1="95" x2="150" y2="89"/><line x1="150" y1="125" x2="150" y2="131"/><line x1="135" y1="110" x2="129" y2="110"/><line x1="165" y1="110" x2="171" y2="110"/></g>
+<circle cx="250" cy="110" r="10" fill="#F5C842" class="o"/><g stroke="#1A1E1B" stroke-width="3" stroke-linecap="round"><line x1="250" y1="95" x2="250" y2="89"/><line x1="250" y1="125" x2="250" y2="131"/><line x1="235" y1="110" x2="229" y2="110"/><line x1="265" y1="110" x2="271" y2="110"/></g>
+<path d="M0 0 C-20 0 -24 -30 0 -32 C4 -54 40 -56 46 -38 C66 -46 86 -30 76 -14 C88 -12 88 4 74 4 Z" fill="#FFFFFF" class="o" transform="translate(320 122) scale(0.6)"/>
+<circle cx="450" cy="110" r="13" fill="#F5C842" class="o"/><g stroke="#1A1E1B" stroke-width="3" stroke-linecap="round"><line x1="450" y1="92" x2="450" y2="86"/><line x1="450" y1="128" x2="450" y2="134"/><line x1="432" y1="110" x2="426" y2="110"/><line x1="468" y1="110" x2="474" y2="110"/></g>
+<path d="M0 0 C-20 0 -24 -30 0 -32 C4 -54 40 -56 46 -38 C66 -46 86 -30 76 -14 C88 -12 88 4 74 4 Z" fill="#C9D3CC" class="o" transform="translate(520 108) scale(0.6)"/>
+<g stroke="#3B82C4" stroke-width="4" stroke-linecap="round"><line x1="528" y1="115" x2="524" y2="126"/><line x1="541" y1="115" x2="538" y2="126"/><line x1="554" y1="115" x2="551" y2="126"/></g>
+<path d="M0 0 C-20 0 -24 -30 0 -32 C4 -54 40 -56 46 -38 C66 -46 86 -30 76 -14 C88 -12 88 4 74 4 Z" fill="#FFFFFF" class="o" transform="translate(630 122) scale(0.6)"/>
+<rect x="139" y="164" width="22" height="22" rx="4" fill="#1F9A4D" class="o"/>
+<rect x="239" y="164" width="22" height="22" rx="4" fill="#1F9A4D" class="o"/>
+<rect x="339" y="164" width="22" height="22" rx="4" fill="#1F9A4D" class="o"/>
+<rect x="439" y="164" width="22" height="22" rx="4" fill="#A7D7B4" class="o"/>
+<rect x="539" y="164" width="22" height="22" rx="4" fill="#E8A33D" class="o"/>
+<rect x="639" y="164" width="22" height="22" rx="4" fill="#1F9A4D" class="o"/>
+<line x1="200" y1="200" x2="200" y2="232" stroke="#1A1E1B" stroke-width="3" stroke-linecap="round"/>
+<path d="M200 200 L218 208 L200 216 Z" fill="#F5C842" class="o"/>
+<line x1="500" y1="200" x2="500" y2="232" stroke="#1A1E1B" stroke-width="3" stroke-linecap="round"/>
+<path d="M500 200 L518 208 L500 216 Z" fill="#F5C842" class="o"/>
+<polyline points="110,270 200,262 300,272 400,268 500,280 600,272 700,266" fill="none" stroke="#146134" stroke-width="3" stroke-dasharray="8 8" stroke-linecap="round"/>
+<polyline points="110,266 200,258 300,268 400,262 450,302 500,298 550,282 600,268 700,262" fill="none" stroke="#3B82C4" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+<circle cx="200" cy="258" r="6" fill="#3B82C4" class="o"/>
+<circle cx="400" cy="262" r="6" fill="#3B82C4" class="o"/>
+<circle cx="450" cy="302" r="6" fill="#3B82C4" class="o"/>
+<circle cx="600" cy="268" r="6" fill="#3B82C4" class="o"/>
+<line x1="450" y1="90" x2="450" y2="340" stroke="#D9534F" stroke-width="4" stroke-linecap="round"/>
+</svg>

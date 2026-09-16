@@ -1,0 +1,65 @@
+---
+title: "Per-field Profit and Loss"
+description: "Every cost and revenue line on a field, totalled, broken down by category and month, and rolled up per farm."
+---
+
+Each field carries its own list of cost lines and revenue lines. Some are typed in. Some are written by the app from records you have already made: an application with a cost on it becomes a cost line, a harvest with a total yield becomes a revenue line, and a ledger line you import becomes a cost line. The **per-field profit and loss** is the arithmetic over that list.
+
+## What It Tells You
+
+For one field:
+
+| Figure | Meaning |
+|---|---|
+| Total cost | The sum of every cost line on the field |
+| Total revenue | The sum of every revenue line on the field |
+| Net | Total revenue minus total cost |
+| Costs by category | The total for each category, largest first |
+| Costs by month, revenue by month | Totals per calendar month, by the date incurred or received |
+
+For the farm: the same totals across every field, a row per field with its cost and revenue, and the farm's costs by category.
+
+## How It's Calculated
+
+A **cost line** has a field, a category, an amount, a date incurred and a source, and optionally a planting, a description and notes. The categories are seed, fertiliser, spray, labour, fuel, machinery, seed treatment, irrigation and other.
+
+A **revenue line** has a field, an amount, a date received and a source, and optionally a planting, a harvest, a quantity in kg, a price per kg, a quality grade, a buyer and a description.
+
+Totals are plain sums. There is no allocation, no per-hectare division and no season filter. Every line recorded on the field counts. Net is revenue minus cost.
+
+Costs mirrored from the applications log. When an application is recorded with a cost amount above zero, a cost line is written for the same field and planting, dated the application date. The category comes from the application type: fertiliser to fertiliser; fungicide, herbicide, insecticide and foliar to spray; irrigation to irrigation; anything else to other. Its description reads "Application cost (type, unit)". Deleting the application deletes the line.
+
+Revenue mirrored from harvests. When a harvest is recorded with a total yield in kg, and the planting's crop has an entry in the app's price list valid on the harvest date, a revenue line is written. An entry for the same quality grade is used first, otherwise an entry with no grade, taking the most recent. The amount is price per kg multiplied by total yield. The line records the quantity, the price and the grade. Without a total yield or a valid price no line is written.
+
+Worked example. One field, one season.
+
+| Line | Source | Amount |
+|---|---|---|
+| Seed, 2 t | Typed in | £3,200 |
+| Fertiliser, two dressings | Applications log | £4,100 |
+| Contractor spraying | Ledger import | £1,450 |
+| Revenue, 42,000 kg at £0.19 per kg | Harvest record | £7,980 |
+| Net | £7,980 minus £8,750 | -£770 |
+
+## Where The Numbers Come From
+
+| Source label | Record | Editable in the profit and loss |
+|---|---|---|
+| `manual` | A cost or revenue typed in | Yes. Operator role to add or edit, manager role to delete |
+| `derived_application` | An application in the [applications log](/features/nutrient-planning/applications-log) with a cost amount | No. Edit or delete the application |
+| `derived_ledger` | A ledger line imported through [ledger import](/features/farm-management/ledger-import) | No. Owned by the ledger line |
+| `derived_harvest` | A harvest with a total yield and a matching price | No. Owned by the harvest |
+
+Every line carries its source. A typed line and a mirrored line count alike in the totals; the source says which is which. A mirrored revenue line is labelled "Auto-revenue at market price" with the grade it was priced on. Amounts are shown in the currency recorded on the lines.
+
+## Limits
+
+- Totals have no date range. A field that has carried two seasons shows both together. The month breakdown separates them.
+- Nothing is spread across fields. A cost is either given a field or stays out.
+- A mirrored cost is written when the application is recorded. Changing the cost on the application afterwards doesn't change the line. Delete the application and record it again.
+- A mirrored revenue line is priced at the moment the harvest is recorded. Editing the harvest afterwards doesn't rewrite it, and a harvest recorded without a total yield never gets one.
+- There is no per-hectare figure and no margin percentage.
+
+<Frame caption="Costs by category set against revenue for one field.">
+  <img src="/images/guides/per-field-profit-and-loss.svg" alt="A clipboard with a field at the top, cost bars by category and a cost bar against a shorter revenue bar." />
+</Frame>

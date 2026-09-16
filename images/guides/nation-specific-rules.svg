@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 450" role="img" aria-label="Cartoon of nation-specific rules: a stylised map with four regions in different colours, each holding a rule card whose closed-period band sits in a different place">
+  <defs><style>.o{stroke:#1A1E1B;stroke-width:4;stroke-linejoin:round;stroke-linecap:round}</style></defs>
+  <rect width="800" height="450" fill="#EAF3EC"/>
+  <g class="o">
+    <path d="M330 40 Q420 20 470 70 Q560 60 590 140 Q640 200 600 260 Q620 330 560 370 Q500 420 420 400 Q350 420 300 380 Q250 340 270 270 Q240 220 280 160 Q250 90 330 40 Z" fill="#A7D7B4"/>
+    <path d="M280 160 Q380 150 470 70 Q560 60 590 140 Q500 170 420 250 Q350 240 270 270 Q240 220 280 160 Z" fill="#1F9A4D"/>
+    <path d="M420 250 Q500 170 590 140 Q640 200 600 260 Q620 330 560 370 Q510 300 420 250 Z" fill="#F5C842"/>
+    <path d="M60 240 Q90 190 150 200 Q210 220 200 290 Q180 340 120 340 Q60 330 60 240 Z" fill="#BFE0F5"/>
+    <rect x="300" y="52" width="104" height="70" rx="10" fill="#FFFFFF"/><rect x="312" y="66" width="50" height="10" rx="5" fill="#D9534F"/><rect x="312" y="90" width="80" height="6" rx="3" fill="#C9D3CC" stroke="none"/><rect x="312" y="104" width="56" height="6" rx="3" fill="#C9D3CC" stroke="none"/>
+    <rect x="310" y="170" width="104" height="70" rx="10" fill="#FFFFFF"/><rect x="322" y="184" width="30" height="10" rx="5" fill="#D9534F"/><rect x="362" y="184" width="40" height="10" rx="5" fill="#D9534F"/><rect x="322" y="208" width="80" height="6" rx="3" fill="#C9D3CC" stroke="none"/><rect x="322" y="222" width="56" height="6" rx="3" fill="#C9D3CC" stroke="none"/>
+    <rect x="480" y="220" width="104" height="70" rx="10" fill="#FFFFFF"/><rect x="492" y="234" width="80" height="10" rx="5" fill="#D9534F"/><rect x="492" y="258" width="80" height="6" rx="3" fill="#C9D3CC" stroke="none"/><rect x="492" y="272" width="56" height="6" rx="3" fill="#C9D3CC" stroke="none"/>
+    <rect x="80" y="230" width="104" height="70" rx="10" fill="#FFFFFF"/><rect x="110" y="244" width="50" height="10" rx="5" fill="#D9534F"/><rect x="92" y="268" width="80" height="6" rx="3" fill="#C9D3CC" stroke="none"/><rect x="92" y="282" width="56" height="6" rx="3" fill="#C9D3CC" stroke="none"/>
+      </g>
+  <circle cx="700" cy="80" r="36" fill="#F5C842" class="o"/>
+</svg>

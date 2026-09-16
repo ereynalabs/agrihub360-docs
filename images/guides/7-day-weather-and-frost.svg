@@ -1,0 +1,41 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 450" role="img" aria-label="Cartoon of a seven day forecast strip with one frosty night, a frost banner above it, and cold air draining into a low field below">
+  <defs><style>.o{stroke:#1A1E1B;stroke-width:4;stroke-linejoin:round;stroke-linecap:round}</style></defs>
+  <rect width="800" height="450" fill="#EAF3EC"/>
+<rect x="60" y="36" width="680" height="60" rx="14" fill="#BFE0F5" class="o"/>
+<path d="M118 44 A22 22 0 1 0 118 88 A18 18 0 1 1 118 44 Z" fill="#F5C842" class="o"/>
+<g stroke="#3B82C4" stroke-width="4" stroke-linecap="round"><line x1="198" y1="66" x2="162" y2="66"/><line x1="189" y1="82" x2="171" y2="50"/><line x1="171" y1="82" x2="189" y2="50"/></g>
+<rect x="220" y="56" width="250" height="12" rx="6" fill="#1A1E1B"/>
+<rect x="220" y="76" width="170" height="8" rx="4" fill="#C9D3CC"/>
+<text x="660" y="76" font-family="Inter, Arial, sans-serif" font-weight="700" font-size="26" text-anchor="middle" fill="#1A1E1B">-1°</text>
+<rect x="60" y="118" width="86" height="100" rx="12" fill="#FFFFFF" class="o"/>
+<rect x="83" y="130" width="40" height="8" rx="4" fill="#C9D3CC"/>
+<circle cx="103" cy="178" r="12" fill="#F5C842" class="o"/><g stroke="#1A1E1B" stroke-width="3" stroke-linecap="round"><line x1="103" y1="161" x2="103" y2="155"/><line x1="103" y1="195" x2="103" y2="201"/><line x1="86" y1="178" x2="80" y2="178"/><line x1="120" y1="178" x2="126" y2="178"/></g>
+<rect x="159" y="118" width="86" height="100" rx="12" fill="#FFFFFF" class="o"/>
+<rect x="182" y="130" width="40" height="8" rx="4" fill="#C9D3CC"/>
+<path d="M0 0 C-20 0 -24 -30 0 -32 C4 -54 40 -56 46 -38 C66 -46 86 -30 76 -14 C88 -12 88 4 74 4 Z" fill="#FFFFFF" class="o" transform="translate(180 190) scale(0.6)"/>
+<rect x="258" y="118" width="86" height="100" rx="12" fill="#BFE0F5" class="o"/>
+<rect x="281" y="130" width="40" height="8" rx="4" fill="#C9D3CC"/>
+<path d="M295 160 A16 16 0 1 0 295 192 A13 13 0 1 1 295 160 Z" fill="#F5C842" class="o"/>
+<g stroke="#3B82C4" stroke-width="4" stroke-linecap="round"><line x1="329" y1="184" x2="305" y2="184"/><line x1="323" y1="194" x2="311" y2="174"/><line x1="311" y1="194" x2="323" y2="174"/></g>
+<rect x="357" y="118" width="86" height="100" rx="12" fill="#FFFFFF" class="o"/>
+<rect x="380" y="130" width="40" height="8" rx="4" fill="#C9D3CC"/>
+<path d="M0 0 C-20 0 -24 -30 0 -32 C4 -54 40 -56 46 -38 C66 -46 86 -30 76 -14 C88 -12 88 4 74 4 Z" fill="#C9D3CC" class="o" transform="translate(376 178) scale(0.6)"/>
+<g stroke="#3B82C4" stroke-width="4" stroke-linecap="round"><line x1="384" y1="185" x2="380" y2="196"/><line x1="397" y1="185" x2="394" y2="196"/><line x1="410" y1="185" x2="407" y2="196"/></g>
+<rect x="456" y="118" width="86" height="100" rx="12" fill="#FFFFFF" class="o"/>
+<rect x="479" y="130" width="40" height="8" rx="4" fill="#C9D3CC"/>
+<path d="M0 0 C-20 0 -24 -30 0 -32 C4 -54 40 -56 46 -38 C66 -46 86 -30 76 -14 C88 -12 88 4 74 4 Z" fill="#FFFFFF" class="o" transform="translate(477 190) scale(0.6)"/>
+<rect x="555" y="118" width="86" height="100" rx="12" fill="#FFFFFF" class="o"/>
+<rect x="578" y="130" width="40" height="8" rx="4" fill="#C9D3CC"/>
+<circle cx="598" cy="178" r="12" fill="#F5C842" class="o"/><g stroke="#1A1E1B" stroke-width="3" stroke-linecap="round"><line x1="598" y1="161" x2="598" y2="155"/><line x1="598" y1="195" x2="598" y2="201"/><line x1="581" y1="178" x2="575" y2="178"/><line x1="615" y1="178" x2="621" y2="178"/></g>
+<rect x="654" y="118" width="86" height="100" rx="12" fill="#FFFFFF" class="o"/>
+<rect x="677" y="130" width="40" height="8" rx="4" fill="#C9D3CC"/>
+<circle cx="697" cy="178" r="12" fill="#F5C842" class="o"/><g stroke="#1A1E1B" stroke-width="3" stroke-linecap="round"><line x1="697" y1="161" x2="697" y2="155"/><line x1="697" y1="195" x2="697" y2="201"/><line x1="680" y1="178" x2="674" y2="178"/><line x1="714" y1="178" x2="720" y2="178"/></g>
+<path d="M0 350 Q150 210 340 360 L0 360 Z" fill="#1F9A4D" class="o"/>
+<path d="M460 360 Q650 210 800 350 L800 360 Z" fill="#1F9A4D" class="o"/>
+<path d="M0 330 Q400 430 800 330 L800 450 L0 450 Z" fill="#A7D7B4" class="o"/>
+<ellipse cx="400" cy="404" rx="130" ry="16" fill="#BFE0F5" class="o"/>
+<path d="M120 300 Q200 330 262 386" fill="none" stroke="#3B82C4" stroke-width="4" stroke-linecap="round" stroke-dasharray="6 8"/>
+<path d="M680 300 Q600 330 538 386" fill="none" stroke="#3B82C4" stroke-width="4" stroke-linecap="round" stroke-dasharray="6 8"/>
+<path d="M262 386 L246 366 L272 364 Z" fill="#3B82C4" class="o"/>
+<path d="M538 386 L554 366 L528 364 Z" fill="#3B82C4" class="o"/>
+</svg>

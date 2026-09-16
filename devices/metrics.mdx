@@ -1,0 +1,33 @@
+---
+title: "Metrics"
+description: "The shared catalogue that says what a reading measures and in which unit."
+---
+
+Every reading names its metric with an integer `metric_id`. The catalogue is shared across all devices, so a soil moisture reading from any device is id `220` in percent. The API stores the value as sent and does not convert units, so the device converts to the catalogue unit before posting.
+
+## Catalogue
+
+| ID | Metric | Unit | Notes |
+|---|---|---|---|
+| `2` | Voltage | V | Battery voltage where the device reports volts |
+| `30` | Capacity | mAh | |
+| `70` | Temperature | °C | Soil or air, by device channel |
+| `90` | Wind speed | m/s | |
+| `110` | Humidity | % | |
+| `120` | pH | pH | |
+| `140` | Luminosity | lux | |
+| `160` | Direction | ° | Wind direction, degrees from north |
+| `200` | Battery | % | Battery level where the device reports a percentage |
+| `201` | Signal | % | Radio signal strength as reported by the device |
+| `220` | Soil moisture | % | Volumetric water content |
+| `224` | Conductivity | mS/cm | |
+
+Battery has two ids on purpose. Post `200` when the device reports a percentage and `2` when it reports volts. Never scale one into the other with a guessed curve.
+
+<Warning>
+  Ids `221` to `223` (nitrogen, phosphorus and potassium) exist in the catalogue but aren't a supported reading. Don't build on them.
+</Warning>
+
+## Adding a Metric
+
+Need a metric that isn't listed? Ask for it through [support](https://www.agrihub360.com/support). Don't reuse an existing id for a different measurement: the models read the id, not the device, and a mislabelled reading reaches them.

@@ -1,0 +1,49 @@
+---
+title: "Sensor"
+description: "Our solar LoRa soil probe."
+---
+
+The **AgriHub360 Sensor** is a solar-powered LoRa soil probe. It measures soil moisture, temperature, conductivity and pH, and sends readings to an [AgriHub360 Hub](/devices/hub), which posts them to the [Device API](/quickstart).
+
+<Frame caption="The AgriHub360 Sensor: a probe in the soil, a solar panel and a LoRa antenna.">
+  <img src="/images/sensor.svg" alt="" />
+</Frame>
+
+## In The Field
+
+Solar-powered and wireless. Push it into the ground and it reports over LoRa to the Hub. No mobile signal or WiFi is needed at the sensor.
+
+The probe and the solar-charged battery feed the radio, which uplinks every 15 minutes or slower. The Hub posts each reading on to the Device API, and the field timeline, alerts and models read from there.
+
+## Channels
+
+| Channel | `metric_id` | Unit |
+|---|---|---|
+| Soil moisture | `220` | % |
+| Soil temperature | `70` | °C |
+| Conductivity (EC) | `224` | mS/cm |
+| pH | `120` | pH |
+| Battery | `200` | % |
+| Signal | `201` | % |
+
+<Warning>
+  The sensor also carries nutrient channels, ids `221` to `223` for nitrogen, phosphorus and potassium. They aren't a supported reading. Don't build on them.
+</Warning>
+
+## Reporting Interval
+
+The sensor reports every 15 minutes or slower. EU868 limits LoRa airtime to 1%, so a faster interval isn't possible.
+
+## Datasheet
+
+<Card title="AgriHub360 Sensor datasheet (PDF)" icon="file-arrow-down">
+  Channels, radio, power and mechanical specifications, in one sheet.
+</Card>
+
+## In The App
+
+Each AgriHub360 Sensor is one device with its own id and API key. Claim it on your farm, assign it to a field, and readings appear on that field. A sensor that stops reporting is shown as **stale** rather than as a current value.
+
+## Open Design
+
+The Sensor is built from commodity modules and nothing inside is sealed. [Open Hardware](/devices/open-hardware) lists the parts, what each repair needs and how to find a fault.

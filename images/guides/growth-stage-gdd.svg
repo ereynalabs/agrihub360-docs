@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 450" role="img" aria-label="Cartoon of three wheat plants at first node, flag leaf and flowering, labelled GS31, GS39 and GS65, under a thermal-time bar filling towards a calendar date">
+  <defs><style>.o{stroke:#1A1E1B;stroke-width:4;stroke-linejoin:round;stroke-linecap:round}</style></defs>
+  <rect width="800" height="450" fill="#EAF3EC"/>
+<circle cx="60" cy="60" r="26" fill="#F5C842" class="o"/><g stroke="#1A1E1B" stroke-width="4" stroke-linecap="round"><line x1="96" y1="60" x2="108" y2="60"/><line x1="85" y1="85" x2="94" y2="94"/><line x1="60" y1="96" x2="60" y2="108"/><line x1="35" y1="85" x2="26" y2="94"/><line x1="24" y1="60" x2="12" y2="60"/><line x1="35" y1="35" x2="26" y2="26"/><line x1="60" y1="24" x2="60" y2="12"/><line x1="85" y1="35" x2="94" y2="26"/></g>
+<g class="o" transform="translate(126 92) scale(1.0)"><rect x="-8" y="-32" width="16" height="44" rx="8" fill="#FFFFFF"/><rect x="-4" y="-14" width="8" height="28" fill="#D9534F" stroke="none"/><circle cx="0" cy="20" r="11" fill="#D9534F"/></g>
+<rect x="160" y="78" width="520" height="30" rx="15" fill="#FFFFFF" class="o"/>
+<rect x="160" y="78" width="330" height="30" rx="15" fill="#E8A33D"/>
+<rect x="160" y="78" width="520" height="30" rx="15" fill="none" class="o"/>
+<line x1="300" y1="70" x2="300" y2="116" stroke="#1A1E1B" stroke-width="3" stroke-linecap="round"/>
+<line x1="420" y1="70" x2="420" y2="116" stroke="#1A1E1B" stroke-width="3" stroke-linecap="round"/>
+<line x1="560" y1="70" x2="560" y2="116" stroke="#1A1E1B" stroke-width="3" stroke-linecap="round"/>
+<rect x="704" y="68" width="56" height="50" rx="8" fill="#FFFFFF" class="o"/>
+<rect x="704" y="68" width="56" height="14" rx="6" fill="#D9534F" class="o"/>
+<rect x="704" y="76" width="56" height="6" fill="#D9534F"/>
+<path d="M0 340 Q400 326 800 340 L800 450 L0 450 Z" fill="#8B5E3C" class="o"/>
+<path d="M0 340 Q400 326 800 340" fill="none" stroke="#6E4A2F" stroke-width="6"/>
+<line x1="200" y1="340" x2="200" y2="240" stroke="#146134" stroke-width="5" stroke-linecap="round"/>
+<circle cx="200" cy="300" r="7" fill="#1F9A4D" class="o"/>
+<path d="M200 310 C166 300 154 270 160 252 C182 262 196 284 200 310 Z" fill="#1F9A4D" class="o"/>
+<path d="M200 280 C234 270 246 240 240 222 C218 232 204 254 200 280 Z" fill="#1F9A4D" class="o"/>
+<line x1="400" y1="340" x2="400" y2="190" stroke="#146134" stroke-width="5" stroke-linecap="round"/>
+<circle cx="400" cy="300" r="7" fill="#1F9A4D" class="o"/>
+<circle cx="400" cy="258" r="7" fill="#1F9A4D" class="o"/>
+<path d="M400 310 C366 300 354 270 360 252 C382 262 396 284 400 310 Z" fill="#1F9A4D" class="o"/>
+<path d="M400 280 C434 270 446 240 440 222 C418 232 404 254 400 280 Z" fill="#1F9A4D" class="o"/>
+<path d="M400 220 C360 200 340 166 350 146 C380 160 396 190 400 220 Z" fill="#1F9A4D" class="o"/>
+<line x1="600" y1="340" x2="600" y2="150" stroke="#146134" stroke-width="5" stroke-linecap="round"/>
+<circle cx="600" cy="300" r="7" fill="#1F9A4D" class="o"/>
+<circle cx="600" cy="258" r="7" fill="#1F9A4D" class="o"/>
+<circle cx="600" cy="216" r="7" fill="#1F9A4D" class="o"/>
+<path d="M600 310 C566 300 554 270 560 252 C582 262 596 284 600 310 Z" fill="#1F9A4D" class="o"/>
+<path d="M600 280 C634 270 646 240 640 222 C618 232 604 254 600 280 Z" fill="#1F9A4D" class="o"/>
+<ellipse cx="600" cy="150" rx="14" ry="34" fill="#F5C842" class="o"/><g stroke="#1A1E1B" stroke-width="3" stroke-linecap="round"><line x1="590" y1="126" x2="610" y2="130"/><line x1="590" y1="140" x2="610" y2="144"/><line x1="590" y1="154" x2="610" y2="158"/><line x1="590" y1="168" x2="610" y2="172"/></g><rect x="156" y="362" width="88" height="36" rx="10" fill="#FFFFFF" class="o"/>
+<text x="200" y="389" font-family="Inter, Arial, sans-serif" font-weight="700" font-size="24" text-anchor="middle" fill="#1A1E1B">GS31</text>
+<rect x="356" y="362" width="88" height="36" rx="10" fill="#FFFFFF" class="o"/>
+<text x="400" y="389" font-family="Inter, Arial, sans-serif" font-weight="700" font-size="24" text-anchor="middle" fill="#1A1E1B">GS39</text>
+<rect x="556" y="362" width="88" height="36" rx="10" fill="#FFFFFF" class="o"/>
+<text x="600" y="389" font-family="Inter, Arial, sans-serif" font-weight="700" font-size="24" text-anchor="middle" fill="#1A1E1B">GS65</text>
+</svg>

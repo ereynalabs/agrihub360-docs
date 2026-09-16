@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 450" role="img" aria-label="Cartoon of the one compliance vault: a folder holding four record cards, each with a retention clock, and one dashed empty slot marked as nothing recorded, exporting to a single document">
+  <defs><style>.o{stroke:#1A1E1B;stroke-width:4;stroke-linejoin:round;stroke-linecap:round}</style></defs>
+  <rect width="800" height="450" fill="#EAF3EC"/>
+  <g class="o">
+    <path d="M196 60 L300 60 L322 82 L590 82 Q606 82 606 98 L606 384 Q606 400 590 400 L196 400 Q180 400 180 384 L180 76 Q180 60 196 60 Z" fill="#8B5E3C"/>
+    <path d="M212 96 L620 96 Q636 96 636 112 L636 384 Q636 400 620 400 L196 400 Q180 400 180 384 L180 112 Q180 96 196 96 Z" fill="#E8A33D"/>
+    <rect x="236" y="110" width="200" height="96" rx="12" fill="#FFFFFF"/><rect x="252" y="126" width="90" height="12" rx="6" fill="#1F9A4D"/><rect x="252" y="152" width="130" height="8" rx="4" fill="#C9D3CC" stroke="none"/><rect x="252" y="170" width="100" height="8" rx="4" fill="#C9D3CC" stroke="none"/><circle cx="406" cy="138" r="14" fill="#F5C842"/><path d="M406 130 L406 138 L412 143" fill="none" stroke="#1A1E1B" stroke-width="4"/><rect x="466" y="110" width="200" height="96" rx="12" fill="#FFFFFF"/><rect x="482" y="126" width="90" height="12" rx="6" fill="#3B82C4"/><rect x="482" y="152" width="130" height="8" rx="4" fill="#C9D3CC" stroke="none"/><rect x="482" y="170" width="100" height="8" rx="4" fill="#C9D3CC" stroke="none"/><circle cx="636" cy="138" r="14" fill="#F5C842"/><path d="M636 130 L636 138 L642 143" fill="none" stroke="#1A1E1B" stroke-width="4"/><rect x="236" y="222" width="200" height="96" rx="12" fill="#FFFFFF"/><rect x="252" y="238" width="90" height="12" rx="6" fill="#E8A33D"/><rect x="252" y="264" width="130" height="8" rx="4" fill="#C9D3CC" stroke="none"/><rect x="252" y="282" width="100" height="8" rx="4" fill="#C9D3CC" stroke="none"/><circle cx="406" cy="250" r="14" fill="#F5C842"/><path d="M406 242 L406 250 L412 255" fill="none" stroke="#1A1E1B" stroke-width="4"/><rect x="466" y="222" width="200" height="96" rx="12" fill="#FFFFFF"/><rect x="482" y="238" width="90" height="12" rx="6" fill="#146134"/><rect x="482" y="264" width="130" height="8" rx="4" fill="#C9D3CC" stroke="none"/><rect x="482" y="282" width="100" height="8" rx="4" fill="#C9D3CC" stroke="none"/><circle cx="636" cy="250" r="14" fill="#F5C842"/><path d="M636 242 L636 250 L642 255" fill="none" stroke="#1A1E1B" stroke-width="4"/>
+    <rect x="236" y="334" width="380" height="44" rx="10" fill="none" stroke="#1A1E1B" stroke-width="4" stroke-dasharray="10 8"/>
+    <rect x="406" y="352" width="40" height="8" rx="4" fill="#C9D3CC"/>
+  </g>
+  <g fill="none" stroke="#146134" stroke-width="4" stroke-linecap="round" stroke-dasharray="8 8"><path d="M646 230 L700 230"/></g>
+  <g class="o">
+    <rect x="700" y="196" width="70" height="80" rx="10" fill="#FFFFFF"/>
+    <path d="M728 176 Q736 176 736 184" fill="none" stroke="#1A1E1B" stroke-width="4"/>
+    <rect x="712" y="212" width="46" height="8" rx="4" fill="#D9534F"/><rect x="712" y="230" width="30" height="8" rx="4" fill="#C9D3CC" stroke="none"/><rect x="712" y="248" width="40" height="8" rx="4" fill="#C9D3CC" stroke="none"/>
+  </g>
+</svg>

@@ -1,0 +1,33 @@
+---
+title: "Open Hardware"
+description: "The AgriHub360 Sensor is an open device. What is inside it, and what you can repair yourself."
+---
+
+The AgriHub360 Sensor is built from commodity modules and nothing inside is potted or glued shut. A part that fails can be replaced, and the sensor keeps its device id, its key and its field history.
+
+<Frame caption="The Sensor opened: board, cell, charge board, panel lead and the probe cable through a gland.">
+  <img src="/images/open-hardware.svg" alt="An opened Sensor enclosure on a bench with the board, cell, charge board, panel lead, antenna and probe cable visible." />
+</Frame>
+
+## What Is Inside
+
+| Module | Part |
+|---|---|
+| Board with LoRa radio | xxx |
+| Soil probe | xxx |
+| Antenna | xxx |
+| Solar panel | xxx |
+| Cell and charge board | xxx |
+| Enclosure and glands | xxx |
+
+## Repairs
+
+| Repair | Skills | Guide |
+|---|---|---|
+| Cell, panel, antenna, gland or enclosure | Hand tools | xxx |
+| Soil probe | Hand tools and a multimeter | xxx |
+| Board or firmware | Soldering and flashing over USB | xxx |
+
+## Firmware
+
+The firmware reads the probe, posts through the [Hub](/devices/hub) every fifteen minutes or slower, and sleeps between readings. A reflashed board keeps the sensor's identity.

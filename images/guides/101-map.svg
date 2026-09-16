@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 450" role="img" aria-label="Cartoon of a mapped farm from above: three fields, a watercourse with a dashed buffer alongside it, hatching over the field inside a designation, and a pen finishing the last boundary">
+  <defs><style>.o{stroke:#1A1E1B;stroke-width:4;stroke-linejoin:round;stroke-linecap:round}</style></defs>
+  <rect width="800" height="450" fill="#EAF3EC"/>
+  <path d="M0 80 C120 140 160 220 120 300 C90 360 140 420 200 450" fill="none" stroke="#3B82C4" stroke-width="14" stroke-linecap="round"/>
+  <path d="M40 60 C170 130 210 220 170 310 C140 370 190 420 250 450" fill="none" stroke="#3B82C4" stroke-width="4" stroke-linecap="round" stroke-dasharray="10 10"/>
+  <g class="o">
+    <path d="M230 70 L470 56 Q490 55 491 75 L496 200 Q497 220 477 221 L240 232 Q220 233 219 213 Z" fill="#1F9A4D"/>
+    <path d="M510 60 L740 50 Q760 49 761 69 L766 250 Q767 270 747 271 L520 280 Q500 281 499 261 Z" fill="#A7D7B4"/>
+    <path d="M250 260 L560 246 Q580 245 581 265 L586 380 Q587 400 567 401 L270 414 Q250 415 249 395 Z" fill="#1F9A4D"/>
+  </g>
+  <g stroke="#146134" stroke-width="3" fill="none"><path d="M520 90 L580 60"/><path d="M520 140 L640 74"/><path d="M520 190 L700 90"/><path d="M522 240 L740 120"/><path d="M560 270 L748 168"/><path d="M640 268 L752 212"/></g>
+  <path d="M586 380 L586 300 L720 294 L726 390" fill="none" stroke="#1A1E1B" stroke-width="4" stroke-linecap="round" stroke-dasharray="10 10"/>
+  <g transform="translate(600 305) rotate(45)" class="o">
+    <rect x="-12" y="-100" width="24" height="90" rx="6" fill="#F5C842"/>
+    <path d="M-12 -10 L0 20 L12 -10 Z" fill="#E8A33D"/>
+    <rect x="-12" y="-116" width="24" height="18" rx="4" fill="#D9534F"/>
+  </g>
+  <g class="o">
+    <rect x="322" y="122" width="26" height="24" rx="4" fill="#8B5E3C"/><path d="M316 124 L335 106 L354 124 Z" fill="#D9534F"/>
+  </g>
+</svg>

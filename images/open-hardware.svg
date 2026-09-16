@@ -1,0 +1,41 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 450" role="img" aria-label="Cartoon of an opened AgriHub360 Sensor enclosure showing the board, the cell, the charge board, the solar panel lead and the probe cable through a gland">
+  <defs><style>.o{stroke:#1A1E1B;stroke-width:4;stroke-linejoin:round;stroke-linecap:round}</style></defs>
+  <rect width="800" height="450" fill="#EAF3EC"/>
+  <!-- workbench -->
+  <rect x="0" y="330" width="800" height="120" fill="#C9D3CC" class="o"/>
+  <!-- open lid, leaning -->
+  <path d="M560 120 L720 60 L740 250 L580 310 Z" fill="#FFFFFF" class="o"/>
+  <path d="M580 140 L700 92 L716 236 L596 284 Z" fill="#A7D7B4" class="o"/>
+  <!-- enclosure body -->
+  <rect x="120" y="120" width="420" height="210" rx="16" fill="#FFFFFF" class="o"/>
+  <rect x="140" y="140" width="380" height="170" rx="10" fill="#EAF3EC" class="o"/>
+  <!-- board -->
+  <rect x="160" y="160" width="190" height="130" rx="8" fill="#1F9A4D" class="o"/>
+  <rect x="180" y="180" width="60" height="40" rx="4" fill="#1A1E1B"/>
+  <rect x="260" y="180" width="70" height="24" rx="4" fill="#C9D3CC" class="o"/>
+  <g fill="#F5C842"><circle cx="190" cy="250" r="7"/><circle cx="215" cy="250" r="7"/><circle cx="240" cy="250" r="7"/></g>
+  <rect x="270" y="236" width="60" height="34" rx="4" fill="#FFFFFF" class="o"/>
+  <!-- cell in holder -->
+  <rect x="370" y="165" width="130" height="50" rx="12" fill="#3B82C4" class="o"/>
+  <rect x="490" y="180" width="14" height="20" rx="3" fill="#C9D3CC" class="o"/>
+  <!-- charge board -->
+  <rect x="370" y="235" width="80" height="50" rx="6" fill="#D9534F" class="o"/>
+  <rect x="385" y="250" width="22" height="20" rx="3" fill="#FFFFFF" class="o"/>
+  <!-- panel lead going out to a small panel -->
+  <path d="M450 260 C 500 260, 520 80, 600 40" fill="none" stroke="#1A1E1B" stroke-width="4"/>
+  <rect x="590" y="10" width="120" height="60" rx="8" fill="#3B82C4" class="o"/>
+  <g stroke="#1A1E1B" stroke-width="3"><line x1="630" y1="12" x2="630" y2="68"/><line x1="670" y1="12" x2="670" y2="68"/><line x1="592" y1="40" x2="708" y2="40"/></g>
+  <!-- gland and probe cable -->
+  <rect x="98" y="220" width="30" height="40" rx="6" fill="#C9D3CC" class="o"/>
+  <path d="M100 240 C 60 240, 40 300, 40 360" fill="none" stroke="#1A1E1B" stroke-width="6"/>
+  <path d="M40 360 L40 420" stroke="#146134" stroke-width="16" stroke-linecap="round"/>
+  <path d="M30 400 L50 400 L40 440 Z" fill="#146134" class="o"/>
+  <!-- antenna -->
+  <rect x="530" y="110" width="14" height="40" rx="4" fill="#1A1E1B"/>
+  <line x1="537" y1="110" x2="537" y2="40" stroke="#1A1E1B" stroke-width="6" stroke-linecap="round"/>
+  <!-- tools -->
+  <path d="M640 370 L760 330" stroke="#1A1E1B" stroke-width="10" stroke-linecap="round"/>
+  <path d="M640 370 L760 330" stroke="#E8A33D" stroke-width="5" stroke-linecap="round"/>
+  <rect x="600" y="380" width="120" height="40" rx="8" fill="#F5C842" class="o"/>
+  <rect x="612" y="390" width="40" height="20" rx="3" fill="#FFFFFF" class="o"/>
+</svg>

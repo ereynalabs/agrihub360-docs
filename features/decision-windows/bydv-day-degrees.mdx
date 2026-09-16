@@ -1,0 +1,16 @@
+---
+title: "BYDV Day-degrees"
+description: "Degree-days from emergence towards the 170 °C day threshold."
+---
+
+## What It Tells You
+
+The **BYDV day-degree count** is how close an autumn-sown cereal is to the second aphid generation. That generation spreads barley yellow dwarf virus plant to plant. Aphids develop with temperature. The count sums degree-days above 3 °C from crop emergence, or from the last aphicide, towards the 170 °C day threshold in the AHDB tool. A field at 40 of 170 has a reason not to spray yet. A field at 150 is the point to start walking the crop. The window closes at stem extension, when a new infection costs little. The count is computed by the [BYDV Risk](/models/bydv) model. It is a thermal proxy for aphid activity. It is not an observation of aphids.
+
+## How It Works
+
+A daily job accumulates degree-days from a gridded weather archive and forecast. Emergence is inferred from the crop's own degree-days since sowing. The state moves from accumulating to approaching at 75 per cent of the threshold. One notification is sent when 170 is reached. A new aphicide in the spray record moves the start date and the count begins again.
+
+<Frame caption="The degree-day count fills towards 170 while the crop is still young, and the window closes at stem extension.">
+  <img src="/images/guides/bydv-day-degrees.svg" alt="Cartoon of a degree-day gauge filling towards a 170 mark with an aphid at its edge, seedlings below and a plant at stem extension at the end." />
+</Frame>

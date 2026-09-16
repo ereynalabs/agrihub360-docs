@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 450" role="img" aria-label="Cartoon of SFI evidence: a top-down land parcel with a photo and an invoice pinned to it, and the claim pack folder gathering them with a download arrow">
+  <defs><style>.o{stroke:#1A1E1B;stroke-width:4;stroke-linejoin:round;stroke-linecap:round}</style></defs>
+  <rect width="800" height="450" fill="#EAF3EC"/>
+  <g class="o">
+    <path d="M70 90 L330 60 Q360 56 364 86 L400 300 Q404 330 374 336 L120 372 Q88 376 84 346 Z" fill="#1F9A4D"/>
+    <g stroke="#146134" stroke-width="3" fill="none"><path d="M110 130 L350 100"/><path d="M118 180 L358 150"/><path d="M126 230 L366 200"/><path d="M134 280 L374 250"/><path d="M142 330 L382 300"/></g>
+  </g>
+  <g class="o">
+    <line x1="200" y1="176" x2="250" y2="120" stroke-width="5"/>
+    <circle cx="200" cy="176" r="8" fill="#D9534F"/>
+    <rect x="240" y="30" width="160" height="126" rx="12" fill="#FFFFFF"/>
+    <rect x="254" y="44" width="132" height="84" rx="8" fill="#BFE0F5"/>
+    <circle cx="352" cy="68" r="12" fill="#F5C842"/>
+    <path d="M254 128 Q300 90 330 108 Q360 92 386 110 L386 128 Z" fill="#1F9A4D"/>
+    <rect x="254" y="138" width="60" height="8" rx="4" fill="#C9D3CC" stroke="none"/>
+  </g>
+  <g class="o">
+    <line x1="300" y1="282" x2="420" y2="250" stroke-width="5"/>
+    <circle cx="300" cy="282" r="8" fill="#D9534F"/>
+    <rect x="410" y="180" width="170" height="150" rx="12" fill="#FFFFFF"/>
+    <rect x="428" y="200" width="80" height="12" rx="6" fill="#146134"/>
+    <rect x="428" y="226" width="130" height="8" rx="4" fill="#C9D3CC" stroke="none"/><rect x="428" y="244" width="110" height="8" rx="4" fill="#C9D3CC" stroke="none"/><rect x="428" y="262" width="120" height="8" rx="4" fill="#C9D3CC" stroke="none"/>
+    <rect x="428" y="292" width="134" height="18" rx="9" fill="#E8A33D"/>
+  </g>
+  <g fill="none" stroke="#146134" stroke-width="4" stroke-linecap="round" stroke-dasharray="8 8"><path d="M404 90 C470 60 540 80 600 130"/><path d="M590 250 L640 250"/></g>
+  <g class="o">
+    <path d="M620 110 L680 110 L696 128 L764 128 Q780 128 780 144 L780 314 Q780 330 764 330 L620 330 Q604 330 604 314 L604 126 Q604 110 620 110 Z" fill="#E8A33D"/>
+    <rect x="620" y="150" width="144" height="164" rx="10" fill="#FFFFFF"/>
+    <rect x="636" y="168" width="80" height="10" rx="5" fill="#1F9A4D"/><rect x="636" y="190" width="110" height="8" rx="4" fill="#C9D3CC" stroke="none"/><rect x="636" y="208" width="90" height="8" rx="4" fill="#C9D3CC" stroke="none"/>
+    <line x1="692" y1="236" x2="692" y2="290" stroke-width="6"/><path d="M670 268 L692 292 L714 268" fill="none" stroke-width="6"/>
+  </g>
+</svg>

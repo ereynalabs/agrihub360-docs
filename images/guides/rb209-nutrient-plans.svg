@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 450" role="img" aria-label="Cartoon of an RB209 nutrient plan: a soil sample jar and a wheat head feed a clipboard that lists the rate for nitrogen, phosphate, potash, magnesium and lime, next to a fertiliser bag">
+  <defs><style>.o{stroke:#1A1E1B;stroke-width:4;stroke-linejoin:round;stroke-linecap:round}</style></defs>
+  <rect width="800" height="450" fill="#EAF3EC"/>
+  <g class="o">
+    <rect x="270" y="60" width="290" height="350" rx="16" fill="#FFFFFF"/>
+    <rect x="360" y="40" width="110" height="44" rx="12" fill="#146134"/>
+    <rect x="300" y="110" width="150" height="14" rx="6" fill="#C9D3CC" stroke="none"/>
+  </g>
+  <g font-family="Inter, Arial, sans-serif" font-size="22" font-weight="700" fill="#1A1E1B">
+    <text x="300" y="176">N</text><text x="300" y="226">P</text><text x="300" y="276">K</text>
+  </g>
+  <g fill="#C9D3CC"><rect x="340" y="158" width="190" height="20" rx="10"/><rect x="340" y="208" width="190" height="20" rx="10"/><rect x="340" y="258" width="190" height="20" rx="10"/><rect x="340" y="308" width="190" height="20" rx="10"/><rect x="340" y="358" width="190" height="20" rx="10"/></g>
+  <g class="o"><rect x="340" y="158" width="170" height="20" rx="10" fill="#1F9A4D"/><rect x="340" y="208" width="90" height="20" rx="10" fill="#1F9A4D"/><rect x="340" y="258" width="120" height="20" rx="10" fill="#1F9A4D"/><rect x="340" y="308" width="60" height="20" rx="10" fill="#A7D7B4"/><rect x="340" y="358" width="140" height="20" rx="10" fill="#F5C842"/></g>
+  <g class="o"><circle cx="312" cy="318" r="10" fill="#A7D7B4"/><rect x="302" y="358" width="20" height="20" rx="5" fill="#EAF3EC"/></g>
+  <g class="o">
+    <rect x="70" y="220" width="110" height="150" rx="16" fill="#BFE0F5"/>
+    <rect x="60" y="204" width="130" height="30" rx="10" fill="#C9D3CC"/>
+    <path d="M74 300 L176 300 L176 354 Q176 366 164 366 L86 366 Q74 366 74 354 Z" fill="#8B5E3C"/>
+    <rect x="94" y="250" width="62" height="34" rx="8" fill="#FFFFFF"/>
+  </g>
+  <g class="o">
+    <line x1="140" y1="180" x2="140" y2="60" stroke-width="5"/>
+    <g fill="#F5C842"><ellipse cx="128" cy="80" rx="12" ry="8" transform="rotate(-30 128 80)"/><ellipse cx="152" cy="92" rx="12" ry="8" transform="rotate(30 152 92)"/><ellipse cx="128" cy="106" rx="12" ry="8" transform="rotate(-30 128 106)"/><ellipse cx="152" cy="118" rx="12" ry="8" transform="rotate(30 152 118)"/><ellipse cx="128" cy="132" rx="12" ry="8" transform="rotate(-30 128 132)"/><ellipse cx="152" cy="144" rx="12" ry="8" transform="rotate(30 152 144)"/></g>
+  </g>
+  <g class="o">
+    <path d="M620 150 Q620 120 650 120 L720 120 Q750 120 750 150 L750 380 Q750 400 730 400 L640 400 Q620 400 620 380 Z" fill="#A7D7B4"/>
+    <rect x="640" y="180" width="90" height="120" rx="10" fill="#FFFFFF"/>
+    <path d="M660 250 C670 210 700 210 710 250 Z" fill="#1F9A4D"/>
+    <line x1="685" y1="250" x2="685" y2="270"/>
+    <rect x="650" y="110" width="70" height="20" rx="6" fill="#146134"/>
+  </g>
+  <g fill="none" stroke="#146134" stroke-width="4" stroke-linecap="round" stroke-dasharray="8 8"><path d="M200 300 L260 300"/><path d="M570 240 L610 240"/></g>
+</svg>
