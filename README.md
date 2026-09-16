@@ -11,7 +11,7 @@ The product and developer documentation for AgriHub360, published with [Mintlify
 | `features/` | One overview page per Guides group and one page per feature under it |
 | `devices/` | The AgriHub360 Sensor and Hub, Connect Your Sensor, Connect Your Device, Standards |
 | `quickstart.mdx`, `api-reference/` | The API Reference tab: guides, the OpenAPI document (`device-api.yaml`) and the AsyncAPI document for live updates (`messagebus.yaml`) |
-| `models/` | The AI Models tab: one page per model, science first, then how it is applied |
+| `models/` | The Models tab: one page per model, science first, then how it is applied |
 | `images/` | Cartoon SVG illustrations; `images/guides/` holds one per feature page |
 | `style.css` | Justified body text, centred figures, the small reference lists |
 | `AGENTS.md` | Writing rules for anyone, human or agent, editing the pages |
