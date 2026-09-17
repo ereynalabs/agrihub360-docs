@@ -94,8 +94,6 @@
             "group": "Farm Management",
             "pages": [
               "features/farm-management",
-              "features/variety-selection",
-              "features/farm-management/variety-recommender",
               "features/farm-management/variety-evidence",
               "features/farm-management/per-field-profit-and-loss",
               "features/farm-management/ledger-import",
@@ -211,9 +209,7 @@
           {
             "group": "Disease & Pest Risk",
             "pages": [
-              "models/bydv",
-              "models/fusarium-head-blight",
-              "models/foliar-disease"
+              "models/bydv"
             ]
           },
           {

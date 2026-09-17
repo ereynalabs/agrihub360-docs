@@ -5,11 +5,11 @@ description: "Geo-scoped, with source and confidence on every alert."
 
 ## What It Tells You
 
-A **regional outbreak alert** says that conditions in your region have reached the point where an epidemic is likely. It describes the region. It does not describe your field. The [Fusarium Head Blight Risk](/models/fusarium-head-blight) model works at regional resolution. Its predictors are the hours of warmth, humidity and rain across the region in the week before wheat flowers. It is labelled regional and is never shown as a per-field result. An alert is the prompt to check your own crop's stage and the [foliar disease](/models/foliar-disease) pressure on your own fields. If they agree, plan the pass.
+A **regional outbreak alert** says that an outbreak has been reported or is spreading in your region. It describes the region. It does not describe your field. Each alert carries its source, such as AHDB regional monitoring, its confidence, and the radius it applies to, and it is never shown as a per-field result. An alert is the prompt to check your own crop's stage and walk your own fields. If they agree, plan the pass.
 
 ## How It Works
 
-Alerts come from the published risk models and are scoped to the region they were computed for. Every alert carries its source: the model and the weather series behind it. Every alert carries its confidence: a calibrated probability with an interval and a band. Only a high band raises a notification. The notification says "conditions in your region". It never says "your field".
+Alerts are raised by AgriHub360 agronomy staff from published monitoring and scoped to a region and a radius. Every alert carries its source and its confidence. A farm with fields inside the radius sees the alert and how many of its fields fall inside. The notification says "in your region". It never says "your field".
 
 <Frame caption="The alert covers the region around the farm and carries its confidence band.">
   <img src="/images/guides/regional-outbreak-alerts.svg" alt="A wide region on a map holds one small farm, with an alert card showing a bell and a confidence band set to high." />
