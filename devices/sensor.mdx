@@ -23,12 +23,12 @@ The probe and the solar-charged battery feed the radio, which uplinks every 15 m
 | Soil temperature | `70` | °C |
 | Conductivity (EC) | `224` | mS/cm |
 | pH | `120` | pH |
+| Air temperature | `230` | °C |
 | Humidity | `110` | % |
+| Barometric pressure | `231` | hPa |
 | Light | `140` | lux |
 | Battery | `200` | % |
 | Signal | `201` | % |
-
-The node also measures air temperature and barometric pressure. Neither has a catalogue id yet, so neither reaches the Device API.
 
 <Warning>
   The sensor also carries nutrient channels, ids `221` to `223` for nitrogen, phosphorus and potassium. They have no validated accuracy, the app stores them without showing them, and they aren't a supported reading. Don't build on them.
