@@ -9,7 +9,9 @@ The **drilling window** says whether the seedbed is warm enough to drill: open, 
 
 ## How It Works
 
-The model reads the daily mean soil temperature from the field's own probe over the last 30 days. The floor and the run length come from a per-crop parameter table, by crop and soil type. The model runs daily. The field card recomputes the state from the readings whenever it is opened. A reading older than six hours is flagged as stale.
+The model reads the daily mean soil temperature from the field's own probe over the last 30 days. A field with no probe uses the modelled soil temperature at 6 cm that comes with the field's forecast, over the last week, and the card says so. The floor and the run length come from a per-crop parameter table, by crop and soil type. The model runs daily. The field card recomputes the state from the readings whenever it is opened. A probe reading older than six hours, or a forecast older than a day, is flagged as stale.
+
+The card needs to know what goes in next. On a field with no next crop set it asks, and the crop is chosen on the card itself.
 
 <Frame caption="Five days in a row above the floor, and the drill moves into the seedbed.">
   <img src="/images/guides/drilling-window.svg" alt="Cartoon of a run of ticked days, a thermometer standing above its floor line, and a tractor with a drill moving into a warm seedbed." />

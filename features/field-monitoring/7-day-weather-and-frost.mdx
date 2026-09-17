@@ -7,6 +7,8 @@ description: "Per-field forecast with a 72-hour frost banner."
 
 The **field forecast** is the week ahead for that field: temperature, humidity, wind and rain. The spray, nitrogen and drought models read it. The forecast on screen is the forecast behind the windows. The **frost banner** appears when frost is likely on one of the next three nights. It shows the night and the effective minimum. The minimum is adjusted for how far the field sits below the farm's mean elevation, because cold air drains into the low fields first. The frost risk is computed by the [Spray Window](/models/spray-frost) model.
 
+Beside the forecast, the card names the nearest real rain gauge, its distance, and what it recorded in the last 24 hours, so the modelled rain can be read against a measured one. Gauges come from the Environment Agency in England and Wales and from SEPA in Scotland; Northern Ireland has no public rainfall feed yet.
+
 ## How It Works
 
 The forecast is refreshed every four hours from a gridded weather model and cached per field. Frost risk is high at an effective minimum at or below 0 °C and low at or below 2 °C. A high risk raises an advisory and a notification once in 24 hours.
