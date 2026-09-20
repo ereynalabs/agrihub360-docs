@@ -1,0 +1,25 @@
+---
+title: "Farm Map and Siting Checks"
+description: "Every field and every store, ditch and heap on one satellite map, with the distances the rules set measured."
+---
+
+## What It Tells You
+
+The **Map** tab is the farm from above: the fields in their crop colours on satellite imagery, and the things the rules name, each drawn where it is. A store that sits too close to water is outlined with a dashed line, and the siting check under the map says which rule it fails and by how much.
+
+## How It Works
+
+A field is drawn on the map, or imported from the RPA shapefile or a GeoJSON. The boundary file's projection is detected, British National Grid included. Each field carries its crop, and the crop sets its colour: cereals gold, oilseed yellow, forage green, pulses blue-green, cover crops olive, horticulture pink.
+
+The other things on a farm are **features**, named by the term the regulations use, with the plain name beside it. There are 28 kinds in four groups.
+
+| Group | Kinds |
+|---|---|
+| Storage | Slurry store, silage store, fuel oil store, solid manure store, temporary field heap, digestate store, dirty water store, fertiliser store, pesticide store, sprayer filling area, sheep dip |
+| Water | Watercourse, pond, spring, well or borehole, abstraction point, field drain outfall, septic tank |
+| Land | Hedgerow, buffer strip, field margin, woodland, scrub, public right of way |
+| Buildings | Livestock building, poultry house, farmyard, grain store, farm track |
+
+Each kind that a rule sites by distance carries that distance as a number, from the Nitrate Pollution Prevention Regulations and the SSAFO Regulations in England and the instruments that follow them in the other nations. The **siting check** measures every store and heap against every watercourse, spring, well and borehole on the map. A failing pair is a dashed outline on the map, a line on the Map tab, a decision on Today and an item on the inspection checklist. A check that cannot be measured, because no water is drawn, says so rather than passing.
+
+Layers can be switched on and off: stores, water, herds, sensors, the satellite ground, and the latest satellite pass for each field laid over its polygon. The map and the siting checks are printed into the compliance pack as the risk map the nitrogen rules ask for.

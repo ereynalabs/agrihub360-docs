@@ -1,0 +1,31 @@
+---
+title: "Modelled Nitrogen"
+description: "The nitrogen the soil released this month, modelled from its temperature and moisture, with the limit beside it."
+---
+
+## What It Tells You
+
+The **modelled nitrogen** card on a field says how much nitrogen the soil's organic matter released over the last month, in kg N/ha, and at what rate it is releasing now. It is the nitrogen the crop gets without a bag. Beside it the field strip shows what has been applied this year against the crop's N-max, so the two halves of the nitrogen budget read together.
+
+It is a model of mineralisation, not a measurement of the nitrogen in the soil now. A soil mineral nitrogen test measures that; this does not, and the card says so.
+
+## How It Works
+
+The release is first-order mineralisation after Stanford and Smith, run day by day on the field's soil temperature and moisture. Temperature scales the rate by a Q10 response after Kätterer et al.; moisture scales it after Myers et al. The soil temperature and moisture are the field's measured readings where it has a probe, and the modelled ones otherwise, and the card names which.
+
+| Input | Source | Default |
+|---|---|---|
+| Soil temperature | Probe, or the field's modelled soil | modelled from the forecast |
+| Soil moisture | Probe, or the field's modelled soil | modelled from the forecast |
+| Organic matter | The field's soil analysis | 3.5 % when there is no sample |
+| Days with data | The last 31 days | the count is shown |
+
+The N-max in the strip is the crop's limit from the NVZ tables for the nation, with the yield and soil adjustments the rules allow. The card and the strip both feed the [RB209 nutrient plan](/features/nutrient-planning/rb209-nutrient-plans).
+
+<div className="refs">
+
+1. Stanford, G. and Smith, S. J., 1972. [Nitrogen mineralization potentials of soils](https://doi.org/10.2136/sssaj1972.03615995003600030029x). Soil Science Society of America Journal.
+2. Kätterer, T., Reichstein, M., Andrén, O. and Lomander, A., 1998. [Temperature dependence of organic matter decomposition: a critical review using literature data analyzed with different models](https://doi.org/10.1007/s003740050430). Biology and Fertility of Soils.
+3. Myers, R. J. K., Campbell, C. A. and Weier, K. L., 1982. [Quantitative relationship between net nitrogen mineralization and moisture content of soils](https://doi.org/10.4141/cjss82-013). Canadian Journal of Soil Science.
+
+</div>

@@ -1,0 +1,22 @@
+---
+title: "Measured Against Modelled"
+description: "The field's own reading against the model that stands in for it, on one chart, with the gap."
+---
+
+## What It Tells You
+
+Every field without a probe runs on a **modelled** soil moisture from the public archive. A field with a probe has a **measured** one. The measured-against-modelled card puts the two on one chart, with the gap between them shaded, so you can see how far the model was from the ground here and decide whether the fields without a probe can be trusted to it.
+
+## How It Works
+
+The modelled side is Open-Meteo's ERA5-Land reanalysis for the spot, the 0 to 7 cm layer as a daily mean of the hourly values. The measured side is the field's own soil moisture sensor. A field without one is compared at the nearest COSMOS-UK site instead: UKCEH's cosmic-ray soil moisture network, published under the Open Government Licence, against the model at that site. That is the plain version of the same question: this is how far the model is out on real ground near you.
+
+The card shows the last 60 days, the two lines and the shaded gap, with the mean bias and the root mean square error in the reading's unit. A gap that stays small says the model is good enough for the fields like this one. A gap that swings with rain says the probe is earning its place.
+
+| Line | Source | Labelled |
+|---|---|---|
+| Measured | The field's probe, through the Hub or a connected station | measured, with the device |
+| Measured, no probe | The nearest COSMOS-UK site | measured, with the site and its distance |
+| Modelled | ERA5-Land through Open-Meteo, 0 to 7 cm | modelled |
+
+The card sits on the field page under the readings. The published intercomparison behind it found 17 of 23 modelled soil moisture products biased low against cosmic-ray ground truth; the chart shows what that is here.

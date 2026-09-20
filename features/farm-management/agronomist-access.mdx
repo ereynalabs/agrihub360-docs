@@ -10,3 +10,7 @@ description: "Your advisor works across client farms and writes signed recommend
 ## How It Works
 
 You grant an advisor access to your farm and it appears in their list of client farms. Each plan or recommendation they write is stored with its author. A new recommendation sends a `recommendation.created` webhook event if you have a webhook set up.
+
+The advisor holds one licence for any number of client farms, and a client farm pays half rate.
+
+The **approvals** inbox is where the assistant's crop protection questions land. The assistant answers questions about your own farm from its record, and cites the lines it used; a question about what to spray is held for the advisor rather than answered, and the advisor's reply goes back to the farm with their name on it. Scout diagnoses below the confidence floor arrive in the same inbox.

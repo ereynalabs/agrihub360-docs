@@ -9,7 +9,9 @@ A **live soil reading** is a measured value from a probe in the field: soil mois
 
 ## How It Works
 
-An [AgriHub360 Sensor](/devices/sensor) reports every 15 minutes or slower over LoRa to the Hub. The Hub posts each reading to the Device API. A [device you bring](/devices/byod) posts to the same endpoint. Each reading is labelled **measured** and shown on the field timeline next to the modelled value it replaces. A sensor that stops reporting is shown as stale.
+An [AgriHub360 Sensor](/devices/sensor) reports every 15 minutes or slower over LoRa to the Hub. The Hub posts each reading to the Device API. A [device you bring](/devices/byod) or an [Ecowitt station](/devices/ecowitt-station) posts to the same place. Each reading is labelled **measured** and shown on the field timeline next to the modelled value it replaces.
+
+The field page sets the two soil readings as figures, with the week's shape under each and a red figure when the reading is out of the crop's range. The Sensors tab lists every device with its last reading, how long ago it came, and the day's sparkline. A sensor that stops reporting is shown as stale, and a card says what to do: restart the gateway, check the probe's battery, or check the station's upload settings. A silent gateway takes its sensors' silence with it, so it is one card, not five.
 
 <Frame caption="A probe in the soil, with its moisture and temperature readings and the Hub that receives them.">
   <img src="/images/guides/live-soil-readings.svg" alt="Cartoon cut-away of soil with a probe below ground, a moisture badge, a temperature badge and a hub receiving the readings." />

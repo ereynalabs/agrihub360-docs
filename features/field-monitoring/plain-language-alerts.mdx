@@ -11,6 +11,8 @@ An **alert** is one sentence about one field: the window that has opened or clos
 
 Every model writes an advisory row when its state changes and sends a push notification and an email. Alert text is rendered from templates. A language model never writes it. A state that persists across runs raises a single alert. The alert links to the field, where the reading and the model behind it are shown.
 
+A custom trigger is announced in words: the field, the reading and its unit, and the threshold it crossed. It fires once on the crossing, not on every reading in breach, and re-arms once the reading has come back past the threshold by a margin. A run of identical alerts folds into one card in the notification centre.
+
 <Frame caption="A frost alert names the night and the temperature, and points at the probe behind it.">
   <img src="/images/guides/plain-language-alerts.svg" alt="Cartoon of a phone with a frost alert bubble that shows a temperature chip and points at a probe in the field." />
 </Frame>

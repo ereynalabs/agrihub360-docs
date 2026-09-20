@@ -42,13 +42,15 @@
               "features/field-monitoring/one-timeline-fusion",
               "features/field-monitoring/growth-stage-gdd",
               "features/field-monitoring/7-day-weather-and-frost",
-              "features/field-monitoring/field-map-first"
+              "features/field-monitoring/field-map-first",
+              "features/field-monitoring/measured-against-modelled"
             ]
           },
           {
             "group": "Decision Windows",
             "pages": [
               "features/decision-windows",
+              "features/decision-windows/todays-decisions",
               "features/decision-windows/drilling-window",
               "features/decision-windows/spray-window",
               "features/decision-windows/nitrogen-timing",
@@ -65,6 +67,7 @@
               "features/nutrient-planning/rb209-nutrient-plans",
               "features/nutrient-planning/nitrogen-timing",
               "features/nutrient-planning/applications-log",
+              "features/nutrient-planning/modelled-nitrogen",
               "features/nutrient-planning/zone-rate-planning"
             ]
           },
@@ -87,6 +90,7 @@
               "features/compliance-and-records/spray-log-with-mapp-check",
               "features/compliance-and-records/eudr-dossier",
               "features/compliance-and-records/one-compliance-vault",
+              "features/compliance-and-records/records-timeline",
               "features/compliance-and-records/nation-specific-rules"
             ]
           },
@@ -99,7 +103,10 @@
               "features/farm-management/ledger-import",
               "features/farm-management/payback-panel",
               "features/farm-management/team-and-roles",
-              "features/farm-management/agronomist-access"
+              "features/farm-management/agronomist-access",
+              "features/farm-management/farm-map-and-siting-checks",
+              "features/farm-management/livestock-and-manure-plan",
+              "features/farm-management/key-dates"
             ]
           },
           {
@@ -109,7 +116,8 @@
               "features/account-and-data/consent-first-data-sharing",
               "features/account-and-data/two-factor-sign-in",
               "features/account-and-data/farmer-sharing-groups",
-              "features/account-and-data/offline-action-queue"
+              "features/account-and-data/offline-action-queue",
+              "features/account-and-data/map-first-account-later"
             ]
           }
         ]
@@ -131,6 +139,7 @@
             "group": "Connect Your Sensor",
             "pages": [
               "devices/byod",
+              "devices/ecowitt-station",
               "devices/bridge-a-vendor-api",
               "devices/map-a-lorawan-uplink",
               "devices/metrics"

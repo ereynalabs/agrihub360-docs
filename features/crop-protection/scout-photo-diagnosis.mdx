@@ -5,11 +5,11 @@ description: "Photograph a leaf, get the call with a confidence score."
 
 ## What It Tells You
 
-A **scout photo diagnosis** is the most likely disease or pest on a leaf you photographed in the field. It carries a confidence score and what the model saw. A lesion you are unsure about becomes a named call on the field's timeline, with the treatment from the species list. The confidence is the model's own and is indicative. A low score is a reason to walk the patch again. It is not a reason to spray. The diagnosis comes from the [Scout Photo Diagnosis](/models/scout-diagnosis) model.
+A **scout photo diagnosis** is the most likely disease or pest on a leaf you photographed in the field. It carries a confidence score and what the model saw. A lesion you are unsure about becomes a named call on the field's timeline. The confidence is the model's own and is indicative. A low score is a reason to walk the patch again. It is not a reason to spray, and the app names no product: what to spray is a decision for a qualified person, and the diagnosis goes to your agronomist for that. The diagnosis comes from the [Scout Photo Diagnosis](/models/scout-diagnosis) model.
 
 ## How It Works
 
-The photo is stripped of location data and downscaled. It is sent to a vision model constrained to a curated list of twelve species. A reply that does not fit the schema, or whose confidence is below the 0.30 floor, is recorded as unknown. The name and the treatment come from the list. The model supplies only the match. A diagnosis below 0.6, or one you correct, goes to the agronomist queue for a check before it becomes advice.
+The photo is stripped of location data and downscaled. It is sent to a vision model constrained to a curated list of UK arable diseases and pests. A reply that does not fit the schema, or whose confidence is below the 0.30 floor, is recorded as unknown. The name comes from the list. The model supplies only the match. A diagnosis below 0.6, or one you correct, goes to the agronomist queue first; the verdict says what it does not know rather than filling the gap.
 
 <Frame caption="The phone photographs the leaf and the result card gives the call with its confidence.">
   <img src="/images/guides/scout-photo-diagnosis.svg" alt="A phone photographs a leaf with a lesion and a result card shows a confidence bar and an agronomist check." />

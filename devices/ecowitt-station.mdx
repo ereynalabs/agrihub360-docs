@@ -1,0 +1,65 @@
+---
+title: "Ecowitt Station"
+description: "A weather station you already own posts its readings through its own gateway. Four lines to type, nothing to build."
+---
+
+An **Ecowitt** station joins the farm through the Customized upload its gateway already has. No serial, no key in firmware, no bridge script. The gateway posts its readings on the interval you set and the app records them under the station like any other device.
+
+## What You Need
+
+- An Ecowitt gateway or console with a **Customized** upload: GW1000, GW1100, GW2000, the WS2910 and WS3800 consoles, and the Froggit and Ambient Weather stations built on the same gateway.
+- A farm on a plan that allows a sensor. A station counts as one.
+
+## Connect It
+
+<Steps>
+  <Step title="Add the station in the app">
+    Sensors → **Connect a station**. Name it, and pick the field its channel 1 soil probe sits in. Leave the field empty for a station with no soil probe. The app shows four lines.
+
+    | Setting | Value |
+    |---|---|
+    | Protocol | Ecowitt |
+    | Server | the device API host, for example `devices.agrihub360.example` |
+    | Path | `/api/bridges/ecowitt/<key>` |
+    | Port | 80 |
+
+    The path is the station's credential. It is shown once. The station's page can issue a new one, and the old one stops working the moment it does.
+  </Step>
+  <Step title="Type them into the gateway">
+    In the WS View Plus app, or the gateway's own web page: the gateway → Weather Services → **Customized** → Enable, protocol **Ecowitt**, then the server, path and port above. An upload interval of one to five minutes is fine.
+  </Step>
+  <Step title="Wait one interval">
+    The first upload lands within an interval. Until then the station shows as silent on the Sensors tab, with what to check.
+  </Step>
+</Steps>
+
+<Warning>
+  The gateway speaks plain HTTP, port 80, and does not follow a redirect to HTTPS. A reverse proxy that forces HTTPS must exempt the bridge path.
+</Warning>
+
+## What Is Fed
+
+| Ecowitt field | Stored as | Metric |
+|---|---|---|
+| `tempf` | air temperature, °C | 230 |
+| `humidity` | humidity, % | 110 |
+| `baromrelin` | relative pressure, hPa | 231 |
+| `windspeedmph` | wind speed, m/s | 90 |
+| `winddir` | wind direction, degrees | 160 |
+| `dailyrainin` | rain since midnight, mm | 232 |
+| `soilmoisture1` | soil moisture, %, the WH51 on channel 1 | 220 |
+| `tf_ch1` | soil temperature, °C, the WN34 on channel 1 | 70 |
+
+Units are converted on the way in. Not fed: soil probes on channels 2 to 8, solar radiation and UV, lightning and battery levels. Put the probe that matters on channel 1.
+
+Every reading carries the station as its source. A field with both a station and an AgriHub360 Sensor names both under its chart.
+
+## Test Without a Gateway
+
+```bash
+curl -X POST http://devices.agrihub360.example/api/bridges/ecowitt/$KEY \
+  -d 'tempf=57.2&humidity=81&baromrelin=29.91&windspeedmph=6.7&winddir=225&dailyrainin=0.12&soilmoisture1=38&tf_ch1=53.6'
+# → {"device_id":"…","stored":8,"ignored":[]}
+```
+
+The reply lists every field that was not mapped. The gateway discards the reply; a person testing with `curl` reads it.

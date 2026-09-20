@@ -9,7 +9,11 @@ description: "Canopy view alongside ground truth."
 
 ## How It Works
 
-Each capture is drawn on the field map and on the field timeline. The [field health review](/models/field-health-review) reads the latest capture. The vision model describes each image once and the description is reused.
+Each capture is drawn on the field map and on the field timeline. The [field health review](/models/field-health-review) reads the latest capture. The vision model describes each image once and the description is reused. On the Map tab the latest pass can be laid over the field's polygon as a layer, and each field's row carries it as a tile.
+
+The **archive** goes back to 2017. For any field polygon the app fetches the ten-day mean NDVI for every interval since then from Copernicus Sentinel-2 through the Data Space, about 350 points, and draws the seasons one over another on the NDVI tab. A new field gets its history on the first night.
+
+The archive is what the zones are tested against. For each season the app ranks the zones by their peak NDVI and asks whether the ranking holds from year to year, with Kendall's W over the seasons. W of 0.7 or more over at least three seasons is **stable**: the pattern in the field is a pattern in the soil, and the zones can carry a rate. Less is **unstable**: the pattern moves with the weather, and the zones are a guide to walk, not to plan by. The verdict is on the zones page, with the seasons it rests on.
 
 <Frame caption="An NDVI capture over the field, with the thin corner in amber and the probe that sits in it.">
   <img src="/images/guides/satellite-ndvi.svg" alt="Cartoon of a field seen from above in green to amber patches under a satellite, with a probe marker and a footpath into the amber corner." />
