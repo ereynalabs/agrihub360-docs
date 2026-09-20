@@ -63,3 +63,14 @@
 .prose .refs a {
   font-weight: 500;
 }
+
+/* A screen of the app on the How Do I pages is shown inside a phone: a dark
+   bezel with rounded corners, so a reader knows at a glance that it is the
+   phone they hold and not a diagram. Only the screenshots in images/screens
+   get it; the cartoons in images/guides do not. */
+img[src^="/images/screens/"] {
+  border: 9px solid #1A1714;
+  border-radius: 30px;
+  box-shadow: 0 10px 30px rgba(26, 23, 20, 0.18), 0 0 0 1px rgba(26, 23, 20, 0.35);
+  background: #1A1714;
+}
