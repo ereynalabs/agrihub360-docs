@@ -24,21 +24,94 @@
         "icon": "book-open",
         "groups": [
           {
-            "group": "Getting Started",
+            "group": "Start Here",
             "pages": [
               "index",
-              "agrihub360-101"
+              "agrihub360-101",
+              "start-here/your-first-week",
+              "start-here/words-on-the-screen"
             ]
           },
           {
             "group": "How Do I",
             "pages": [
               "how-do-i/overview",
-              "how-do-i/log-a-spray",
-              "how-do-i/connect-a-station",
-              "how-do-i/build-and-share-the-pack",
-              "how-do-i/move-a-herd",
-              "how-do-i/a-sensor-has-gone-quiet"
+              {
+                "group": "Today",
+                "pages": [
+                  "how-do-i/today/see-the-weeks-decisions",
+                  "how-do-i/today/tick-a-decision",
+                  "how-do-i/today/hand-a-decision-to-someone",
+                  "how-do-i/today/read-where-a-decision-comes-from",
+                  "how-do-i/today/get-the-email-and-the-push-before-a-date"
+                ]
+              },
+              {
+                "group": "Map",
+                "pages": [
+                  "how-do-i/map/draw-a-field",
+                  "how-do-i/map/upload-the-rpa-file",
+                  "how-do-i/map/draw-a-store-a-heap-and-a-ditch",
+                  "how-do-i/map/place-a-probe-on-the-field",
+                  "how-do-i/map/draw-zones-and-run-the-stability-test",
+                  "how-do-i/map/set-the-rates-and-export-for-the-tractor",
+                  "how-do-i/map/move-a-herd",
+                  "how-do-i/map/read-the-grazing-wedge",
+                  "how-do-i/map/switch-the-layers"
+                ]
+              },
+              {
+                "group": "Records",
+                "pages": [
+                  "how-do-i/records/log-a-spray",
+                  "how-do-i/records/log-fertiliser-or-manure",
+                  "how-do-i/records/add-a-photo-to-a-record",
+                  "how-do-i/records/let-the-assistant-draft-a-record",
+                  "how-do-i/records/log-a-soil-sample",
+                  "how-do-i/records/record-a-harvest",
+                  "how-do-i/records/write-a-record-with-no-signal"
+                ]
+              },
+              {
+                "group": "Compliance",
+                "pages": [
+                  "how-do-i/compliance/read-the-inspection-list-and-fix-a-line",
+                  "how-do-i/compliance/see-the-closed-period-on-each-field",
+                  "how-do-i/compliance/build-and-share-the-pack",
+                  "how-do-i/compliance/fill-in-the-nvz-record",
+                  "how-do-i/compliance/attach-sfi-evidence",
+                  "how-do-i/compliance/open-the-manure-plan"
+                ]
+              },
+              {
+                "group": "More",
+                "pages": [
+                  "how-do-i/more/set-up-the-farm",
+                  "how-do-i/more/invite-the-team-and-set-roles",
+                  "how-do-i/more/invite-an-advisor",
+                  "how-do-i/more/choose-a-plan",
+                  "how-do-i/more/turn-on-two-factor",
+                  "how-do-i/more/leave-or-delete-a-farm"
+                ]
+              },
+              {
+                "group": "Sensors",
+                "pages": [
+                  "how-do-i/sensors/is-a-probe-worth-it-here",
+                  "how-do-i/sensors/claim-the-sensor",
+                  "how-do-i/sensors/connect-a-station",
+                  "how-do-i/sensors/set-a-trigger",
+                  "how-do-i/sensors/a-sensor-has-gone-quiet"
+                ]
+              },
+              {
+                "group": "For advisors",
+                "pages": [
+                  "how-do-i/advisors/your-today-across-client-farms",
+                  "how-do-i/advisors/answer-a-held-question",
+                  "how-do-i/advisors/the-licence-and-what-a-client-pays"
+                ]
+              }
             ]
           },
           {
@@ -268,5 +341,27 @@
       "copy",
       "view"
     ]
-  }
+  },
+  "redirects": [
+    {
+      "source": "/how-do-i/log-a-spray",
+      "destination": "/how-do-i/records/log-a-spray"
+    },
+    {
+      "source": "/how-do-i/connect-a-station",
+      "destination": "/how-do-i/sensors/connect-a-station"
+    },
+    {
+      "source": "/how-do-i/build-and-share-the-pack",
+      "destination": "/how-do-i/compliance/build-and-share-the-pack"
+    },
+    {
+      "source": "/how-do-i/move-a-herd",
+      "destination": "/how-do-i/map/move-a-herd"
+    },
+    {
+      "source": "/how-do-i/a-sensor-has-gone-quiet",
+      "destination": "/how-do-i/sensors/a-sensor-has-gone-quiet"
+    }
+  ]
 }

@@ -1,0 +1,38 @@
+---
+title: "Set a Trigger"
+description: "A reading crossing a line, a sensor going quiet, frost in the forecast. A push, and a webhook if you want one."
+---
+
+<Steps>
+  <Step title="Open the field, then Alerts">
+    The triggers on the field, how often each has fired, and the events. **Add an alert**.
+  </Step>
+  <Step title="What to watch">
+    **Frost forecast**, **Heat forecast**, **Heavy rain forecast**, **High wind forecast**, **Sensor reading crosses a threshold**, **A device goes offline**, **Pest pressure forecast**. Then the line: a threshold for a reading, a temperature for frost.
+  </Step>
+  <Step title="What to do">
+    **Alert only** sends a push. **Auto-action via webhook** calls a URL you give, for a pump or a vent. Save. **Test fire** on the trigger sends one now so you can see it arrive.
+  </Step>
+</Steps>
+
+<Frame caption="Tell me when: what to watch and the threshold.">
+  <img src="/images/screens/trigger-edit.jpg" alt="Tell me when: What to watch with Frost forecast chosen, Heat forecast, Heavy rain forecast, High wind forecast, Sensor reading crosses a threshold, A device goes offline, Pest pressure forecast, then Threshold (°C)." width="270" />
+</Frame>
+
+<Frame caption="The field's alerts: three set, fifty fired, with Pause, Edit and Test fire.">
+  <img src="/images/screens/triggers.jpg" alt="Alerts on North Pasture: 3 set, 50 fired in the last 30 days; Sensor reading drops below 18, Alert only, fired 83 times; Soil temp drops below 2; each with Pause, Edit, Test fire." width="270" />
+</Frame>
+
+## What You See Next
+
+A trigger that fires is a decision on Today under **Reading**, with the value and the line it crossed. **Pause** keeps it without firing.
+
+## If It Does Not
+
+| You see | It means | Do |
+|---|---|---|
+| Automation is a paid feature | Webhooks are on Grower | Alert only works on Free |
+| It fires every hour | The reading sits on the line | Move the threshold, or pause it |
+| The webhook fails | The URL refused it | The event shows the HTTP status; check the receiver |
+
+Related: [Custom Triggers](/features/decision-windows/custom-triggers), [Webhooks](/devices/webhooks).

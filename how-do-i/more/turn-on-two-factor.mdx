@@ -1,0 +1,35 @@
+---
+title: "Turn On Two-factor"
+description: "An authenticator app on top of the password. Emailed codes stay as the fallback."
+---
+
+**Before you start.** An authenticator app on the phone: Google Authenticator, Microsoft Authenticator, Proton Pass or similar.
+
+<Steps>
+  <Step title="More, Profile, then Two-factor authentication">
+    **Set up authenticator app**.
+  </Step>
+  <Step title="Scan the code">
+    Scan the QR code with the app, or type the key it shows. Enter the six-digit code the app gives. **Confirm & enable**.
+  </Step>
+  <Step title="Sign in from now on">
+    Password, then the code from the app. If the phone is lost, the emailed code still signs you in; turn the authenticator off and on again from this page.
+  </Step>
+</Steps>
+
+<Frame caption="Two-factor authentication, with the setup button.">
+  <img src="/images/screens/2fa.jpg" alt="Two-factor authentication: the note that emailed codes stay as a fallback, and Set up authenticator app." width="270" />
+</Frame>
+
+## What You See Next
+
+The page reads "Your authenticator app is on". **Disable authenticator** asks for a current code.
+
+## If It Does Not
+
+| You see | It means | Do |
+|---|---|---|
+| Invalid code | The phone's clock is off, or the code has rolled over | Wait for the next code; check the time settings |
+| No QR code appears | Setup could not start | Try again on a connection |
+
+Related: [Two-factor Sign-in](/features/account-and-data/two-factor-sign-in).

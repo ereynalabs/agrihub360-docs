@@ -1,0 +1,40 @@
+---
+title: "Set the Rates and Export for the Tractor"
+description: "A nitrogen rate per zone, then the file the terminal reads. Only on a field whose zones hold."
+---
+
+**Before you start.** The field has two or more zones and a **Stable** verdict. [Draw Zones and Run the Stability Test](/how-do-i/map/draw-zones-and-run-the-stability-test) comes first.
+
+<Steps>
+  <Step title="Set the rates">
+    On the zones page, under the verdict, **Rate plan, nitrogen**. **Set the rates**: the product, its nitrogen content in percent, a flat rate for comparison, and a kg N/ha figure for each zone. **Save**.
+  </Step>
+  <Step title="Export for the tractor">
+    On a Stable field the button is there. On any other field the card says why it is not.
+  </Step>
+  <Step title="Pick the terminal">
+    **ISOXML** for John Deere, Fendt, Claas, Kverneland and Amazone: a TASKDATA zip. **Shapefile** for Trimble, Topcon, Ag Leader and any GIS. A CSV with the rates sits beside both.
+  </Step>
+</Steps>
+
+<Frame caption="The rate plan under the verdict: a rate per zone and the flat rate beside it.">
+  <img src="/images/screens/rate-plan.jpg" alt="Rate plan, nitrogen: Ammonium nitrate 34.5%, North headland 190, South slope 160, Whole field flat 180, and the buttons Export for the tractor and Edit rates." width="270" />
+</Frame>
+
+<Frame caption="Which terminal? ISOXML or a shapefile.">
+  <img src="/images/screens/rate-export.jpg" alt="The export sheet: ISOXML (ISO 11783-10) for John Deere, Fendt, Claas, Kverneland, Amazone, and Shapefile for Trimble, Topcon, Ag Leader, any GIS." width="270" />
+</Frame>
+
+## What You See Next
+
+The file downloads, and the plan is written to the nitrogen record as one line with the rate by zone, so the N-max check sees it. Export again after a change and the same line is updated, not added to.
+
+## If It Does Not
+
+| You see | It means | Do |
+|---|---|---|
+| No Export for the tractor | The verdict is not Stable | Run the test; a Not stable field cannot export |
+| The terminal wants a product rate | The N content is blank | Edit rates and fill in the percent; the file then carries kg of product |
+| Exports are locked | The farm is on the free plan | More, Billing |
+
+Related: [Draw Zones and Run the Stability Test](/how-do-i/map/draw-zones-and-run-the-stability-test), [Zone Rate Planning](/features/nutrient-planning/zone-rate-planning), [NVZ Nitrogen Records](/features/compliance-and-records/nvz-nitrogen-records).

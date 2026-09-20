@@ -1,0 +1,36 @@
+---
+title: "Upload the RPA File"
+description: "Every field on the map from the file the Rural Payments service already gave you."
+---
+
+**Before you start.** Download your land parcels from the Rural Payments service: sign in, open **Land**, and download the parcels as a shapefile. Keep the zip as it comes.
+
+<Steps>
+  <Step title="Map, Add a field, then Upload your RPA parcels">
+    **Add a field** under the map offers three doors; the first is the upload. A GeoJSON from another tool works as well as the RPA zip.
+  </Step>
+  <Step title="Choose the file">
+    **Choose the file**. The app reads it and draws every parcel it finds, with the count and the hectares. A shape it cannot read is listed as skipped, with why.
+  </Step>
+  <Step title="Leave out what is not yours">
+    Tap a field on the map, or untick it in the list, to leave it out. Then **Add 14 fields, 127.3 ha**, with your own numbers.
+  </Step>
+</Steps>
+
+<Frame caption="Import field boundaries: where the file comes from, and the button.">
+  <img src="/images/screens/import-rpa.jpg" alt="Import field boundaries: a note on downloading parcels from the Rural Payments service, and Choose the file." width="270" />
+</Frame>
+
+## What You See Next
+
+Every field is on the Map, named as the parcel was. Give each one its crop, from the field's page, and Today fills in. The inspection list on the Compliance tab ticks **Field boundaries** the moment the import lands.
+
+## If It Does Not
+
+| You see | It means | Do |
+|---|---|---|
+| No fields in that file | The zip is not the parcels, or the shapefile is missing its .shp | Download the parcels again, as a shapefile |
+| A shape was skipped | It is not a polygon, or has no area | Draw that one by hand |
+| Two fields overlap | The RPA file holds both a parcel and a part-parcel | Untick one before adding |
+
+Related: [Draw a Field](/how-do-i/map/draw-a-field), [Read the Inspection List and Fix a Line](/how-do-i/compliance/read-the-inspection-list-and-fix-a-line).
