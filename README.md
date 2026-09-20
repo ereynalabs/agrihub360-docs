@@ -9,6 +9,7 @@ The product and developer documentation for AgriHub360, published with [Mintlify
 | `docs.json` | Site configuration and the navigation for the four tabs |
 | `index.mdx`, `agrihub360-101.mdx` | The Guides tab's Getting Started pages |
 | `features/` | One overview page per Guides group and one page per feature under it |
+| `how-do-i/`, `for-inspectors/`, `what-changed.mdx` | One task per page with the real screen; the pack explained to the person who reads it; the app, dated |
 | `devices/` | The AgriHub360 Sensor and Hub, Connect Your Sensor, Connect Your Device, Standards |
 | `quickstart.mdx`, `api-reference/` | The API Reference tab: guides, the OpenAPI document (`device-api.yaml`) and the AsyncAPI document for live updates (`messagebus.yaml`) |
 | `models/` | The Models tab: one page per model, science first, then how it is applied |

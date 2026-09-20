@@ -1,0 +1,23 @@
+---
+title: "A Sensor Has Gone Quiet"
+description: "What the Sensors tab says when a device stops reporting, what it means, and what to do in the order that finds the fault fastest."
+---
+
+The Sensors tab puts a card above the list for each device that has gone silent, with the step to take. This page is the same in one table.
+
+| The tab says | It means | Do |
+|---|---|---|
+| The gateway is silent, and its sensors with it | The link, not the probes. One card: the gateway's, with the count of sensors behind it | Hold the gateway's button for five seconds to restart it. A light that stays red is the SIM or the power |
+| The gateway is live, one sensor is silent | That probe | Its battery, then the antenna seat, then how far the field is from the gateway |
+| A station has never reported | The upload settings | Server, path and port in the gateway's Customized upload against the station's page in the app; the path is the credential and is case sensitive |
+| A sensor reports, but the reading is flat | The probe is out of the ground or shorted | Reseat it; a soil probe in air reads a constant |
+
+<Frame caption="A silent gateway is one card; the rows under it carry the last reading of each sensor.">
+  <img src="/images/screens/sensors.jpg" alt="The Sensors tab: an amber card for a silent gateway, the filter chips, then the rows with their readings and sparklines." width="270" />
+</Frame>
+
+## After an Hour
+
+A device that is still silent after an hour with the step done is a support case. Open the device's page and send its serial with the note. The device page keeps the last reading and the last time it was seen, which is what support asks first.
+
+Related: [Live Soil Readings](/features/field-monitoring/live-soil-readings), [Ecowitt Station](/devices/ecowitt-station), [The AgriHub360 Hub](/devices/hub).

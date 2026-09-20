@@ -18,6 +18,7 @@ This is the AgriHub360 documentation site, built on Mintlify. Pages are MDX file
 ## Images
 
 - Illustrations are cartoon SVGs in `images/guides/`, drawn in the style of `images/sensor.svg`: 800x450, the same palette and outline. A page gets one only where a picture adds something.
+- The How Do I pages are the exception: they show the real screen, a 540 wide JPEG of the app on the demo farm at phone size, in `images/screens/`. Cartoons explain, screenshots instruct. Never a real farm's records.
 
 ## Voice
 

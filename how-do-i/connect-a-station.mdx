@@ -1,0 +1,27 @@
+---
+title: "Connect a Station"
+description: "An Ecowitt station you already own posts its readings through its own gateway. Four lines to type."
+---
+
+<Steps>
+  <Step title="Sensors, then Connect a station">
+    More → Sensors → **Connect a station**. The page says which gateways work: any Ecowitt gateway or console with a Customized upload, and the Froggit and Ambient Weather stations built on the same one.
+  </Step>
+  <Step title="Name it and pick its field">
+    The name is what the Sensors tab shows. The field is where the channel 1 soil probe sits; leave it empty for a station with no soil probe.
+  </Step>
+  <Step title="Copy the four lines into the gateway">
+    The app shows the protocol, server, path and port. In the WS View Plus app: the gateway → Weather Services → Customized → Enable, protocol Ecowitt, then those four. An upload interval of one to five minutes is fine. The path is the station's credential; the app shows it once.
+  </Step>
+  <Step title="Wait one interval">
+    The first upload arrives within the interval you set. Until then the station shows as silent on the Sensors tab with what to check.
+  </Step>
+</Steps>
+
+<Frame caption="Connect a station, under Sensors.">
+  <img src="/images/screens/connect-station.jpg" alt="The Connect a station page: what it works with, what it feeds, then the name and field fields." width="270" />
+</Frame>
+
+## What You See Next
+
+The station is a row on the Sensors tab with its last reading, how long ago it came and the day's line. Its readings are labelled measured on the field and in the record, with the station as their source. The full list of what is fed, and what is not, is on [Ecowitt Station](/devices/ecowitt-station).

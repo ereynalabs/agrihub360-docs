@@ -27,7 +27,19 @@
             "group": "Getting Started",
             "pages": [
               "index",
-              "agrihub360-101"
+              "agrihub360-101",
+              "what-changed"
+            ]
+          },
+          {
+            "group": "How Do I",
+            "pages": [
+              "how-do-i/overview",
+              "how-do-i/log-a-spray",
+              "how-do-i/connect-a-station",
+              "how-do-i/build-and-share-the-pack",
+              "how-do-i/move-a-herd",
+              "how-do-i/a-sensor-has-gone-quiet"
             ]
           },
           {
@@ -118,6 +130,12 @@
               "features/account-and-data/farmer-sharing-groups",
               "features/account-and-data/offline-action-queue",
               "features/account-and-data/map-first-account-later"
+            ]
+          },
+          {
+            "group": "For Inspectors and Assessors",
+            "pages": [
+              "for-inspectors/reading-the-pack"
             ]
           }
         ]
