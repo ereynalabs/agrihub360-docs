@@ -26,7 +26,7 @@ This is the AgriHub360 documentation site, built on Mintlify. Pages are MDX file
 
 - `node scripts/lint-guides.mjs` runs before a commit. It fails on an em-dash anywhere, on a How Do I page missing one of its parts, and on a sentence over thirty words on a How Do I or Start Here page. It warns over twenty; aim under.
 - On a task page, a word the screen does not show is either on Words on the Screen or not on the page. Name a button as it reads on the screen, in bold, once per step. One idea a step; "and then" is two steps.
-- Screens for task pages come from `scratchpad/shoot-guides.mjs` against the demo farms (Whitaker Farm, Cwm Elan Farm), 540 wide. Re-run it after a release so the pictures match the build. Never a real farm's records.
+- Screens for task pages come from `scripts/shoot-guides.mjs` (and `shoot-guides2.mjs` for the retakes) against the demo farms (Whitaker Farm, Cwm Elan Farm), 540 wide. Re-run it after a release so the pictures match the build. Never a real farm's records.
 
 ## Voice
 
