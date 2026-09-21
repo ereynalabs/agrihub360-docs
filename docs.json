@@ -229,7 +229,7 @@
             "group": "Connect Your Sensor",
             "pages": [
               "devices/byod",
-              "devices/ecowitt-station",
+              "devices/weather-station",
               "devices/bridge-a-vendor-api",
               "devices/map-a-lorawan-uplink",
               "devices/metrics"

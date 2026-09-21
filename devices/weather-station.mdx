@@ -1,15 +1,15 @@
 ---
-title: "Ecowitt Station"
+title: "Your Own Weather Station"
 description: "A weather station you already own posts its readings through its own gateway. Four lines to type, nothing to build."
 ---
 
 How to: [Connect a Station](/how-do-i/sensors/connect-a-station).
 
-An **Ecowitt** station joins the farm through the Customized upload its gateway already has. No serial, no key in firmware, no bridge script. The gateway posts its readings on the interval you set and the app records them under the station like any other device.
+A weather station you already own joins the farm through the customized upload its gateway already has. No serial, no key in firmware, no bridge script. The gateway posts its readings on the interval you set and the app records them under the station like any other device.
 
 ## What You Need
 
-- An Ecowitt gateway or console with a **Customized** upload: GW1000, GW1100, GW2000, the WS2910 and WS3800 consoles, and the Froggit and Ambient Weather stations built on the same gateway.
+- A weather station whose gateway or console has a **customized upload**: a server, a path and a port you can type in. Most consumer stations sold in the last few years do.
 - A farm on a plan that allows a sensor. A station counts as one.
 
 ## Connect It
@@ -20,7 +20,7 @@ An **Ecowitt** station joins the farm through the Customized upload its gateway 
 
     | Setting | Value |
     |---|---|
-    | Protocol | Ecowitt |
+    | Protocol | the gateway's own format, not a third-party weather service |
     | Server | the device API host, for example `devices.agrihub360.example` |
     | Path | `/api/bridges/ecowitt/<key>` |
     | Port | 80 |
@@ -28,7 +28,7 @@ An **Ecowitt** station joins the farm through the Customized upload its gateway 
     The path is the station's credential. It is shown once. The station's page can issue a new one, and the old one stops working the moment it does.
   </Step>
   <Step title="Type them into the gateway">
-    In the WS View Plus app, or the gateway's own web page: the gateway → Weather Services → **Customized** → Enable, protocol **Ecowitt**, then the server, path and port above. An upload interval of one to five minutes is fine.
+    In the gateway's app or its own web page: weather services → **customized upload** → enable, the gateway's own protocol, then the server, path and port above. An upload interval of one to five minutes is fine.
   </Step>
   <Step title="Wait one interval">
     The first upload lands within an interval. Until then the station shows as silent on the Sensors tab, with what to check.
@@ -41,7 +41,7 @@ An **Ecowitt** station joins the farm through the Customized upload its gateway 
 
 ## What Is Fed
 
-| Ecowitt field | Stored as | Metric |
+| Gateway field | Stored as | Metric |
 |---|---|---|
 | `tempf` | air temperature, °C | 230 |
 | `humidity` | humidity, % | 110 |
